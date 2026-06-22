@@ -1,0 +1,29 @@
+{
+  "name": "smart-scale-systems",
+  "version": "1.0.0",
+  "description": "Smart Scale Systems - AI Services, Automation and Training Data",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "AI",
+    "machine learning",
+    "data annotation",
+    "automation",
+    "computer vision",
+    "NLP",
+    "LLM"
+  ],
+  "author": "Smart Scale Systems",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "nodemailer": "^9.0.1"
+  }
+}

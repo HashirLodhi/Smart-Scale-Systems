@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Scale Systems | AI Services, Automation and Training Data</title>
+  <meta name="description" content="Smart Scale Systems helps businesses scale smarter with AI model training, automation, computer vision, NLP, LLM solutions, data annotation, and AI training data creation." />
+  <meta name="keywords" content="AI services, AI model training, AI automation, computer vision, NLP, LLMs, data annotation, AI training data, machine learning datasets, RLHF" />
+  <meta property="og:title" content="Smart Scale Systems | AI Services, Automation and Training Data" />
+  <meta property="og:description" content="Smart Scale Systems helps businesses scale smarter with AI model training, automation, computer vision, NLP, LLM solutions, data annotation, and AI training data creation." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://smartscalesystems.com" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Smart Scale Systems | AI Services, Automation and Training Data" />
+  <meta name="twitter:description" content="Smart Scale Systems helps businesses scale smarter with AI model training, automation, computer vision, NLP, LLM solutions, data annotation, and AI training data creation." />
+  <link rel="canonical" href="https://smartscalesystems.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/style.css" />
+  <link rel="stylesheet" href="/src/styles/carousel.css" />
+</head>
+<body>
+
+<!-- NOISE TEXTURE OVERLAY -->
+<div class="noise-overlay"></div>
+
+<!-- NAVIGATION -->
+<div id="nav-placeholder"></div>
+
+<!-- HERO SCROLL SECTION -->
+<section class="scroll-section" id="scrollSection">
+  <div class="sticky-wrap">
+    <canvas id="heroCanvas" class="hero-canvas"></canvas>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="hero-overlay" id="heroOverlay">
+      <div class="hero-left">
+        <h1 class="hero-title">
+          Scale with<br/>
+          <span class="hero-title-accent">Intelligence</span>
+        </h1>
+        <p class="hero-subtitle">
+          We engineer AI systems that transform how businesses
+          grow, operate, and compete at any scale.
+        </p>
+        <div class="hero-actions">
+          <a href="/services" class="btn-primary">
+            <span class="btn-icon">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            Explore Services
+          </a>
+          <a href="/contact" class="btn-ghost">Work with us</a>
+        </div>
+        <div class="trust-strip">
+          <div class="trust-item">
+            <svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="8"/></svg>
+            120+ Projects
+          </div>
+          <div class="trust-dot"></div>
+          <div class="trust-item">
+            <svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="8"/></svg>
+            98% Retention
+          </div>
+          <div class="trust-dot"></div>
+          <div class="trust-item">
+            <svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="8"/></svg>
+            4.9 ★ Rating
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-panel">
+          <div class="panel-corner tl"></div>
+          <div class="panel-corner tr"></div>
+          <div class="panel-corner bl"></div>
+          <div class="panel-corner br"></div>
+
+          <!-- Floating AI tech elements -->
+          <div class="panel-tech-grid">
+            <div class="tech-float tf-1">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <div class="tech-float tf-2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="tech-float tf-3">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/></svg>
+            </div>
+            <div class="tech-float tf-4">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </div>
+            <div class="tech-float tf-5">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <div class="tech-float tf-6">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7M4 7c0-2 1-3 3-3h10c2 0 3 1 3 3M4 7h16"/></svg>
+            </div>
+          </div>
+
+          <!-- Neural network lines -->
+          <svg class="panel-neural" viewBox="0 0 200 150" fill="none" stroke="rgba(161,188,152,0.2)" stroke-width="0.5">
+            <circle cx="40" cy="30" r="3" fill="rgba(161,188,152,0.3)"/>
+            <circle cx="100" cy="20" r="3" fill="rgba(161,188,152,0.3)"/>
+            <circle cx="160" cy="40" r="3" fill="rgba(161,188,152,0.3)"/>
+            <circle cx="30" cy="75" r="3" fill="rgba(161,188,152,0.3)"/>
+            <circle cx="100" cy="75" r="4" fill="rgba(119,136,115,0.4)"/>
+            <circle cx="170" cy="80" r="3" fill="rgba(161,188,152,0.3)"/>
+            <circle cx="50" cy="120" r="3" fill="rgba(161,188,152,0.3)"/>
+            <circle cx="110" cy="130" r="3" fill="rgba(161,188,152,0.3)"/>
+            <circle cx="160" cy="115" r="3" fill="rgba(161,188,152,0.3)"/>
+            <line x1="40" y1="30" x2="100" y2="20"/>
+            <line x1="100" y1="20" x2="160" y2="40"/>
+            <line x1="30" y1="75" x2="100" y2="75"/>
+            <line x1="100" y1="75" x2="170" y2="80"/>
+            <line x1="40" y1="30" x2="30" y2="75"/>
+            <line x1="100" y1="20" x2="100" y2="75"/>
+            <line x1="160" y1="40" x2="170" y2="80"/>
+            <line x1="30" y1="75" x2="50" y2="120"/>
+            <line x1="100" y1="75" x2="110" y2="130"/>
+            <line x1="170" y1="80" x2="160" y2="115"/>
+            <line x1="50" y1="120" x2="110" y2="130"/>
+            <line x1="110" y1="130" x2="160" y2="115"/>
+          </svg>
+
+          <div class="panel-badge">
+            <span class="badge-ring"></span>
+            AI in action
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint" id="scrollHint">
+        <div class="scroll-line">
+          <div class="scroll-line-fill"></div>
+        </div>
+        <span>Scroll to reveal</span>
+      </div>
+    </div>
+
+    <div class="scroll-progress-bar">
+      <div class="scroll-progress-fill" id="progressFill"></div>
+    </div>
+    <div class="frame-counter" id="frameCounter">
+      <span id="frameNum">01</span>
+      <span class="frame-sep">/</span>
+      <span>122</span>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES PREVIEW -->
+<section class="content-section" id="services-preview">
+  <div class="section-inner">
+    <div class="section-tag">What We Do</div>
+    <div class="section-header-row">
+      <h2 class="section-title">AI Services Built<br/>to Scale</h2>
+      <a href="/services" class="btn-ghost">View all services →</a>
+    </div>
+    <p class="section-body">From raw data to deployed AI, we handle every layer of the AI lifecycle so your team can focus on growth.</p>
+    <div class="carousel-scene">
+      <div class="carousel-controls">
+        <button class="carousel-btn carousel-prev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button class="carousel-btn carousel-next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+      <div class="carousel-spinner" id="services-spinner">
+      <a href="/service-ai-model-training" class="service-card">
+        <div class="service-card-top">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <span class="service-num">01</span>
+        </div>
+        <h3>AI Model Training</h3>
+        <p>Custom model training, fine-tuning, evaluation, and deployment support for real-world use cases.</p>
+        <span class="card-link">Learn more</span>
+      </a>
+      <a href="/service-ai-automation" class="service-card">
+        <div class="service-card-top">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <span class="service-num">02</span>
+        </div>
+        <h3>AI Automation</h3>
+        <p>AI workflow automation, agents, CRM automation, and business process optimization systems.</p>
+        <span class="card-link">Learn more</span>
+      </a>
+      <a href="/service-computer-vision" class="service-card">
+        <div class="service-card-top">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/></svg>
+          </div>
+          <span class="service-num">03</span>
+        </div>
+        <h3>Computer Vision</h3>
+        <p>Object detection, image classification, segmentation, OCR, and visual AI systems.</p>
+        <span class="card-link">Learn more</span>
+      </a>
+      <a href="/service-nlp" class="service-card">
+        <div class="service-card-top">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <span class="service-num">04</span>
+        </div>
+        <h3>NLP</h3>
+        <p>Text classification, sentiment analysis, NER, intent detection, and language understanding.</p>
+        <span class="card-link">Learn more</span>
+      </a>
+      <a href="/service-llm" class="service-card">
+        <div class="service-card-top">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <span class="service-num">05</span>
+        </div>
+        <h3>LLM Solutions</h3>
+        <p>LLM fine-tuning, prompt engineering, RLHF, response evaluation, and custom AI pipelines.</p>
+        <span class="card-link">Learn more</span>
+      </a>
+      <a href="/service-data-annotation" class="service-card">
+        <div class="service-card-top">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7M4 7c0-2 1-3 3-3h10c2 0 3 1 3 3M4 7h16M10 11h4M10 15h4"/></svg>
+          </div>
+          <span class="service-num">06</span>
+        </div>
+        <h3>Data Annotation</h3>
+        <p>Image, video, text and audio annotation with bounding boxes, polygons, segmentation, and QA review.</p>
+        <span class="card-link">Learn more</span>
+      </a>
+      <a href="/service-ai-training-data" class="service-card">
+        <div class="service-card-top">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+          </div>
+          <span class="service-num">07</span>
+        </div>
+        <h3>AI Training Data</h3>
+        <p>High-quality datasets for machine learning, computer vision, NLP, LLMs, and AI evaluation.</p>
+        <span class="card-link">Learn more</span>
+      </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY SMART SCALE SYSTEMS -->
+<section class="content-section alt" id="why-us">
+  <div class="section-inner">
+    <div class="section-tag">Why Choose Us</div>
+    <div class="section-header-row">
+      <h2 class="section-title">Built for builders<br/>who think big</h2>
+    </div>
+    <p class="section-body">
+      Smart Scale Systems is an AI-first agency partnering with ambitious teams
+      to deploy intelligent automation, data systems, and AI infrastructure
+      that compounds over time.
+    </p>
+    <div class="carousel-scene">
+      <div class="carousel-controls">
+        <button class="carousel-btn carousel-prev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button class="carousel-btn carousel-next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+      <div class="carousel-spinner" id="why-spinner">
+      <div class="why-card reveal-on-scroll">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3>End-to-End AI Delivery</h3>
+        <p>From data collection to deployed models, we own the full AI lifecycle so nothing falls through the cracks.</p>
+      </div>
+      <div class="why-card reveal-on-scroll">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <h3>Speed Without Compromise</h3>
+        <p>Rapid iteration cycles with enterprise-grade quality standards. We move fast and we get it right.</p>
+      </div>
+      <div class="why-card reveal-on-scroll">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h3>Dedicated Expert Teams</h3>
+        <p>Specialized teams for each domain, annotation, ML engineering, NLP, and automation, not generalists.</p>
+      </div>
+      <div class="why-card reveal-on-scroll">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+        </div>
+        <h3>Rigorous QA Process</h3>
+        <p>Multi-layer quality assurance with detailed reporting, calibration sessions, and ongoing performance monitoring.</p>
+      </div>
+      <div class="why-card reveal-on-scroll">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
+        </div>
+        <h3>Scalable Infrastructure</h3>
+        <p>Infrastructure that scales with your project, from 1,000 to 1,000,000 data points without skipping a beat.</p>
+      </div>
+      <div class="why-card reveal-on-scroll">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Transparent Communication</h3>
+        <p>Real-time dashboards, weekly reports, and direct Slack channels. You always know where your project stands.</p>
+      </div>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="stat">
+        <div class="stat-num">120<span>+</span></div>
+        <div class="stat-label">Projects Delivered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">98<span>%</span></div>
+        <div class="stat-label">Client Retention</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">4.9<span>★</span></div>
+        <div class="stat-label">Average Rating</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5<span>+</span></div>
+        <div class="stat-label">Years of AI Expertise</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI WORKFLOW / PROCESS -->
+<section class="content-section" id="process">
+  <div class="section-inner">
+    <div class="section-tag">Our Process</div>
+    <h2 class="section-title">How We Deliver<br/>AI at Scale</h2>
+    <p class="section-body">A structured, proven methodology for AI project delivery, from kickoff to continuous improvement.</p>
+    <div class="process-steps">
+      <div class="process-step reveal-on-scroll">
+        <div class="step-number">01</div>
+        <div class="step-content">
+          <h3>Discovery and Scoping</h3>
+          <p>We analyze your data landscape, define success metrics, and create a detailed AI roadmap tailored to your objectives.</p>
+        </div>
+      </div>
+      <div class="process-connector"></div>
+      <div class="process-step reveal-on-scroll">
+        <div class="step-number">02</div>
+        <div class="step-content">
+          <h3>Data Strategy and Collection</h3>
+          <p>We design data collection pipelines, define annotation schemas, and establish quality benchmarks before work begins.</p>
+        </div>
+      </div>
+      <div class="process-connector"></div>
+      <div class="process-step reveal-on-scroll">
+        <div class="step-number">03</div>
+        <div class="step-content">
+          <h3>Annotation and Dataset Creation</h3>
+          <p>Expert annotators with multi-layer QA produce training-ready datasets with detailed quality reports.</p>
+        </div>
+      </div>
+      <div class="process-connector"></div>
+      <div class="process-step reveal-on-scroll">
+        <div class="step-number">04</div>
+        <div class="step-content">
+          <h3>Model Training and Evaluation</h3>
+          <p>We train, fine-tune, and benchmark AI models against defined performance standards with full transparency.</p>
+        </div>
+      </div>
+      <div class="process-connector"></div>
+      <div class="process-step reveal-on-scroll">
+        <div class="step-number">05</div>
+        <div class="step-content">
+          <h3>Deployment and Monitoring</h3>
+          <p>Smooth model deployment with ongoing performance monitoring, drift detection, and continuous improvement cycles.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INDUSTRIES WE SERVE -->
+<section class="content-section alt" id="industries">
+  <div class="section-inner">
+    <div class="section-tag">Industries</div>
+    <h2 class="section-title">Industries<br/>We Serve</h2>
+    <p class="section-body">We bring domain-specific AI expertise across a wide range of industries.</p>
+    <div class="carousel-scene">
+      <div class="carousel-controls">
+        <button class="carousel-btn carousel-prev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button class="carousel-btn carousel-next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+      <div class="carousel-spinner" id="industries-spinner">
+      <div class="industry-card reveal-on-scroll">
+        <div class="industry-icon">🏥</div>
+        <h4>Healthcare and Medical</h4>
+        <p>Medical imaging AI, clinical NLP, diagnostic tools</p>
+      </div>
+      <div class="industry-card reveal-on-scroll">
+        <div class="industry-icon">🏦</div>
+        <h4>Finance and Fintech</h4>
+        <p>Risk models, fraud detection, document automation</p>
+      </div>
+      <div class="industry-card reveal-on-scroll">
+        <div class="industry-icon">🛒</div>
+        <h4>Retail and E-commerce</h4>
+        <p>Visual search, recommendation systems, demand forecasting</p>
+      </div>
+      <div class="industry-card reveal-on-scroll">
+        <div class="industry-icon">🚗</div>
+        <h4>Automotive and Mobility</h4>
+        <p>Autonomous driving datasets, ADAS systems, sensor fusion</p>
+      </div>
+      <div class="industry-card reveal-on-scroll">
+        <div class="industry-icon">🏭</div>
+        <h4>Manufacturing</h4>
+        <p>Defect detection, predictive maintenance, quality inspection</p>
+      </div>
+      <div class="industry-card reveal-on-scroll">
+        <div class="industry-icon">📱</div>
+        <h4>Tech and SaaS</h4>
+        <p>AI feature development, NLP integrations, LLM products</p>
+      </div>
+      <div class="industry-card reveal-on-scroll">
+        <div class="industry-icon">🎓</div>
+        <h4>EdTech</h4>
+        <p>Intelligent tutoring, content classification, assessment AI</p>
+      </div>
+      <div class="industry-card reveal-on-scroll">
+        <div class="industry-icon">🔐</div>
+        <h4>Security and Defense</h4>
+        <p>Surveillance systems, threat detection, video analytics</p>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED TESTIMONIALS -->
+<section class="content-section" id="testimonials-preview">
+  <div class="section-inner">
+    <div class="section-tag">Client Stories</div>
+    <div class="section-header-row">
+      <h2 class="section-title">Trusted by AI<br/>Teams Worldwide</h2>
+      <a href="/testimonials" class="btn-ghost">View all testimonials →</a>
+    </div>
+    <div class="carousel-scene">
+      <div class="carousel-controls">
+        <button class="carousel-btn carousel-prev"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <button class="carousel-btn carousel-next"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+      </div>
+      <div class="carousel-spinner" id="testimonials-spinner">
+      <div class="testimonial-card reveal-on-scroll">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Smart Scale Systems delivered an annotation project at a scale and accuracy level we hadn't seen before. Their QA process is genuinely best-in-class."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">JM</div>
+          <div>
+            <strong>James M.</strong>
+            <span>ML Director, Computer Vision Startup</span>
+          </div>
+        </div>
+        <div class="testimonial-service-tag">Computer Vision · Data Annotation</div>
+      </div>
+      <div class="testimonial-card reveal-on-scroll">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"The LLM fine-tuning work exceeded our performance benchmarks. The team's understanding of RLHF and evaluation methodology was impressive."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SR</div>
+          <div>
+            <strong>Sarah R.</strong>
+            <span>CTO, AI Research Lab</span>
+          </div>
+        </div>
+        <div class="testimonial-service-tag">LLM Solutions · RLHF</div>
+      </div>
+      <div class="testimonial-card reveal-on-scroll">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Exceptional automation work. They built our entire CRM AI workflow in three weeks flat. Communication throughout was clear and professional."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AK</div>
+          <div>
+            <strong>Ahmed K.</strong>
+            <span>Operations Lead, SaaS Company</span>
+          </div>
+        </div>
+        <div class="testimonial-service-tag">AI Automation</div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="content-section cta-section" id="cta">
+  <div class="section-inner center">
+    <div class="section-tag">Ready to Start?</div>
+    <h2 class="section-title">Let's Build Your<br/>AI System Together</h2>
+    <p class="section-body">Tell us about your project and we'll get back to you within one business day with a clear action plan.</p>
+    <div class="cta-actions">
+      <a href="/contact" class="btn-primary large">
+        <span class="btn-icon">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        Start a Project
+      </a>
+      <a href="/services" class="btn-ghost">Explore Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div id="footer-placeholder"></div>
+
+<!-- Structured Data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Smart Scale Systems",
+  "description": "AI services agency delivering model training, automation, computer vision, NLP, LLM solutions, and data annotation at scale.",
+  "url": "https://smartscalesystems.com",
+  "email": "hello@smartscalesystems.com",
+  "sameAs": []
+}
+</script>
+
+<script src="/src/scripts/app.js"></script>
+<script src="/src/scripts/nav.js"></script>
+<script src="/src/scripts/components.js"></script>
+<script src="/src/scripts/robot-mascot.js" defer></script>
+<script src="/src/scripts/carousel.js" defer></script>
+<script src="/src/scripts/stats-counter.js" defer></script>
+</body>
+</html>
