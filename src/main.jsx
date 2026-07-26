@@ -126,62 +126,80 @@ const PAKISTAN_KEYWORDS = 'AI agency in Pakistan, AI services in Pakistan, artif
 
 const SEO_OVERRIDES = {
   '/': {
-    title: 'AI Agency in Pakistan | Smart Scale Systems',
+    title: 'Smart Scale Systems | AI Agency in Pakistan',
     description: 'Smart Scale Systems is an AI agency in Pakistan for automation, model training, computer vision, NLP, LLMs and data annotation.',
     keywords: PAKISTAN_KEYWORDS,
   },
   '/services': {
-    title: 'AI Services in Pakistan | Smart Scale Systems',
+    title: 'Services | AI Services in Pakistan',
     description: 'Explore AI services in Pakistan, including AI model training, automation, computer vision, NLP, LLM solutions, data annotation, and AI training data by Smart Scale Systems.',
     keywords: PAKISTAN_KEYWORDS,
   },
+  '/team': {
+    title: 'Our Team | AI Experts in Pakistan',
+  },
+  '/careers': {
+    title: 'Careers | AI Jobs in Pakistan',
+  },
+  '/testimonials': {
+    title: 'Client Testimonials | AI Success Stories',
+  },
+  '/contact': {
+    title: 'Contact Us | Start Your AI Project',
+  },
+  '/privacy-policy': {
+    title: 'Privacy Policy | Data Protection and Security',
+  },
+  '/terms-of-service': {
+    title: 'Terms of Service | Website Usage Policies',
+  },
   '/ai-agency-pakistan': {
-    title: 'AI Agency in Pakistan | Smart Scale Systems',
+    title: 'AI Agency in Pakistan | AI Development Company',
     description: 'Looking for an AI agency in Pakistan? Smart Scale Systems builds AI automation, machine learning models, LLM systems, computer vision pipelines, NLP solutions, and training datasets.',
     keywords: PAKISTAN_KEYWORDS,
   },
   '/ai-services-pakistan': {
-    title: 'AI Services in Pakistan | Model Training, Automation, LLMs',
+    title: 'AI Services in Pakistan | Automation, Models and Data',
     description: 'Smart Scale Systems provides AI services in Pakistan for startups and businesses, including model training, AI automation, computer vision, NLP, LLM solutions, annotation, and training data.',
     keywords: PAKISTAN_KEYWORDS,
   },
   '/service-ai-model-training': {
-    title: 'AI Model Training Services in Pakistan | Smart Scale Systems',
+    title: 'AI Model Training | Custom Machine Learning Models',
     description: 'Custom AI model training services in Pakistan, including fine-tuning, dataset preparation, model evaluation, optimization, and deployment support.',
     keywords: 'AI model training Pakistan, machine learning model training Pakistan, AI fine-tuning Pakistan, custom AI models Pakistan',
   },
   '/service-ai-automation': {
-    title: 'AI Automation Services in Pakistan | Smart Scale Systems',
+    title: 'AI Automation | Business Workflow Automation',
     description: 'AI automation services in Pakistan for workflows, AI agents, CRM automation, lead generation, operations, and business process automation.',
     keywords: 'AI automation Pakistan, AI agents Pakistan, business process automation Pakistan, CRM automation Pakistan, workflow automation Pakistan',
   },
   '/service-computer-vision': {
-    title: 'Computer Vision Services in Pakistan | Smart Scale Systems',
+    title: 'Computer Vision | Image and Video AI',
     description: 'Computer vision services in Pakistan for object detection, image classification, segmentation, OCR, video analytics, and visual AI systems.',
     keywords: 'computer vision services Pakistan, object detection Pakistan, OCR services Pakistan, image annotation Pakistan, video analytics Pakistan',
   },
   '/service-nlp': {
-    title: 'NLP Services in Pakistan | Smart Scale Systems',
+    title: 'NLP Services | Natural Language Processing',
     description: 'NLP services in Pakistan for text classification, sentiment analysis, named entity recognition, intent detection, search relevance, and language AI.',
     keywords: 'NLP services Pakistan, natural language processing Pakistan, text classification Pakistan, sentiment analysis Pakistan, NER Pakistan',
   },
   '/service-llm': {
-    title: 'LLM Solutions in Pakistan | Smart Scale Systems',
+    title: 'LLM Solutions | Custom AI Assistants',
     description: 'LLM solutions in Pakistan, including prompt engineering, LLM fine-tuning, RLHF, response evaluation, AI assistants, and custom large language model pipelines.',
     keywords: 'LLM solutions Pakistan, LLM fine-tuning Pakistan, prompt engineering Pakistan, RLHF Pakistan, AI assistants Pakistan',
   },
   '/service-data-annotation': {
-    title: 'Data Annotation Services in Pakistan | Smart Scale Systems',
+    title: 'Data Annotation | Training Data Services',
     description: 'Data annotation services in Pakistan for images, video, text, audio, OCR, bounding boxes, polygons, segmentation masks, and QA review.',
     keywords: 'data annotation Pakistan, image annotation Pakistan, video annotation Pakistan, text annotation Pakistan, OCR annotation Pakistan',
   },
   '/service-ai-training-data': {
-    title: 'AI Training Data Services in Pakistan | Smart Scale Systems',
+    title: 'AI Training Data | Dataset Creation Services',
     description: 'AI training data services in Pakistan for machine learning, computer vision, NLP, LLMs, automation systems, evaluation datasets, and dataset curation.',
     keywords: 'AI training data Pakistan, dataset creation Pakistan, machine learning datasets Pakistan, data collection Pakistan, dataset curation Pakistan',
   },
   '/service-custom': {
-    title: 'Custom AI Solutions in Pakistan | Smart Scale Systems',
+    title: 'Custom AI Solutions | AI Development Services',
     description: 'Custom AI solutions in Pakistan for businesses that need tailored automation, machine learning, LLM, computer vision, NLP, and data systems.',
     keywords: 'custom AI solutions Pakistan, AI consulting Pakistan, AI development Pakistan, artificial intelligence agency Pakistan',
   },
@@ -438,7 +456,7 @@ function updateDocumentSeo(rawHtml, pathname) {
 
 function bodyContent(html) {
   const doc = new DOMParser().parseFromString(html, 'text/html');
-  doc.querySelectorAll('script, #nav-placeholder, #footer-placeholder, .noise-overlay').forEach((node) => node.remove());
+  doc.querySelectorAll('#nav-placeholder, #footer-placeholder, .noise-overlay').forEach((node) => node.remove());
   doc.querySelectorAll('spline-viewer').forEach((viewer, index) => {
     const mount = doc.createElement('div');
     mount.className = 'react-spline-viewer';
@@ -1702,7 +1720,7 @@ function App() {
     if (document.getElementById('robot-mascot-script')) return;
     const script = document.createElement('script');
     script.id = 'robot-mascot-script';
-    script.src = '/src/scripts/robot-mascot.js?v=20260707-structured';
+    script.src = '/src/scripts/robot-mascot.js?v=20260726-scalebot-v7-clean-input';
     script.defer = true;
     document.body.appendChild(script);
   }, []);

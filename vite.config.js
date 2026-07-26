@@ -39,9 +39,10 @@ module.exports = defineConfig({
   plugins: [react(), gzipTextAssetsPlugin()],
   server: {
     port: 3000,
+    strictPort: true,
     proxy: {
-      '/api': 'http://localhost:3001',
-      '/chat': 'http://localhost:3001',
+      '/api': process.env.API_ORIGIN || 'http://127.0.0.1:3001',
+      '/chat': process.env.API_ORIGIN || 'http://127.0.0.1:3001',
     },
   },
   build: {
