@@ -24,7 +24,7 @@
       align-items: flex-end;
       max-width: calc(100vw - 24px);
       color: var(--chat-ink);
-      font-family: var(--font-body, 'Roboto', Arial, sans-serif);
+      font-family: var(--font-body, 'Cabin', Arial, sans-serif);
     }
 
     #smart-scale-mascot {
@@ -324,7 +324,7 @@
       padding: 1px 4px;
       border-radius: 4px;
       background: rgba(0, 0, 0, 0.07);
-      font-family: Consolas, monospace;
+      font-family: var(--font-body, 'Cabin', Arial, sans-serif);
       font-size: 0.86em;
     }
 

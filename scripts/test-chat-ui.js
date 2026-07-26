@@ -17,7 +17,7 @@ const checks = [
   ['mobile panel uses available width', /@media \(max-width:\s*520px\)[\s\S]*?#mascot-chat-window\s*\{[\s\S]*?width:\s*100%/],
   ['bot content uses the safe structured renderer', /message\.appendChild\(formatBotMessage\(text\)\)/],
   ['renderer validates links before creating anchors', /if \(isSafeHref\(match\[3\]\)\)/],
-  ['chat inherits the website body font token', /font-family:\s*var\(--font-body,\s*'Roboto'/],
+  ['chat inherits the Cabin website font token', /font-family:\s*var\(--font-body,\s*'Cabin'/],
   ['header uses the website solid black palette', /\.chat-header\s*\{[\s\S]*?background:\s*#000000/],
   ['header uses the transparent ScaleBot logo', /<img src="\/assets\/chatbot\/scalebot-logo-transparent\.png\?v=20260726" alt="">/],
   ['header logo fits cleanly inside its badge', /\.chat-brand-mark img\s*\{[\s\S]*?object-fit:\s*contain;[\s\S]*?padding:\s*3px/],
