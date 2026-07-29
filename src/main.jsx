@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createPortal } from 'react-dom';
 import { gsap } from 'gsap';
@@ -9,6 +9,7 @@ import navHtml from './components/nav.html?raw';
 import footerHtml from './components/footer.html?raw';
 import homeHtml from './pages/index.html?raw';
 import servicesHtml from './pages/services.html?raw';
+import projectsHtml from './pages/projects.html?raw';
 import teamHtml from './pages/team.html?raw';
 import careersHtml from './pages/careers.html?raw';
 import testimonialsHtml from './pages/testimonials.html?raw';
@@ -37,6 +38,8 @@ const pages = {
   '/index.html': homeHtml,
   '/services': servicesHtml,
   '/services.html': servicesHtml,
+  '/projects': projectsHtml,
+  '/projects.html': projectsHtml,
   '/team': teamHtml,
   '/team.html': teamHtml,
   '/careers': careersHtml,
@@ -119,7 +122,8 @@ function primeSplineLoading(pathname) {
 primeSplineLoading(normalizeRoutePath(window.location.pathname));
 
 const SITE_URL = 'https://smartscalesystems.com';
-const DEFAULT_IMAGE = `${SITE_URL}/logo-main.png`;
+const LOGO_IMAGE = `${SITE_URL}/logo-main.png`;
+const SOCIAL_IMAGE = `${SITE_URL}/og.png`;
 const DEFAULT_DESCRIPTION = 'Smart Scale Systems helps businesses scale smarter with AI model training, automation, computer vision, NLP, LLM solutions, data annotation, and AI training data creation.';
 const DEFAULT_KEYWORDS = 'AI services, AI model training, AI automation, computer vision, NLP, LLMs, data annotation, AI training data, machine learning datasets, RLHF';
 const PAKISTAN_KEYWORDS = 'AI agency in Pakistan, AI services in Pakistan, artificial intelligence company Pakistan, AI automation Pakistan, AI model training Pakistan, computer vision services Pakistan, NLP services Pakistan, LLM solutions Pakistan, data annotation Pakistan, AI training data Pakistan, machine learning services Pakistan';
@@ -134,6 +138,11 @@ const SEO_OVERRIDES = {
     title: 'Services | AI Services in Pakistan',
     description: 'Explore AI services in Pakistan, including AI model training, automation, computer vision, NLP, LLM solutions, data annotation, and AI training data by Smart Scale Systems.',
     keywords: PAKISTAN_KEYWORDS,
+  },
+  '/projects': {
+    title: 'AI Projects & Case Studies | Smart Scale Systems',
+    description: 'Explore Smart Scale Systems projects across Agentic RAG, custom chatbots, AI agents, voice calling, automation, model training, video annotation, analytics, and financial risk.',
+    keywords: 'Agentic RAG, custom chatbot, custom AI agent, voice calling agent, AI integrations, AI automation, autonomous data annotation, custom model training, action recognition, customer analytics, fraud detection',
   },
   '/team': {
     title: 'Our Team | AI Experts in Pakistan',
@@ -246,7 +255,7 @@ function buildStructuredData({ title, description, url, kind }) {
     name: 'Smart Scale Systems',
     url: SITE_URL,
     email: 'contact@smartscalesystems.tech',
-    logo: DEFAULT_IMAGE,
+    logo: LOGO_IMAGE,
     description: 'AI services agency delivering model training, automation, computer vision, NLP, LLM solutions, and data annotation at scale.',
     areaServed: {
       '@type': 'Country',
@@ -270,7 +279,7 @@ function buildStructuredData({ title, description, url, kind }) {
       '@id': `${SITE_URL}/#ai-agency`,
       name: 'Smart Scale Systems',
       url: SITE_URL,
-      image: DEFAULT_IMAGE,
+      image: LOGO_IMAGE,
       description: 'AI agency in Pakistan providing AI model training, automation, computer vision, NLP, LLM solutions, data annotation, and AI training data services.',
       email: 'contact@smartscalesystems.tech',
       areaServed: {
@@ -434,12 +443,12 @@ function updateDocumentSeo(rawHtml, pathname) {
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:url', content: url }],
     ['meta', { property: 'og:site_name', content: 'Smart Scale Systems' }],
-    ['meta', { property: 'og:image', content: DEFAULT_IMAGE }],
-    ['meta', { property: 'og:image:alt', content: 'Smart Scale Systems logo' }],
+    ['meta', { property: 'og:image', content: SOCIAL_IMAGE }],
+    ['meta', { property: 'og:image:alt', content: 'Smart Scale Systems — AI systems made for the real world' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:title', content: title }],
     ['meta', { name: 'twitter:description', content: description }],
-    ['meta', { name: 'twitter:image', content: DEFAULT_IMAGE }],
+    ['meta', { name: 'twitter:image', content: SOCIAL_IMAGE }],
     ['link', { rel: 'canonical', href: url }],
     ['link', { rel: 'alternate', hreflang: 'en', href: url }],
     ['link', { rel: 'alternate', hreflang: 'x-default', href: url }],
@@ -704,7 +713,7 @@ function initNav() {
 
 function initRevealAnimations() {
   const observers = [];
-  const revealItems = document.querySelectorAll('.reveal-on-scroll');
+  const revealItems = document.querySelectorAll('.reveal-on-scroll, .project-reveal');
   if (revealItems.length) {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -1690,6 +1699,55 @@ function initPremiumAnimations() {
   };
 }
 
+const ROUTE_LABELS = {
+  '/': 'Home',
+  '/services': 'Services',
+  '/projects': 'Projects',
+  '/team': 'Team',
+  '/careers': 'Careers',
+  '/testimonials': 'Testimonials',
+  '/contact': 'Contact',
+};
+
+function routeLabel(pathname) {
+  const normalized = normalizeSeoPath(pathname);
+  if (ROUTE_LABELS[normalized]) return ROUTE_LABELS[normalized];
+  if (normalized.startsWith('/service-')) {
+    return normalized
+      .replace('/service-', '')
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
+  return normalized
+    .replace(/^\//, '')
+    .split('-')
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ') || 'Home';
+}
+
+function PageTransition() {
+  return (
+    <div className="page-transition" aria-hidden="true">
+      <div className="page-transition-panels" aria-hidden="true">
+        <div className="page-transition-panel page-transition-panel-a" />
+        <div className="page-transition-panel page-transition-panel-b" />
+        <div className="page-transition-panel page-transition-panel-c" />
+      </div>
+      <div className="page-transition-content">
+        <div className="page-transition-brand">SMART SCALE / SYSTEMS</div>
+        <div className="page-transition-route">
+          <span className="page-transition-kicker">Entering</span>
+          <strong className="page-transition-label">Projects</strong>
+        </div>
+        <div className="page-transition-count">SSS — 2026</div>
+      </div>
+      <div className="page-transition-progress"><span /></div>
+    </div>
+  );
+}
+
 function Layout({ children, pathname }) {
   useEffect(() => {
     const cleanup = initNav();
@@ -1709,8 +1767,16 @@ function Layout({ children, pathname }) {
 
 function App() {
   const [pathname, setPathname] = useState(() => normalizeRoutePath(window.location.pathname));
+  const currentPathRef = useRef(pathname);
+  const transitionInProgressRef = useRef(false);
+  const queuedNavigationRef = useRef(null);
+  const navigateRef = useRef(null);
   const rawPage = pages[pathname] || error404Html;
   const content = useMemo(() => bodyContent(rawPage), [rawPage]);
+
+  useEffect(() => {
+    currentPathRef.current = pathname;
+  }, [pathname]);
 
   useEffect(() => {
     updateDocumentSeo(rawPage, pathname);
@@ -1725,23 +1791,174 @@ function App() {
     document.body.appendChild(script);
   }, []);
 
+  navigateRef.current = (targetPath, { historyAction = 'push' } = {}) => {
+    const normalizedTarget = normalizeRoutePath(targetPath);
+    const currentPath = currentPathRef.current;
+
+    if (normalizedTarget === currentPath) {
+      scrollToPageTop({ smooth: true });
+      return;
+    }
+
+    if (transitionInProgressRef.current) {
+      queuedNavigationRef.current = { targetPath: normalizedTarget, historyAction };
+      return;
+    }
+
+    const commitRoute = () => {
+      if (historyAction === 'push') {
+        window.history.pushState({}, '', normalizedTarget);
+      }
+      currentPathRef.current = normalizedTarget;
+      setPathname(normalizedTarget);
+      scrollToPageTop();
+    };
+
+    if (prefersReducedMotion()) {
+      commitRoute();
+      return;
+    }
+
+    const overlay = document.querySelector('.page-transition');
+    const panels = overlay?.querySelectorAll('.page-transition-panel');
+    const label = overlay?.querySelector('.page-transition-label');
+    const contentItems = overlay?.querySelectorAll('.page-transition-brand, .page-transition-route, .page-transition-count');
+    const progress = overlay?.querySelector('.page-transition-progress span');
+    const currentShell = document.querySelector('.route-shell');
+
+    if (!overlay || !panels?.length) {
+      commitRoute();
+      return;
+    }
+
+    transitionInProgressRef.current = true;
+    document.body.classList.add('route-transitioning');
+    overlay.setAttribute('aria-hidden', 'false');
+    if (label) label.textContent = routeLabel(normalizedTarget);
+
+    gsap.killTweensOf([overlay, panels, contentItems, progress, currentShell].filter(Boolean));
+    gsap.set(overlay, { autoAlpha: 1, pointerEvents: 'auto' });
+    gsap.set(panels, { scaleY: 0, transformOrigin: 'bottom center' });
+    gsap.set(contentItems, { y: 26, autoAlpha: 0 });
+    gsap.set(progress, { scaleX: 0, transformOrigin: 'left center' });
+
+    gsap.timeline({
+      defaults: { overwrite: 'auto' },
+      onComplete: () => {
+        commitRoute();
+
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => {
+            const nextShell = document.querySelector('.route-shell');
+            gsap.set(panels, { transformOrigin: 'top center' });
+            gsap.set(nextShell, { y: 40, scale: 0.988, autoAlpha: 0, filter: 'blur(12px)' });
+
+            gsap.timeline({
+              defaults: { overwrite: 'auto' },
+              onComplete: () => {
+                gsap.set(overlay, { autoAlpha: 0, pointerEvents: 'none' });
+                gsap.set(nextShell, { clearProps: 'transform,opacity,visibility,filter' });
+                overlay.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('route-transitioning');
+                transitionInProgressRef.current = false;
+
+                const queued = queuedNavigationRef.current;
+                queuedNavigationRef.current = null;
+                if (queued && queued.targetPath !== currentPathRef.current) {
+                  navigateRef.current?.(queued.targetPath, { historyAction: queued.historyAction });
+                }
+              },
+            })
+              .to(contentItems, {
+                y: -22,
+                autoAlpha: 0,
+                duration: 0.32,
+                stagger: 0.025,
+                ease: 'power2.in',
+              }, 0)
+              .to(panels, {
+                scaleY: 0,
+                duration: 0.78,
+                stagger: { each: 0.065, from: 'end' },
+                ease: 'power4.inOut',
+              }, 0.08)
+              .to(progress, {
+                scaleX: 0,
+                transformOrigin: 'right center',
+                duration: 0.55,
+                ease: 'power3.inOut',
+              }, 0.08)
+              .to(nextShell, {
+                y: 0,
+                scale: 1,
+                autoAlpha: 1,
+                filter: 'blur(0px)',
+                duration: 0.82,
+                ease: 'expo.out',
+              }, 0.28);
+          });
+        });
+      },
+    })
+      .to(currentShell, {
+        y: -30,
+        scale: 0.982,
+        autoAlpha: 0.35,
+        filter: 'blur(10px)',
+        duration: 0.56,
+        ease: 'power3.in',
+      }, 0)
+      .to(panels, {
+        scaleY: 1,
+        duration: 0.76,
+        stagger: 0.065,
+        ease: 'power4.inOut',
+      }, 0)
+      .to(contentItems, {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.58,
+        stagger: 0.055,
+        ease: 'expo.out',
+      }, 0.31)
+      .to(progress, {
+        scaleX: 1,
+        duration: 0.62,
+        ease: 'power3.inOut',
+      }, 0.2);
+  };
+
   useEffect(() => {
-    const onPopState = () => setPathname(normalizeRoutePath(window.location.pathname));
+    const onPopState = () => {
+      navigateRef.current?.(normalizeRoutePath(window.location.pathname), { historyAction: 'none' });
+    };
     window.addEventListener('popstate', onPopState);
 
     const onClick = (event) => {
       const anchor = event.target.closest('a[href]');
-      if (!anchor) return;
+      if (
+        !anchor
+        || event.defaultPrevented
+        || event.button !== 0
+        || event.metaKey
+        || event.ctrlKey
+        || event.shiftKey
+        || event.altKey
+        || anchor.target === '_blank'
+        || anchor.hasAttribute('download')
+      ) return;
       const url = new URL(anchor.href);
-      if (url.origin !== window.location.origin || url.pathname.startsWith('/api')) return;
+      if (
+        url.origin !== window.location.origin
+        || !['http:', 'https:'].includes(url.protocol)
+        || url.pathname.startsWith('/api')
+      ) return;
       const targetPath = normalizeRoutePath(url.pathname);
+      const isSamePage = targetPath === currentPathRef.current;
+      if (isSamePage && url.hash) return;
+
       event.preventDefault();
-      const isSamePage = targetPath === normalizeRoutePath(window.location.pathname);
-      if (!isSamePage) {
-        window.history.pushState({}, '', targetPath);
-        setPathname(targetPath);
-      }
-      scrollToPageTop({ smooth: isSamePage || targetPath === '/' });
+      navigateRef.current?.(targetPath, { historyAction: 'push' });
     };
     document.addEventListener('click', onClick);
 
@@ -1757,10 +1974,15 @@ function App() {
   }, [content]);
 
   return (
-    <Layout pathname={pathname}>
-      <main dangerouslySetInnerHTML={{ __html: content }} />
-      <ReactSplineMounts contentKey={content} />
-    </Layout>
+    <>
+      <Layout pathname={pathname}>
+        <div className="route-shell" key={pathname}>
+          <main dangerouslySetInnerHTML={{ __html: content }} />
+          <ReactSplineMounts contentKey={content} />
+        </div>
+      </Layout>
+      <PageTransition />
+    </>
   );
 }
 
