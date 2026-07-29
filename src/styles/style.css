@@ -1974,7 +1974,7 @@ textarea:focus-visible,
 
 .project-catalog-card {
   position: relative;
-  min-height: 465px;
+  min-height: 580px;
   padding: 34px;
   display: flex;
   flex-direction: column;
@@ -2040,6 +2040,45 @@ textarea:focus-visible,
 
 .project-catalog-card-dark .project-catalog-head span:first-child {
   color: #ffffff;
+}
+
+.project-catalog-visual {
+  position: relative;
+  z-index: 2;
+  height: clamp(145px, 13vw, 188px);
+  margin: 28px -10px 30px;
+  overflow: hidden;
+  border: 1px solid rgba(17, 20, 22, 0.12);
+  border-radius: 22px;
+  background: #cfd5d8;
+  box-shadow: 0 18px 38px rgba(20, 27, 31, 0.12);
+}
+
+.project-catalog-card-dark .project-catalog-visual {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: #090c0e;
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.28);
+}
+
+.project-catalog-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 34%),
+    linear-gradient(0deg, rgba(4, 7, 8, 0.16), transparent 36%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.project-catalog-visual img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.82) contrast(1.03);
+  transition: transform 0.7s var(--ease-out-expo), filter 0.45s ease;
 }
 
 .project-catalog-signal {
@@ -2144,7 +2183,11 @@ textarea:focus-visible,
 
 .project-catalog-card-wide {
   grid-column: span 2;
-  min-height: 420px;
+  min-height: 580px;
+}
+
+.project-catalog-card-wide .project-catalog-visual {
+  height: clamp(165px, 18vw, 230px);
 }
 
 .project-catalog-card-wide .project-catalog-signal {
@@ -2165,6 +2208,11 @@ textarea:focus-visible,
 
   .project-catalog-card-dark:hover {
     border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .project-catalog-card:hover .project-catalog-visual img {
+    transform: scale(1.055);
+    filter: saturate(0.98) contrast(1.05);
   }
 }
 
@@ -2211,8 +2259,14 @@ textarea:focus-visible,
   .project-catalog-card,
   .project-catalog-card-wide {
     grid-column: auto;
-    min-height: 430px;
+    min-height: 570px;
     padding: 28px 24px;
+  }
+
+  .project-catalog-visual,
+  .project-catalog-card-wide .project-catalog-visual {
+    height: 190px;
+    margin-inline: -4px;
   }
 
   .project-catalog-card-wide .project-catalog-signal {
@@ -4829,11 +4883,26 @@ body.route-transitioning {
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
+    linear-gradient(180deg, rgba(5, 8, 10, 0.62) 0%, transparent 22%, transparent 72%, rgba(5, 8, 10, 0.72) 100%),
     linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 48px 48px;
+  background-size: auto, 48px 48px, 48px 48px;
   pointer-events: none;
+}
+
+.project-stage-artwork {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.82) contrast(1.04);
+  transform: scale(1.015);
 }
 
 .stage-topline,
