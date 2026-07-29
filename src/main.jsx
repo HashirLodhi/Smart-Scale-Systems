@@ -336,6 +336,17 @@ function buildStructuredData({ title, description, url, kind }) {
     });
   }
 
+  if (kind === 'project') {
+    graph.push({
+      '@type': 'CreativeWork',
+      '@id': `${url}#project`,
+      name: title.replace(' | Smart Scale Systems', ''),
+      description,
+      creator: { '@id': `${SITE_URL}/#organization` },
+      url,
+    });
+  }
+
   if (url.endsWith('/ai-agency-pakistan') || url.endsWith('/ai-services-pakistan')) {
     graph.push({
       '@type': 'OfferCatalog',
@@ -1433,17 +1444,6 @@ function initScaleMotion() {
 
   if (!section || !stage || !track || !headline || prefersReducedMotion()) {
     return () => {};
-  }
-
-  if (kind === 'project') {
-    graph.push({
-      '@type': 'CreativeWork',
-      '@id': `${url}#project`,
-      name: title.replace(' | Smart Scale Systems', ''),
-      description,
-      creator: { '@id': `${SITE_URL}/#organization` },
-      url,
-    });
   }
 
   const accessibleLabel = headline.getAttribute('aria-label') || headline.textContent.trim();
