@@ -1041,3 +1041,44 @@ body {
     display: none;
   }
 }
+
+/* Dark surfaces stay intentionally flat: no green cast, grids, or gradients. */
+:is(
+  .route-home .sticky-wrap,
+  .scale-motion,
+  .scale-motion__stage,
+  .cta-section,
+  .home-ai-showcase,
+  .home-end-showcase,
+  .route-team .team-cinematic-intro,
+  .route-team .team-member-row:nth-child(even),
+  .route-contact .contact-info-wrap,
+  .project-detail-hero,
+  .project-detail-system,
+  .project-detail-proof,
+  .projects-hero,
+  .projects-cta,
+  .project-stage,
+  .project-stage-agentic,
+  .project-catalog-card-dark,
+  .footer
+) {
+  background-color: #090b0d !important;
+  background-image: none !important;
+}
+
+.route-home :is(.hero-left, .hero-right) {
+  background-image: none !important;
+}
+
+:is(
+  .scale-motion__stage,
+  .home-ai-showcase,
+  .projects-hero
+)::before,
+:is(
+  .scale-motion__stage,
+  .projects-hero
+)::after {
+  background-image: none !important;
+}
