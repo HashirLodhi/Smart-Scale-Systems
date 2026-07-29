@@ -304,16 +304,11 @@ body {
   height: calc(100vh - 24px);
   min-height: 720px;
   overflow: hidden;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    radial-gradient(circle at 74% 45%, var(--route-accent), transparent 28%),
-    #0b0e10;
-  background-size: 66px 66px, 66px 66px, auto, auto;
+  background: #ffffff;
 }
 
 .route-home .orb {
-  opacity: 0.24;
+  display: none;
 }
 
 .route-home .hero-overlay {
@@ -324,18 +319,17 @@ body {
 
 .route-home .hero-left {
   max-width: 700px;
-  padding: clamp(28px, 4vw, 52px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--ui-radius-lg);
-  color: #ffffff;
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.13);
-  backdrop-filter: blur(20px);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: #17191b;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
 }
 
 .route-home .hero-title {
-  color: #ffffff;
+  color: #17191b;
   font-size: clamp(4rem, 7.3vw, 7.7rem);
   font-weight: 600;
   line-height: 0.87;
@@ -343,47 +337,45 @@ body {
 }
 
 .route-home .hero-title-accent {
-  color: rgba(255, 255, 255, 0.5);
+  color: #707579;
 }
 
 .route-home .hero-subtitle {
-  color: rgba(255, 255, 255, 0.62);
+  color: #5f6569;
 }
 
 .route-home .hero-left .btn-primary {
-  color: #0d1012;
-  background: #ffffff;
+  color: #ffffff;
+  background: #262a2d;
 }
 
 .route-home .hero-left .btn-ghost {
-  color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.24);
+  color: #262a2d;
+  border-color: rgba(38, 42, 45, 0.22);
 }
 
 .route-home .trust-strip {
   width: 100%;
   margin-top: 28px;
   padding-top: 22px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-top: 1px solid rgba(38, 42, 45, 0.12);
 }
 
 .route-home .trust-item {
-  color: rgba(255, 255, 255, 0.58);
+  color: #6d7276;
 }
 
 .route-home .trust-item svg {
-  color: #ffffff;
+  color: #262a2d;
 }
 
 .route-home .hero-right {
   height: min(69vh, 680px);
-  padding: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--ui-radius-lg);
-  background:
-    radial-gradient(circle at 50% 45%, rgba(191, 210, 215, 0.12), transparent 40%),
-    rgba(255, 255, 255, 0.025);
-  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
 }
 
 .route-home .spline-wrapper {
@@ -393,7 +385,8 @@ body {
   max-height: none;
   min-height: 0;
   overflow: hidden;
-  border-radius: calc(var(--ui-radius-lg) - 8px) !important;
+  border-radius: 0 !important;
+  background: transparent;
 }
 
 .route-home :is(.home-proof-section, .home-industries-section) {
@@ -1044,7 +1037,6 @@ body {
 
 /* Dark surfaces stay intentionally flat: no green cast, grids, or gradients. */
 :is(
-  .route-home .sticky-wrap,
   .scale-motion,
   .scale-motion__stage,
   .cta-section,
