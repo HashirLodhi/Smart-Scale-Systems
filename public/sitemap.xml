@@ -26,9 +26,81 @@
   </url>
   <url>
     <loc>https://smartscalesystems.com/projects</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-07-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://smartscalesystems.com/projects/agentic-rag</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartscalesystems.com/projects/custom-chatbot</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartscalesystems.com/projects/custom-ai-agent</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartscalesystems.com/projects/voice-calling-agent</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartscalesystems.com/projects/ai-integrations</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartscalesystems.com/projects/business-automation</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartscalesystems.com/projects/autonomous-data-annotation</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartscalesystems.com/projects/custom-model-training</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartscalesystems.com/projects/video-action-recognition</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartscalesystems.com/projects/data-segmentation</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartscalesystems.com/projects/churn-value-optimization</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://smartscalesystems.com/projects/fraud-anomaly-detection</loc>
+    <lastmod>2026-07-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://smartscalesystems.com/service-ai-model-training</loc>

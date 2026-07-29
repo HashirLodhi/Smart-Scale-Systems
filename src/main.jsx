@@ -12,6 +12,7 @@ import footerHtml from './components/footer.html?raw';
 import homeHtml from './pages/index.html?raw';
 import servicesHtml from './pages/services.html?raw';
 import projectsHtml from './pages/projects.html?raw';
+import { projectPages } from './pages/project-case-studies.js';
 import teamHtml from './pages/team.html?raw';
 import careersHtml from './pages/careers.html?raw';
 import testimonialsHtml from './pages/testimonials.html?raw';
@@ -42,6 +43,7 @@ const pages = {
   '/services.html': servicesHtml,
   '/projects': projectsHtml,
   '/projects.html': projectsHtml,
+  ...projectPages,
   '/team': teamHtml,
   '/team.html': teamHtml,
   '/careers': careersHtml,
@@ -228,6 +230,7 @@ function canonicalUrl(pathname) {
 
 function pageKind(pathname) {
   const normalizedPath = normalizeSeoPath(pathname);
+  if (normalizedPath.startsWith('/projects/')) return 'project';
   if (normalizedPath.startsWith('/service-')) return 'service';
   if (normalizedPath === '/ai-agency-pakistan' || normalizedPath === '/ai-services-pakistan') return 'service';
   if (normalizedPath === '/contact') return 'contact';
@@ -486,8 +489,9 @@ function bodyContent(html) {
 
 function setActiveNav(pathname) {
   const current = pathname === '/' ? 'home' : pathname.replace(/^\//, '').replace('.html', '');
+  const activePage = current.startsWith('projects/') ? 'projects' : current;
   document.querySelectorAll('.nav-link[data-page]').forEach((link) => {
-    link.classList.toggle('active', link.dataset.page === current);
+    link.classList.toggle('active', link.dataset.page === activePage);
   });
 
   const servicesPages = [
@@ -1431,6 +1435,17 @@ function initScaleMotion() {
     return () => {};
   }
 
+  if (kind === 'project') {
+    graph.push({
+      '@type': 'CreativeWork',
+      '@id': `${url}#project`,
+      name: title.replace(' | Smart Scale Systems', ''),
+      description,
+      creator: { '@id': `${SITE_URL}/#organization` },
+      url,
+    });
+  }
+
   const accessibleLabel = headline.getAttribute('aria-label') || headline.textContent.trim();
   section.classList.add('scale-motion--ready');
   splitTextNodes(headline, 'chars');
@@ -1844,6 +1859,13 @@ const ROUTE_LABELS = {
 function routeLabel(pathname) {
   const normalized = normalizeSeoPath(pathname);
   if (ROUTE_LABELS[normalized]) return ROUTE_LABELS[normalized];
+  if (normalized.startsWith('/projects/')) {
+    return normalized
+      .replace('/projects/', '')
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
   if (normalized.startsWith('/service-')) {
     return normalized
       .replace('/service-', '')
@@ -1867,6 +1889,7 @@ function routeClassNames(pathname) {
   const classes = [`route-${slug}`];
 
   if (slug.startsWith('service-')) classes.push('route-service-detail');
+  if (slug.startsWith('projects-')) classes.push('route-project-detail');
   if (slug === 'ai-agency-pakistan' || slug === 'ai-services-pakistan') classes.push('route-market-page');
   if (slug === 'privacy-policy' || slug === 'terms-of-service') classes.push('route-legal');
   if (slug === '403' || slug === '404' || slug === '500') classes.push('route-error');
