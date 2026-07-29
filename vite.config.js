@@ -35,8 +35,23 @@ function gzipTextAssetsPlugin() {
   };
 }
 
+function sitesStaticWorkerPlugin() {
+  return {
+    name: 'sites-static-worker',
+    apply: 'build',
+    writeBundle() {
+      const serverDir = path.resolve(__dirname, 'dist', 'server');
+      fs.mkdirSync(serverDir, { recursive: true });
+      fs.copyFileSync(
+        path.resolve(__dirname, 'worker', 'sites-static.js'),
+        path.join(serverDir, 'index.js')
+      );
+    },
+  };
+}
+
 module.exports = defineConfig({
-  plugins: [react(), gzipTextAssetsPlugin()],
+  plugins: [react(), sitesStaticWorkerPlugin(), gzipTextAssetsPlugin()],
   server: {
     port: 3000,
     strictPort: true,

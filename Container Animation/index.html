@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A horizontally scrolling text animation powered by GSAP and ScrollTrigger."
+    />
+    <title>Horizontal Scroll Animation</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"
+    ></script>
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <main>
+      <section class="Horizontal" aria-label="Horizontal text animation">
+        <div class="container">
+          <h1 class="Horizontal__text heading-xl">
+            The containerAnimation property allows us to create ScrollTriggered
+            animations within a container that's animated horizontally. It's like
+            having nested ScrollTriggers!
+          </h1>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
