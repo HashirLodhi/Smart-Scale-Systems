@@ -50,8 +50,28 @@ function sitesStaticWorkerPlugin() {
   };
 }
 
+function sitesHostingMetadataPlugin() {
+  return {
+    name: 'sites-hosting-metadata',
+    apply: 'build',
+    writeBundle() {
+      const metadataDir = path.resolve(__dirname, 'dist', '.openai');
+      fs.mkdirSync(metadataDir, { recursive: true });
+      fs.copyFileSync(
+        path.resolve(__dirname, '.openai', 'hosting.json'),
+        path.join(metadataDir, 'hosting.json')
+      );
+    },
+  };
+}
+
 module.exports = defineConfig({
-  plugins: [react(), sitesStaticWorkerPlugin(), gzipTextAssetsPlugin()],
+  plugins: [
+    react(),
+    sitesStaticWorkerPlugin(),
+    sitesHostingMetadataPlugin(),
+    gzipTextAssetsPlugin(),
+  ],
   server: {
     port: 3000,
     strictPort: true,
