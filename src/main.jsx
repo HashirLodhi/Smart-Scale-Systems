@@ -876,31 +876,9 @@ function ReactSplineMounts({ contentKey }) {
   useEffect(() => {
     const splineMounts = mounts.filter((mount) => mount.dataset.splineUrl);
     if (!splineMounts.length) return undefined;
+    setVisibleMounts(splineMounts);
     primeSplineLoading(window.location.pathname);
-
-    if (!('IntersectionObserver' in window)) {
-      setVisibleMounts(splineMounts);
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      setVisibleMounts((current) => {
-        const next = new Set(current);
-
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) next.add(entry.target);
-          else next.delete(entry.target);
-        });
-
-        return Array.from(next);
-      });
-    }, {
-      rootMargin: '280px 0px',
-      threshold: 0.01,
-    });
-
-    splineMounts.forEach((mount) => observer.observe(mount));
-    return () => observer.disconnect();
+    return undefined;
   }, [mounts]);
 
   useEffect(() => {
@@ -1468,120 +1446,116 @@ function initScaleMotion() {
     return () => {};
   }
 
-  if (window.matchMedia('(max-width: 760px)').matches) {
-    section.classList.add('scale-motion--static');
-    return () => section.classList.remove('scale-motion--static');
-  }
-
+  const accessibleLabel = headline.getAttribute('aria-label') || headline.textContent.trim();
   section.classList.add('scale-motion--ready');
+  splitTextNodes(headline, 'chars');
+  headline.setAttribute('aria-label', accessibleLabel);
+
+  const chars = Array.from(headline.querySelectorAll('.gsap-char'));
+  chars.forEach((char) => char.setAttribute('aria-hidden', 'true'));
 
   const core = section.querySelector('.scale-object--core');
   const cube = section.querySelector('.scale-object--cube');
   const stack = section.querySelector('.scale-object--stack');
-  const phrases = Array.from(headline.children);
   const progressBar = section.querySelector('[data-scale-progress-bar]');
   const progressLabel = section.querySelector('[data-scale-progress-label]');
+  const clamp = gsap.utils.clamp(0, 1);
 
   const travelDistance = () => Math.max(
     headline.offsetLeft + headline.offsetWidth - window.innerWidth * 0.76,
     window.innerWidth * 1.8
   );
-  const scrollDistance = () => travelDistance() + window.innerHeight * 0.48;
+  const scrollDistance = () => travelDistance() + window.innerHeight * 0.72;
 
   const ctx = gsap.context(() => {
-    const setProgress = progressBar ? gsap.quickSetter(progressBar, 'scaleX') : null;
-    let lastProgressLabel = -1;
+    const updateScene = (progress) => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const lift = Math.sin(progress * Math.PI);
 
-    gsap.set([track, ...phrases, core, cube, stack].filter(Boolean), {
-      force3D: true,
-      backfaceVisibility: 'hidden',
-    });
+      if (core) {
+        gsap.set(core, {
+          x: width * (0.54 - progress * 1.14),
+          y: height * (-0.15 + lift * 0.19),
+          rotation: progress * 142,
+          scale: 0.76 + progress * 0.28,
+          opacity: 0.34 + lift * 0.54,
+        });
+      }
 
-    const timeline = gsap.timeline({
-      defaults: { ease: 'none' },
+      if (cube) {
+        const cubeProgress = clamp((progress - 0.08) / 0.92);
+        gsap.set(cube, {
+          x: width * (1.02 - cubeProgress * 1.58),
+          y: height * (0.22 - cubeProgress * 0.34),
+          rotation: -18 + cubeProgress * 190,
+          scale: 0.68 + Math.sin(cubeProgress * Math.PI) * 0.34,
+          opacity: clamp(Math.sin(cubeProgress * Math.PI) * 1.35),
+        });
+      }
+
+      if (stack) {
+        const stackProgress = clamp((progress - 0.22) / 0.78);
+        gsap.set(stack, {
+          x: width * (1.12 - stackProgress * 1.48),
+          y: height * (-0.2 + stackProgress * 0.26),
+          rotation: 12 - stackProgress * 118,
+          scale: 0.72 + Math.sin(stackProgress * Math.PI) * 0.28,
+          opacity: clamp(Math.sin(stackProgress * Math.PI) * 1.5),
+        });
+      }
+
+      if (progressBar) gsap.set(progressBar, { scaleX: progress });
+      if (progressLabel) {
+        progressLabel.textContent = String(Math.round(progress * 100)).padStart(2, '0');
+      }
+    };
+
+    updateScene(0);
+
+    const horizontalTween = gsap.to(track, {
+      x: () => -travelDistance(),
+      ease: 'none',
       scrollTrigger: {
         trigger: section,
         pin: stage,
         start: 'top top',
         end: () => `+=${scrollDistance()}`,
-        scrub: 0.55,
+        scrub: 1,
         anticipatePin: 1,
         invalidateOnRefresh: true,
-        fastScrollEnd: true,
-        onUpdate: (self) => {
-          if (setProgress) setProgress(self.progress);
-          const nextLabel = Math.round(self.progress * 100);
-          if (progressLabel && nextLabel !== lastProgressLabel) {
-            progressLabel.textContent = String(nextLabel).padStart(2, '0');
-            lastProgressLabel = nextLabel;
-          }
-        },
+        onUpdate: (self) => updateScene(self.progress),
       },
     });
 
-    timeline
-      .to(track, { x: () => -travelDistance(), duration: 1 }, 0)
-      .fromTo(
-        phrases,
-        { yPercent: 22, autoAlpha: 0.26 },
-        { yPercent: 0, autoAlpha: 1, stagger: 0.045, duration: 0.28 },
-        0.04
+    chars.forEach((char, index) => {
+      const direction = index % 2 === 0 ? -1 : 1;
+      gsap.fromTo(
+        char,
+        {
+          yPercent: direction * (82 + (index % 5) * 24),
+          rotationX: direction * (46 + (index % 4) * 9),
+          rotationZ: direction * (7 + (index % 3) * 3),
+          autoAlpha: 0.12,
+          filter: 'blur(10px)',
+        },
+        {
+          yPercent: 0,
+          rotationX: 0,
+          rotationZ: 0,
+          autoAlpha: 1,
+          filter: 'blur(0px)',
+          ease: 'back.out(1.35)',
+          scrollTrigger: {
+            trigger: char,
+            containerAnimation: horizontalTween,
+            start: 'left 94%',
+            end: 'left 43%',
+            scrub: 0.85,
+          },
+        }
       );
-
-    if (core) {
-      timeline.fromTo(core, {
-        x: () => window.innerWidth * 0.54,
-        y: () => -window.innerHeight * 0.15,
-        rotation: 0,
-        scale: 0.76,
-        autoAlpha: 0.34,
-      }, {
-        x: () => -window.innerWidth * 0.6,
-        y: () => window.innerHeight * 0.04,
-        rotation: 142,
-        scale: 1.04,
-        autoAlpha: 0.66,
-        duration: 1,
-      }, 0);
-    }
-
-    if (cube) {
-      timeline
-        .fromTo(cube, {
-          x: () => window.innerWidth * 0.96,
-          y: () => window.innerHeight * 0.2,
-          rotation: -18,
-          scale: 0.68,
-          autoAlpha: 0,
-        }, {
-          x: () => -window.innerWidth * 0.56,
-          y: () => -window.innerHeight * 0.12,
-          rotation: 172,
-          scale: 0.92,
-          duration: 0.88,
-        }, 0.08)
-        .to(cube, { autoAlpha: 0.82, duration: 0.18 }, 0.12)
-        .to(cube, { autoAlpha: 0, duration: 0.18 }, 0.8);
-    }
-
-    if (stack) {
-      timeline
-        .fromTo(stack, {
-          x: () => window.innerWidth * 1.08,
-          y: () => -window.innerHeight * 0.18,
-          rotation: 12,
-          scale: 0.72,
-          autoAlpha: 0,
-        }, {
-          x: () => -window.innerWidth * 0.36,
-          y: () => window.innerHeight * 0.06,
-          rotation: -106,
-          scale: 0.94,
-          duration: 0.76,
-        }, 0.2)
-        .to(stack, { autoAlpha: 0.78, duration: 0.16 }, 0.25)
-        .to(stack, { autoAlpha: 0, duration: 0.16 }, 0.82);
-    }
+    });
   }, section);
 
   ScrollTrigger.refresh();
