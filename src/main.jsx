@@ -5,6 +5,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './styles/style.css';
 import './styles/carousel.css';
+import './styles/redesign.css';
+import './styles/scale-motion.css';
 import navHtml from './components/nav.html?raw';
 import footerHtml from './components/footer.html?raw';
 import homeHtml from './pages/index.html?raw';
@@ -1419,6 +1421,136 @@ function splitTextNodes(element, mode) {
   element.dataset.gsapSplit = mode;
 }
 
+function initScaleMotion() {
+  const section = document.querySelector('.scale-motion');
+  const stage = section?.querySelector('.scale-motion__stage');
+  const track = section?.querySelector('.scale-motion__track');
+  const headline = section?.querySelector('.scale-motion__headline');
+
+  if (!section || !stage || !track || !headline || prefersReducedMotion()) {
+    return () => {};
+  }
+
+  const accessibleLabel = headline.getAttribute('aria-label') || headline.textContent.trim();
+  section.classList.add('scale-motion--ready');
+  splitTextNodes(headline, 'chars');
+  headline.setAttribute('aria-label', accessibleLabel);
+
+  const chars = Array.from(headline.querySelectorAll('.gsap-char'));
+  chars.forEach((char) => char.setAttribute('aria-hidden', 'true'));
+
+  const core = section.querySelector('.scale-object--core');
+  const cube = section.querySelector('.scale-object--cube');
+  const stack = section.querySelector('.scale-object--stack');
+  const progressBar = section.querySelector('[data-scale-progress-bar]');
+  const progressLabel = section.querySelector('[data-scale-progress-label]');
+  const clamp = gsap.utils.clamp(0, 1);
+
+  const travelDistance = () => Math.max(
+    headline.offsetLeft + headline.offsetWidth - window.innerWidth * 0.76,
+    window.innerWidth * 1.8
+  );
+  const scrollDistance = () => travelDistance() + window.innerHeight * 0.72;
+
+  const ctx = gsap.context(() => {
+    const updateScene = (progress) => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const lift = Math.sin(progress * Math.PI);
+
+      if (core) {
+        gsap.set(core, {
+          x: width * (0.54 - progress * 1.14),
+          y: height * (-0.15 + lift * 0.19),
+          rotation: progress * 142,
+          scale: 0.76 + progress * 0.28,
+          opacity: 0.34 + lift * 0.54,
+        });
+      }
+
+      if (cube) {
+        const cubeProgress = clamp((progress - 0.08) / 0.92);
+        gsap.set(cube, {
+          x: width * (1.02 - cubeProgress * 1.58),
+          y: height * (0.22 - cubeProgress * 0.34),
+          rotation: -18 + cubeProgress * 190,
+          scale: 0.68 + Math.sin(cubeProgress * Math.PI) * 0.34,
+          opacity: clamp(Math.sin(cubeProgress * Math.PI) * 1.35),
+        });
+      }
+
+      if (stack) {
+        const stackProgress = clamp((progress - 0.22) / 0.78);
+        gsap.set(stack, {
+          x: width * (1.12 - stackProgress * 1.48),
+          y: height * (-0.2 + stackProgress * 0.26),
+          rotation: 12 - stackProgress * 118,
+          scale: 0.72 + Math.sin(stackProgress * Math.PI) * 0.28,
+          opacity: clamp(Math.sin(stackProgress * Math.PI) * 1.5),
+        });
+      }
+
+      if (progressBar) gsap.set(progressBar, { scaleX: progress });
+      if (progressLabel) {
+        progressLabel.textContent = String(Math.round(progress * 100)).padStart(2, '0');
+      }
+    };
+
+    updateScene(0);
+
+    const horizontalTween = gsap.to(track, {
+      x: () => -travelDistance(),
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        pin: stage,
+        start: 'top top',
+        end: () => `+=${scrollDistance()}`,
+        scrub: 1,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => updateScene(self.progress),
+      },
+    });
+
+    chars.forEach((char, index) => {
+      const direction = index % 2 === 0 ? -1 : 1;
+      gsap.fromTo(
+        char,
+        {
+          yPercent: direction * (82 + (index % 5) * 24),
+          rotationX: direction * (46 + (index % 4) * 9),
+          rotationZ: direction * (7 + (index % 3) * 3),
+          autoAlpha: 0.12,
+          filter: 'blur(10px)',
+        },
+        {
+          yPercent: 0,
+          rotationX: 0,
+          rotationZ: 0,
+          autoAlpha: 1,
+          filter: 'blur(0px)',
+          ease: 'back.out(1.35)',
+          scrollTrigger: {
+            trigger: char,
+            containerAnimation: horizontalTween,
+            start: 'left 94%',
+            end: 'left 43%',
+            scrub: 0.85,
+          },
+        }
+      );
+    });
+  }, section);
+
+  ScrollTrigger.refresh();
+
+  return () => {
+    ctx.revert();
+    section.classList.remove('scale-motion--ready');
+  };
+}
+
 function initPremiumAnimations() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return () => {};
   const hoverCleanups = [];
@@ -1727,6 +1859,21 @@ function routeLabel(pathname) {
     .join(' ') || 'Home';
 }
 
+function routeClassNames(pathname) {
+  const normalized = normalizeSeoPath(pathname);
+  const slug = normalized === '/'
+    ? 'home'
+    : normalized.replace(/^\//, '').replace(/[^a-z0-9-]/g, '-');
+  const classes = [`route-${slug}`];
+
+  if (slug.startsWith('service-')) classes.push('route-service-detail');
+  if (slug === 'ai-agency-pakistan' || slug === 'ai-services-pakistan') classes.push('route-market-page');
+  if (slug === 'privacy-policy' || slug === 'terms-of-service') classes.push('route-legal');
+  if (slug === '403' || slug === '404' || slug === '500') classes.push('route-error');
+
+  return classes.join(' ');
+}
+
 function PageTransition() {
   return (
     <div className="page-transition" aria-hidden="true">
@@ -1969,14 +2116,14 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const cleanups = [initRevealAnimations(), initSplineLoader(), initCountUpStats(), initAiCanvases(), initCarousels(), initForms(), initPremiumAnimations()];
+    const cleanups = [initRevealAnimations(), initSplineLoader(), initCountUpStats(), initAiCanvases(), initCarousels(), initForms(), initScaleMotion(), initPremiumAnimations()];
     return () => cleanups.forEach((cleanup) => cleanup && cleanup());
   }, [content]);
 
   return (
     <>
       <Layout pathname={pathname}>
-        <div className="route-shell" key={pathname}>
+        <div className={`route-shell ${routeClassNames(pathname)}`} key={pathname} data-route={normalizeSeoPath(pathname)}>
           <main dangerouslySetInnerHTML={{ __html: content }} />
           <ReactSplineMounts contentKey={content} />
         </div>

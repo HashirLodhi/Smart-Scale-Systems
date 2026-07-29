@@ -1,0 +1,1043 @@
+/* ============================================================
+   SMART SCALE SYSTEMS — ROUTE UI REDESIGN
+   Preserves the original hierarchy and component order.
+   This layer only changes presentation, spacing, surfaces,
+   responsive composition, and rounded geometry.
+   ============================================================ */
+
+:root {
+  --ui-canvas: #e9eced;
+  --ui-white: #ffffff;
+  --ui-ink: #0d1012;
+  --ui-muted: #566064;
+  --ui-line: rgba(13, 16, 18, 0.11);
+  --ui-radius-xl: clamp(34px, 4vw, 54px);
+  --ui-radius-lg: clamp(28px, 3vw, 40px);
+  --ui-radius-md: 28px;
+  --ui-radius-sm: 18px;
+  --ui-shadow-soft: 0 24px 70px rgba(22, 30, 34, 0.08);
+  --ui-shadow-card: 0 18px 46px rgba(22, 30, 34, 0.07);
+}
+
+body {
+  background: var(--ui-canvas);
+}
+
+.route-shell {
+  --route-accent: rgba(171, 188, 194, 0.34);
+  --route-surface: #e5e9ea;
+  --route-card: #ffffff;
+  background: var(--ui-canvas);
+}
+
+.route-home { --route-accent: rgba(183, 201, 206, 0.26); --route-surface: #e1e6e7; }
+.route-services { --route-accent: rgba(148, 177, 188, 0.42); --route-surface: #dce4e6; }
+.route-projects { --route-accent: rgba(172, 188, 194, 0.28); --route-surface: #e1e5e6; }
+.route-team { --route-accent: rgba(195, 177, 164, 0.36); --route-surface: #e8e1dc; }
+.route-careers { --route-accent: rgba(177, 193, 161, 0.38); --route-surface: #e3e8df; }
+.route-testimonials { --route-accent: rgba(184, 172, 204, 0.36); --route-surface: #e6e1eb; }
+.route-contact { --route-accent: rgba(151, 188, 175, 0.38); --route-surface: #dfe9e5; }
+.route-service-ai-model-training { --route-accent: rgba(148, 176, 190, 0.4); }
+.route-service-ai-automation { --route-accent: rgba(171, 190, 151, 0.4); }
+.route-service-computer-vision { --route-accent: rgba(184, 163, 174, 0.38); }
+.route-service-nlp { --route-accent: rgba(173, 166, 201, 0.38); }
+.route-service-llm { --route-accent: rgba(153, 180, 190, 0.4); }
+.route-service-data-annotation { --route-accent: rgba(191, 177, 151, 0.38); }
+.route-service-ai-training-data { --route-accent: rgba(162, 190, 179, 0.4); }
+.route-service-custom { --route-accent: rgba(190, 170, 192, 0.36); }
+.route-market-page { --route-accent: rgba(194, 180, 151, 0.38); --route-surface: #e8e3d9; }
+.route-legal { --route-accent: rgba(178, 185, 188, 0.3); --route-surface: #e5e8e9; }
+
+.route-shell main {
+  padding: 12px;
+  background:
+    radial-gradient(circle at 7% 4%, rgba(255, 255, 255, 0.88), transparent 23%),
+    var(--ui-canvas);
+}
+
+.route-shell main > section {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.route-shell main > section:last-child {
+  margin-bottom: 0;
+}
+
+/* Rounded geometry is enforced across every route. */
+:is(
+  .sticky-wrap,
+  .page-hero,
+  .content-section,
+  .team-cinematic-intro,
+  .team-members-section,
+  .projects-hero,
+  .projects-intro,
+  .projects-showcase,
+  .projects-cta,
+  .home-ai-showcase,
+  .error-page
+) {
+  border-radius: var(--ui-radius-xl);
+}
+
+:is(
+  .spline-wrapper,
+  .team-hero-spline-shell,
+  .ai-network-shell,
+  .carousel-scene,
+  .services-motion-board,
+  .services-motion-viewport,
+  .service-choice-shell,
+  .why-card,
+  .industry-card,
+  .service-card,
+  .service-full-card,
+  .service-choice-card,
+  .offering-card,
+  .use-case-card,
+  .related-card,
+  .career-card,
+  .testimonial-full-card,
+  .contact-form-wrap,
+  .contact-info-wrap,
+  .contact-info-card,
+  .contact-trust-item,
+  .stats-row,
+  .legal-content,
+  .team-member-row,
+  .team-member-photo,
+  .project-feature,
+  .project-stage,
+  .project-card,
+  .project-card-visual,
+  .project-catalog-card,
+  .agentic-stage,
+  .error-page-inner
+) {
+  border-radius: var(--ui-radius-md) !important;
+}
+
+:is(
+  .motion-tile,
+  .service-icon,
+  .why-icon,
+  .industry-icon,
+  .offering-icon,
+  .contact-info-icon,
+  .author-avatar,
+  .form-error,
+  .form-success,
+  .agentic-node,
+  .rag-node,
+  .automation-step,
+  .doc-cursor
+) {
+  border-radius: var(--ui-radius-sm) !important;
+}
+
+.spline-wrapper :is(.react-spline-viewer, .spline-loader),
+.team-hero-spline-shell :is(.react-spline-viewer, .spline-loader) {
+  border-radius: inherit !important;
+}
+
+:is(
+  .btn-primary,
+  .btn-ghost,
+  .nav-cta,
+  .footer-cta-btn,
+  .career-apply-btn,
+  .section-tag,
+  .sfc-tags span,
+  .career-tag,
+  .team-member-skills span,
+  .testimonial-service-tag,
+  .project-capabilities span,
+  .projects-cta-link
+) {
+  border-radius: 999px !important;
+}
+
+:is(input, textarea, select) {
+  border-radius: var(--ui-radius-sm) !important;
+}
+
+/* Keep original hierarchy; refine the shared section presentation. */
+.content-section {
+  padding: clamp(92px, 9vw, 132px) clamp(24px, 5vw, 68px);
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 91% 8%, var(--route-accent), transparent 25%),
+    #ffffff;
+}
+
+.content-section.alt {
+  background:
+    radial-gradient(circle at 8% 88%, rgba(255, 255, 255, 0.68), transparent 28%),
+    var(--route-surface);
+}
+
+.section-inner {
+  max-width: 1160px;
+}
+
+.section-title {
+  font-weight: 600;
+  letter-spacing: -0.045em;
+}
+
+.section-inner > .section-title {
+  max-width: 830px;
+}
+
+.section-inner > .section-body {
+  max-width: 640px;
+  color: var(--ui-muted);
+}
+
+.section-tag {
+  padding: 8px 15px;
+  color: rgba(20, 27, 31, 0.64);
+  background: rgba(255, 255, 255, 0.64);
+  border-color: rgba(20, 27, 31, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+}
+
+.cta-section {
+  color: #ffffff;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 80% 18%, var(--route-accent), transparent 27%),
+    #0d1012;
+  background-size: 58px 58px, 58px 58px, auto, auto;
+}
+
+.cta-section :is(.section-title, .section-body) {
+  color: #ffffff;
+}
+
+.cta-section .section-body {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.cta-section .section-tag {
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.cta-section .btn-primary {
+  color: #0d1012;
+  background: #ffffff;
+}
+
+.cta-section .btn-ghost {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* All standard page heroes preserve their centered H1 hierarchy. */
+.route-shell:not(.route-home):not(.route-projects):not(.route-error) .page-hero {
+  min-height: clamp(610px, 74vh, 790px);
+  padding: clamp(170px, 16vw, 215px) clamp(26px, 5vw, 72px) clamp(90px, 10vw, 125px);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    linear-gradient(rgba(24, 32, 36, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(24, 32, 36, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 82% 25%, var(--route-accent), transparent 30%),
+    radial-gradient(circle at 14% 82%, rgba(255, 255, 255, 0.78), transparent 28%),
+    linear-gradient(145deg, #fafbfb 0%, var(--route-surface) 100%);
+  background-size: 64px 64px, 64px 64px, auto, auto, auto;
+}
+
+.route-shell:not(.route-home):not(.route-projects):not(.route-error) .page-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(48vw, 620px);
+  aspect-ratio: 1;
+  right: -15%;
+  top: -28%;
+  border: 1px solid rgba(20, 28, 32, 0.09);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 70px rgba(255, 255, 255, 0.1),
+    0 0 0 140px rgba(20, 28, 32, 0.025);
+}
+
+.route-shell:not(.route-home):not(.route-projects):not(.route-error) .page-hero-inner {
+  width: 100%;
+  max-width: 1160px;
+}
+
+.route-shell:not(.route-home):not(.route-projects):not(.route-error) .page-hero-content {
+  max-width: 800px;
+}
+
+.route-shell:not(.route-home):not(.route-projects):not(.route-error) .page-hero-title {
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.06em;
+}
+
+.route-shell:not(.route-home):not(.route-projects):not(.route-error) .page-hero-subtitle {
+  max-width: 610px;
+  color: rgba(25, 33, 37, 0.72);
+}
+
+.route-shell:not(.route-home):not(.route-projects):not(.route-error) .page-hero-orb {
+  right: -80px;
+  top: -40px;
+  width: 460px;
+  height: 460px;
+  opacity: 0.46;
+}
+
+/* HOME */
+.route-home .sticky-wrap {
+  height: calc(100vh - 24px);
+  min-height: 720px;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 74% 45%, var(--route-accent), transparent 28%),
+    #0b0e10;
+  background-size: 66px 66px, 66px 66px, auto, auto;
+}
+
+.route-home .orb {
+  opacity: 0.24;
+}
+
+.route-home .hero-overlay {
+  grid-template-columns: minmax(0, 0.95fr) minmax(390px, 1.05fr);
+  gap: clamp(34px, 5vw, 72px);
+  padding: 132px clamp(30px, 6vw, 86px) 52px;
+}
+
+.route-home .hero-left {
+  max-width: 700px;
+  padding: clamp(28px, 4vw, 52px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--ui-radius-lg);
+  color: #ffffff;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.025));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(20px);
+}
+
+.route-home .hero-title {
+  color: #ffffff;
+  font-size: clamp(4rem, 7.3vw, 7.7rem);
+  font-weight: 600;
+  line-height: 0.87;
+  letter-spacing: -0.065em;
+}
+
+.route-home .hero-title-accent {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.route-home .hero-subtitle {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.route-home .hero-left .btn-primary {
+  color: #0d1012;
+  background: #ffffff;
+}
+
+.route-home .hero-left .btn-ghost {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.route-home .trust-strip {
+  width: 100%;
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.route-home .trust-item {
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.route-home .trust-item svg {
+  color: #ffffff;
+}
+
+.route-home .hero-right {
+  height: min(69vh, 680px);
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--ui-radius-lg);
+  background:
+    radial-gradient(circle at 50% 45%, rgba(191, 210, 215, 0.12), transparent 40%),
+    rgba(255, 255, 255, 0.025);
+  overflow: hidden;
+}
+
+.route-home .spline-wrapper {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: calc(var(--ui-radius-lg) - 8px) !important;
+}
+
+.route-home :is(.home-proof-section, .home-industries-section) {
+  padding-top: clamp(100px, 10vw, 145px);
+}
+
+.route-home :is(.why-card, .industry-card) {
+  border-radius: 30px !important;
+  box-shadow: var(--ui-shadow-card);
+}
+
+.route-home .home-end-showcase {
+  min-height: 500px;
+  overflow: hidden;
+  background-color: #070908;
+}
+
+/* SERVICES */
+.route-services .services-hero {
+  background:
+    linear-gradient(rgba(25, 37, 42, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(25, 37, 42, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.82), transparent 30%),
+    radial-gradient(circle at 82% 35%, var(--route-accent), transparent 32%),
+    #dce4e6;
+  background-size: 58px 58px, 58px 58px, auto, auto, auto;
+}
+
+.services-catalog-section {
+  background:
+    radial-gradient(circle at 88% 8%, rgba(255, 255, 255, 0.7), transparent 22%),
+    #dfe5e6;
+}
+
+.route-services .services-motion-board {
+  border-radius: 40px !important;
+  box-shadow: var(--ui-shadow-soft);
+}
+
+.route-services .services-motion-viewport {
+  border-radius: 34px !important;
+}
+
+.route-services .motion-tile {
+  border-radius: 22px !important;
+}
+
+.route-services .service-choice-shell {
+  border-radius: 42px !important;
+  box-shadow: var(--ui-shadow-soft);
+}
+
+.route-services .service-choice-card {
+  border-radius: 28px !important;
+}
+
+.route-services .service-choice-card:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.92);
+}
+
+/* PROJECTS — retain the approved hierarchy, round every exposed vertex. */
+.route-projects main > section {
+  overflow: hidden;
+}
+
+.route-projects .project-feature {
+  padding: 12px;
+  gap: 12px;
+  border-radius: 40px !important;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: var(--ui-shadow-soft);
+}
+
+.route-projects :is(.project-stage, .project-catalog-card) {
+  border-radius: 30px !important;
+}
+
+.route-projects :is(.agentic-stage, .agentic-node, .project-catalog-head, .project-catalog-signal i) {
+  border-radius: 18px;
+}
+
+.route-projects .projects-cta-link {
+  padding: 13px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.route-projects .project-stage {
+  background-color: #0b0e10;
+}
+
+.route-projects :is(.project-meta, .project-catalog-head, .projects-kicker) {
+  color: #596267;
+}
+
+.route-projects :is(.stage-topline, .stage-bottomline, .projects-hero-index > span, .projects-hero-index small) {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.route-projects .project-catalog-card-dark .project-catalog-head,
+.route-projects .project-visual-data small {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* TEAM */
+.route-team .team-page-hero {
+  background:
+    linear-gradient(rgba(38, 31, 27, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(38, 31, 27, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 75% 28%, var(--route-accent), transparent 31%),
+    #e8e1dc;
+  background-size: 62px 62px, 62px 62px, auto, auto;
+}
+
+.route-team .team-page-hero .page-hero-inner {
+  grid-template-columns: minmax(0, 1fr) minmax(390px, 0.82fr);
+  gap: clamp(48px, 7vw, 100px);
+}
+
+.route-team .team-page-hero .page-hero-content {
+  text-align: left;
+}
+
+.route-team .team-page-hero .page-hero-subtitle {
+  margin-inline: 0;
+}
+
+.route-team .team-hero-spline-shell {
+  min-height: 490px;
+  overflow: hidden;
+  border: 1px solid rgba(29, 23, 20, 0.11);
+  border-radius: 40px !important;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.8), transparent 42%),
+    rgba(255, 255, 255, 0.32);
+  box-shadow: var(--ui-shadow-soft);
+}
+
+.route-team .team-cinematic-intro {
+  overflow: hidden;
+  color: #ffffff;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(193, 177, 165, 0.12), transparent 30%),
+    #0e1113;
+  background-size: 58px 58px, 58px 58px, auto, auto;
+}
+
+.route-team .team-cinematic-line,
+.route-team .team-cin-line-2 {
+  color: #ffffff;
+  text-shadow: 0 8px 34px rgba(0, 0, 0, 0.28);
+}
+
+.route-team .team-cinematic-sub {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.route-team .team-members-section {
+  padding: 12px;
+  background: transparent;
+}
+
+.route-team .team-member-row {
+  max-width: 1240px;
+  min-height: 650px;
+  margin: 0 auto 12px;
+  padding: clamp(40px, 6vw, 80px);
+  overflow: hidden;
+  border: 1px solid var(--ui-line);
+  border-radius: 42px !important;
+  background:
+    radial-gradient(circle at 16% 18%, rgba(209, 199, 192, 0.28), transparent 27%),
+    #ffffff;
+}
+
+.route-team .team-member-row:nth-child(even) {
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 84% 18%, rgba(194, 178, 166, 0.14), transparent 27%),
+    #111416;
+}
+
+.route-team .team-member-row:nth-child(even) :is(.team-member-name, .team-member-role) {
+  color: #ffffff;
+}
+
+.route-team .team-member-row:nth-child(even) .team-member-bio {
+  color: rgba(255, 255, 255, 0.57);
+}
+
+.route-team .team-member-row:nth-child(even) .team-member-skills span {
+  color: rgba(255, 255, 255, 0.72);
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.route-team .team-member-photo {
+  overflow: hidden;
+  border-radius: 36px !important;
+}
+
+/* CAREERS */
+.route-careers .careers-hero {
+  background:
+    linear-gradient(rgba(33, 39, 29, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(33, 39, 29, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 76% 30%, var(--route-accent), transparent 32%),
+    #e3e8df;
+  background-size: 64px 64px, 64px 64px, auto, auto;
+}
+
+.careers-benefits-section {
+  background:
+    radial-gradient(circle at 10% 12%, rgba(255, 255, 255, 0.7), transparent 24%),
+    #e3e8df;
+}
+
+.route-careers .why-card {
+  border-radius: 30px !important;
+  box-shadow: var(--ui-shadow-card);
+}
+
+.route-careers .why-icon {
+  background: rgba(180, 194, 166, 0.28);
+}
+
+/* TESTIMONIALS */
+.route-testimonials .testimonials-hero {
+  background:
+    linear-gradient(rgba(36, 29, 42, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(36, 29, 42, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 78% 30%, var(--route-accent), transparent 33%),
+    #e6e1eb;
+  background-size: 62px 62px, 62px 62px, auto, auto;
+}
+
+.route-testimonials .stats-row {
+  overflow: hidden;
+  border-radius: 32px !important;
+  box-shadow: var(--ui-shadow-soft);
+}
+
+.route-testimonials .stat {
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.route-testimonials .stat:hover {
+  background: #ffffff;
+}
+
+.testimonials-stories-section {
+  background:
+    radial-gradient(circle at 88% 8%, rgba(255, 255, 255, 0.68), transparent 24%),
+    #e5e1e9;
+}
+
+.route-testimonials .testimonial-full-card {
+  border-radius: 30px !important;
+  box-shadow: var(--ui-shadow-card);
+}
+
+.route-testimonials .testimonial-stars {
+  color: #806817;
+}
+
+.route-testimonials .author-avatar {
+  border-radius: 50% !important;
+  background-color: #303639;
+}
+
+/* CONTACT */
+.route-contact .contact-hero {
+  background:
+    linear-gradient(rgba(25, 39, 34, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(25, 39, 34, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 78% 30%, var(--route-accent), transparent 33%),
+    #dfe9e5;
+  background-size: 62px 62px, 62px 62px, auto, auto;
+}
+
+.contact-workspace-section {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.74), transparent 24%),
+    #dfe8e5;
+}
+
+.route-contact .contact-layout {
+  gap: 14px;
+  align-items: stretch;
+}
+
+.route-contact :is(.contact-form-wrap, .contact-info-wrap) {
+  padding: clamp(30px, 5vw, 56px);
+  border-radius: 36px !important;
+}
+
+.route-contact .contact-form-wrap {
+  border: 1px solid var(--ui-line);
+  background: #ffffff;
+  box-shadow: var(--ui-shadow-soft);
+}
+
+.route-contact .contact-info-wrap {
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 82% 16%, rgba(153, 190, 177, 0.17), transparent 25%),
+    #101315;
+}
+
+.route-contact .contact-info-title {
+  color: #ffffff;
+}
+
+.route-contact .contact-info-card {
+  border-color: rgba(255, 255, 255, 0.12);
+  border-radius: 22px !important;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.route-contact .contact-info-card :is(strong, a, span) {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.route-contact .contact-info-icon {
+  color: #111416;
+  background: #edf3f1;
+}
+
+.route-contact :is(input, textarea, select) {
+  min-height: 54px;
+  padding-inline: 17px;
+  border-radius: 16px !important;
+  background: #f2f5f4;
+}
+
+.route-contact textarea {
+  min-height: 150px;
+  padding-top: 16px;
+}
+
+.contact-trust-section {
+  background: #ffffff;
+}
+
+.route-contact .contact-trust-item {
+  border-radius: 28px !important;
+}
+
+/* Every service detail route */
+.route-service-detail .service-page-hero {
+  background:
+    linear-gradient(rgba(27, 36, 40, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 36, 40, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 50% 22%, rgba(255, 255, 255, 0.78), transparent 27%),
+    radial-gradient(circle at 80% 32%, var(--route-accent), transparent 31%),
+    #e4e9ea;
+  background-size: 60px 60px, 60px 60px, auto, auto, auto;
+}
+
+.route-service-detail .content-section:nth-of-type(even):not(.cta-section) {
+  background:
+    radial-gradient(circle at 10% 85%, rgba(255, 255, 255, 0.67), transparent 26%),
+    #e2e7e8;
+}
+
+.route-service-detail :is(.offering-card, .use-case-card, .related-card) {
+  border-radius: 28px !important;
+  box-shadow: var(--ui-shadow-card);
+}
+
+.route-service-detail :is(.offering-grid, .use-cases-grid, .related-grid) {
+  gap: 16px;
+}
+
+.route-service-detail .carousel-scene {
+  border-radius: 36px !important;
+}
+
+/* Pakistan market pages */
+.route-market-page .page-hero {
+  background:
+    linear-gradient(rgba(43, 35, 22, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(43, 35, 22, 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 78% 30%, var(--route-accent), transparent 32%),
+    #e8e3d9;
+  background-size: 64px 64px, 64px 64px, auto, auto;
+}
+
+.route-market-page .service-full-card {
+  border-radius: 28px !important;
+  box-shadow: var(--ui-shadow-card);
+}
+
+/* Legal information */
+.route-legal .legal-content {
+  max-width: 900px;
+  padding: clamp(30px, 5vw, 64px);
+  border: 1px solid var(--ui-line);
+  border-radius: 38px !important;
+  background: #ffffff;
+  box-shadow: var(--ui-shadow-soft);
+}
+
+.route-legal .legal-content h2:not(:first-child) {
+  padding-top: 30px;
+  border-top: 1px solid rgba(13, 16, 18, 0.08);
+}
+
+/* Error routes */
+.route-error .error-page {
+  overflow: hidden;
+  border-radius: var(--ui-radius-xl);
+}
+
+.route-error .error-page-inner {
+  border-radius: 36px !important;
+}
+
+/* Existing carousel/card components */
+.carousel-btn {
+  border-radius: 50% !important;
+  box-shadow: 0 12px 28px rgba(20, 27, 31, 0.1);
+}
+
+:is(
+  .why-card,
+  .industry-card,
+  .offering-card,
+  .use-case-card,
+  .related-card,
+  .testimonial-full-card,
+  .contact-trust-item
+) {
+  overflow: hidden;
+  border-radius: 28px !important;
+}
+
+/* Footer remains in its original hierarchy, now presented as a rounded finale. */
+.footer {
+  margin: 0 12px 12px;
+  padding: clamp(60px, 7vw, 92px) clamp(28px, 6vw, 78px);
+  overflow: hidden;
+  border-radius: var(--ui-radius-xl);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    #090b0d;
+  background-size: 60px 60px;
+}
+
+.footer-inner {
+  max-width: 1160px;
+}
+
+.footer-socials a {
+  border-radius: 50% !important;
+}
+
+.footer .footer-desc {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.footer :is(.footer-legal-links a, .footer-links-group a, .footer-links-group span, .footer-copy) {
+  color: rgba(255, 255, 255, 0.64);
+}
+
+.footer .social-link {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.footer-cta-btn {
+  padding: 12px 17px !important;
+}
+
+/* Responsive: hierarchy and order remain unchanged. */
+@media (max-width: 1024px) {
+  .route-home .hero-overlay {
+    grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+    padding-inline: 34px;
+  }
+
+  .route-home .hero-title {
+    font-size: clamp(3.5rem, 7vw, 5.9rem);
+  }
+
+  .route-team .team-page-hero .page-hero-inner {
+    grid-template-columns: 1fr 0.85fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .route-shell main {
+    padding: 8px;
+  }
+
+  .route-shell main > section {
+    margin-bottom: 8px;
+  }
+
+  .route-home .sticky-wrap {
+    height: auto;
+    min-height: 960px;
+  }
+
+  .route-home .hero-overlay {
+    position: relative;
+    min-height: 960px;
+    grid-template-columns: 1fr;
+    align-content: start;
+    padding: 130px 24px 44px;
+  }
+
+  .route-home .hero-left {
+    width: min(100%, 720px);
+    margin-inline: auto;
+  }
+
+  .route-home .hero-right {
+    width: min(100%, 720px);
+    height: 420px;
+    margin-inline: auto;
+  }
+
+  .route-team .team-page-hero .page-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .route-team .team-page-hero .page-hero-content {
+    text-align: center;
+  }
+
+  .route-team .team-page-hero .page-hero-subtitle {
+    margin-inline: auto;
+  }
+
+  .route-team .team-hero-spline-shell {
+    min-height: 410px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --ui-radius-xl: 32px;
+    --ui-radius-lg: 28px;
+    --ui-radius-md: 23px;
+  }
+
+  .content-section {
+    padding: 80px 24px;
+  }
+
+  .route-shell:not(.route-home):not(.route-projects):not(.route-error) .page-hero {
+    min-height: 610px;
+    padding: 145px 24px 75px;
+    background-size: 44px 44px, 44px 44px, auto, auto, auto;
+  }
+
+  .route-shell:not(.route-home):not(.route-projects):not(.route-error) .page-hero-title {
+    font-size: clamp(3rem, 13vw, 4.8rem);
+  }
+
+  .route-home .sticky-wrap,
+  .route-home .hero-overlay {
+    min-height: 930px;
+  }
+
+  .route-home .hero-overlay {
+    padding: 122px 16px 38px;
+  }
+
+  .route-home .hero-left {
+    padding: 28px 22px;
+  }
+
+  .route-home .hero-title {
+    font-size: clamp(3.1rem, 14vw, 4.7rem);
+  }
+
+  .route-home .hero-right {
+    height: 360px;
+  }
+
+  .route-home .trust-strip {
+    gap: 10px;
+  }
+
+  .route-team .team-member-row {
+    padding: 40px 24px;
+    border-radius: 30px !important;
+  }
+
+  .route-contact :is(.contact-form-wrap, .contact-info-wrap) {
+    padding: 30px 24px;
+  }
+
+  .footer {
+    margin: 0 8px 8px;
+    padding: 62px 24px;
+  }
+
+  .nav-inner:has(.nav-links.open),
+  .nav.compact-mobile .nav-inner:has(.nav-links.open) {
+    inset: 8px;
+    width: auto;
+    max-width: none;
+    min-height: calc(100dvh - 16px);
+    border-radius: 28px;
+    overflow: hidden;
+  }
+
+  .nav-links,
+  .nav-links.open {
+    border-radius: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .route-shell main {
+    padding: 6px;
+  }
+
+  .route-shell main > section {
+    margin-bottom: 6px;
+  }
+
+  .route-home .hero-left {
+    padding-inline: 18px;
+  }
+
+  .route-home .hero-right {
+    height: 320px;
+  }
+
+  .route-home .hero-actions a {
+    justify-content: center;
+  }
+
+  .route-home .trust-strip {
+    flex-wrap: wrap;
+  }
+
+  .route-home .trust-dot {
+    display: none;
+  }
+}
