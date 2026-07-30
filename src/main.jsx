@@ -21,6 +21,10 @@ import aiAgencyPakistanHtml from './pages/ai-agency-pakistan.html?raw';
 import aiServicesPakistanHtml from './pages/ai-services-pakistan.html?raw';
 import modelTrainingHtml from './pages/service-ai-model-training.html?raw';
 import automationHtml from './pages/service-ai-automation.html?raw';
+import customAgentsHtml from './pages/service-custom-ai-agents.html?raw';
+import dataAnalyticsHtml from './pages/service-data-analytics.html?raw';
+import aiIntegrationsHtml from './pages/service-ai-integrations.html?raw';
+import businessAutomationsHtml from './pages/service-business-automations.html?raw';
 import computerVisionHtml from './pages/service-computer-vision.html?raw';
 import nlpHtml from './pages/service-nlp.html?raw';
 import llmHtml from './pages/service-llm.html?raw';
@@ -60,6 +64,14 @@ const pages = {
   '/service-ai-model-training.html': modelTrainingHtml,
   '/service-ai-automation': automationHtml,
   '/service-ai-automation.html': automationHtml,
+  '/service-custom-ai-agents': customAgentsHtml,
+  '/service-custom-ai-agents.html': customAgentsHtml,
+  '/service-data-analytics': dataAnalyticsHtml,
+  '/service-data-analytics.html': dataAnalyticsHtml,
+  '/service-ai-integrations': aiIntegrationsHtml,
+  '/service-ai-integrations.html': aiIntegrationsHtml,
+  '/service-business-automations': businessAutomationsHtml,
+  '/service-business-automations.html': businessAutomationsHtml,
   '/service-computer-vision': computerVisionHtml,
   '/service-computer-vision.html': computerVisionHtml,
   '/service-nlp': nlpHtml,
@@ -185,6 +197,26 @@ const SEO_OVERRIDES = {
     title: 'AI Automation | Business Workflow Automation',
     description: 'AI automation services in Pakistan for workflows, AI agents, CRM automation, lead generation, operations, and business process automation.',
     keywords: 'AI automation Pakistan, AI agents Pakistan, business process automation Pakistan, CRM automation Pakistan, workflow automation Pakistan',
+  },
+  '/service-custom-ai-agents': {
+    title: 'Custom AI Agents | Smart Scale Systems',
+    description: 'Custom AI agent development for lead qualification, customer support, internal operations, task execution, and integrated business workflows.',
+    keywords: 'custom AI agents Pakistan, AI agents Pakistan, agentic workflows Pakistan, AI assistants Pakistan',
+  },
+  '/service-data-analytics': {
+    title: 'Data Analytics | Smart Scale Systems',
+    description: 'Data analytics services for dashboards, reporting, forecasting, KPI tracking, and decision support.',
+    keywords: 'data analytics Pakistan, business dashboards Pakistan, KPI tracking Pakistan, reporting automation Pakistan',
+  },
+  '/service-ai-integrations': {
+    title: 'AI Integration for Websites & Apps | Smart Scale Systems',
+    description: 'AI integration services for websites and apps, including smart search, assistants, recommendations, and workflow automation.',
+    keywords: 'AI integration Pakistan, website AI Pakistan, app AI integration Pakistan, AI product features Pakistan',
+  },
+  '/service-business-automations': {
+    title: 'Business Automations | Smart Scale Systems',
+    description: 'Business automation services for sales, support, operations, reporting, and system connections.',
+    keywords: 'business automation Pakistan, workflow automation Pakistan, sales automation Pakistan, support automation Pakistan',
   },
   '/service-computer-vision': {
     title: 'Computer Vision | Image and Video AI',
