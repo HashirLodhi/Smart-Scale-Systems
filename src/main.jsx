@@ -128,14 +128,14 @@ primeSplineLoading(normalizeRoutePath(window.location.pathname));
 const SITE_URL = 'https://smartscalesystems.com';
 const LOGO_IMAGE = `${SITE_URL}/logo-main.png`;
 const SOCIAL_IMAGE = `${SITE_URL}/og.png`;
-const DEFAULT_DESCRIPTION = 'Smart Scale Systems helps businesses scale smarter with AI model training, automation, computer vision, NLP, LLM solutions, data annotation, and AI training data creation.';
-const DEFAULT_KEYWORDS = 'AI services, AI model training, AI automation, computer vision, NLP, LLMs, data annotation, AI training data, machine learning datasets, RLHF';
-const PAKISTAN_KEYWORDS = 'AI agency in Pakistan, AI services in Pakistan, artificial intelligence company Pakistan, AI automation Pakistan, AI model training Pakistan, computer vision services Pakistan, NLP services Pakistan, LLM solutions Pakistan, data annotation Pakistan, AI training data Pakistan, machine learning services Pakistan';
+const DEFAULT_DESCRIPTION = 'Smart Scale Systems builds custom AI agents, data analytics, AI integrations for websites and apps, business automations, and practical AI systems that remove manual work.';
+const DEFAULT_KEYWORDS = 'custom AI agents, data analytics, AI website integration, AI app integration, business automation, AI services, AI consulting, AI model training, data annotation';
+const PAKISTAN_KEYWORDS = 'AI agency in Pakistan, AI services in Pakistan, artificial intelligence company Pakistan, custom AI agents Pakistan, data analytics Pakistan, AI integration Pakistan, business automation Pakistan, AI model training Pakistan, data annotation Pakistan';
 
 const SEO_OVERRIDES = {
   '/': {
     title: 'Smart Scale Systems | AI Agency in Pakistan',
-    description: 'Smart Scale Systems is an AI agency in Pakistan for automation, model training, computer vision, NLP, LLMs and data annotation.',
+    description: 'Smart Scale Systems is an AI agency in Pakistan for custom AI agents, data analytics, website and app integrations, business automations, model training, and data annotation.',
     keywords: PAKISTAN_KEYWORDS,
   },
   '/services': {
@@ -168,12 +168,12 @@ const SEO_OVERRIDES = {
   },
   '/ai-agency-pakistan': {
     title: 'AI Agency in Pakistan | AI Development Company',
-    description: 'Looking for an AI agency in Pakistan? Smart Scale Systems builds AI automation, machine learning models, LLM systems, computer vision pipelines, NLP solutions, and training datasets.',
+    description: 'Looking for an AI agency in Pakistan? Smart Scale Systems builds custom AI agents, data analytics systems, AI website and app integrations, business automations, and training datasets.',
     keywords: PAKISTAN_KEYWORDS,
   },
   '/ai-services-pakistan': {
     title: 'AI Services in Pakistan | Automation, Models and Data',
-    description: 'Smart Scale Systems provides AI services in Pakistan for startups and businesses, including model training, AI automation, computer vision, NLP, LLM solutions, annotation, and training data.',
+    description: 'Smart Scale Systems provides AI services in Pakistan for startups and businesses, including custom AI agents, data analytics, AI integrations, business automations, annotation, and training data.',
     keywords: PAKISTAN_KEYWORDS,
   },
   '/service-ai-model-training': {
@@ -261,7 +261,7 @@ function buildStructuredData({ title, description, url, kind }) {
     url: SITE_URL,
     email: 'contact@smartscalesystems.tech',
     logo: LOGO_IMAGE,
-    description: 'AI services agency delivering model training, automation, computer vision, NLP, LLM solutions, and data annotation at scale.',
+    description: 'AI services agency delivering custom AI agents, data analytics, AI integrations, business automations, model training, and data annotation at scale.',
     areaServed: {
       '@type': 'Country',
       name: 'Pakistan',
@@ -269,11 +269,11 @@ function buildStructuredData({ title, description, url, kind }) {
     knowsAbout: [
       'AI automation',
       'AI model training',
-      'Computer vision',
-      'Natural language processing',
-      'Large language models',
+      'Custom AI agents',
+      'Data analytics',
+      'AI integrations for websites and apps',
+      'Business automation',
       'Data annotation',
-      'AI training data',
     ],
   };
 
@@ -299,8 +299,8 @@ function buildStructuredData({ title, description, url, kind }) {
         'Custom AI agents',
         'Data analytics',
         'AI integrations for websites and apps',
-        'Data annotation',
         'Business automation',
+        'Data annotation',
       ],
     },
     {
@@ -353,13 +353,13 @@ function buildStructuredData({ title, description, url, kind }) {
       '@id': `${url}#offer-catalog`,
       name: 'AI Services in Pakistan',
       itemListElement: [
+        'Custom AI Agents',
+        'Data Analytics',
+        'AI Integration for Websites & Apps',
+        'Business Automations',
         'AI Model Training',
         'AI Automation',
-        'Computer Vision',
-        'NLP Services',
-        'LLM Solutions',
         'Data Annotation',
-        'AI Training Data',
         'Custom AI Solutions',
       ].map((name) => ({
         '@type': 'Offer',
@@ -383,7 +383,7 @@ function buildStructuredData({ title, description, url, kind }) {
           name: 'What makes Smart Scale Systems an AI agency in Pakistan?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Smart Scale Systems provides AI services for businesses in Pakistan and global clients, including automation, model training, computer vision, NLP, LLM solutions, data annotation, and AI training data.',
+            text: 'Smart Scale Systems provides AI services for businesses in Pakistan and global clients, including custom AI agents, data analytics, AI integrations, business automations, model training, and data annotation.',
           },
         },
         {
@@ -399,7 +399,7 @@ function buildStructuredData({ title, description, url, kind }) {
           name: 'Can you create datasets for AI model training?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Yes. Smart Scale Systems creates, cleans, annotates, reviews, and structures datasets for machine learning, computer vision, NLP, LLM evaluation, and custom AI systems.',
+            text: 'Yes. Smart Scale Systems creates, cleans, annotates, reviews, and structures datasets for machine learning and custom AI systems.',
           },
         },
       ],
