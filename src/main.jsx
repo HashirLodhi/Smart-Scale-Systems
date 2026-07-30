@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createPortal } from 'react-dom';
 import { gsap } from 'gsap';
@@ -529,13 +529,28 @@ function prefersReducedMotion() {
 }
 
 function scrollToPageTop({ smooth = false } = {}) {
-  window.requestAnimationFrame(() => {
+  const resetScroll = () => {
+    const root = document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+    if (!smooth) root.style.scrollBehavior = 'auto';
+
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: smooth && !prefersReducedMotion() ? 'smooth' : 'auto',
     });
-  });
+    root.scrollTop = 0;
+    document.body.scrollTop = 0;
+
+    if (!smooth) root.style.scrollBehavior = previousScrollBehavior;
+  };
+
+  if (smooth && !prefersReducedMotion()) {
+    window.requestAnimationFrame(resetScroll);
+    return;
+  }
+
+  resetScroll();
 }
 
 function initNav() {
@@ -1946,6 +1961,20 @@ function App() {
 
   useEffect(() => {
     currentPathRef.current = pathname;
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!('scrollRestoration' in window.history)) return undefined;
+    const previousScrollRestoration = window.history.scrollRestoration;
+    window.history.scrollRestoration = 'manual';
+
+    return () => {
+      window.history.scrollRestoration = previousScrollRestoration;
+    };
+  }, []);
+
+  useLayoutEffect(() => {
+    scrollToPageTop();
   }, [pathname]);
 
   useEffect(() => {
