@@ -5540,6 +5540,25 @@ body.route-transitioning {
   font-size: clamp(1rem, 1.45vw, 1.25rem);
 }
 
+.projects-hero .hero-actions {
+  justify-content: flex-start;
+  margin: 30px 0 0;
+}
+
+.projects-hero .btn-primary {
+  background: #ffffff;
+  color: #121719;
+}
+
+.projects-hero .btn-ghost {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.34);
+}
+
+.services-hero .hero-actions {
+  margin: 30px 0 0;
+}
+
 .projects-hero-index {
   position: relative;
   z-index: 2;
@@ -6294,6 +6313,12 @@ body.route-transitioning {
 
   .projects-hero .page-hero-title {
     font-size: clamp(3.1rem, 15vw, 4.7rem);
+  }
+
+  .projects-hero .hero-actions {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-top: 24px;
   }
 
   .projects-intro {

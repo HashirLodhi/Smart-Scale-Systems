@@ -140,8 +140,8 @@ const SEO_OVERRIDES = {
   },
   '/services': {
     title: 'Services | AI Services in Pakistan',
-    description: 'Explore AI services in Pakistan, including AI model training, automation, computer vision, NLP, LLM solutions, data annotation, and AI training data by Smart Scale Systems.',
-    keywords: PAKISTAN_KEYWORDS,
+    description: 'Explore custom AI agents, data analytics, AI integrations for websites and apps, business automation, model training, and data annotation by Smart Scale Systems.',
+    keywords: 'custom AI agents Pakistan, data analytics Pakistan, AI website integration, AI app integration, business automation Pakistan, AI model training, data annotation',
   },
   '/projects': {
     title: 'AI Projects & Case Studies | Smart Scale Systems',
@@ -285,7 +285,7 @@ function buildStructuredData({ title, description, url, kind }) {
       name: 'Smart Scale Systems',
       url: SITE_URL,
       image: LOGO_IMAGE,
-      description: 'AI agency in Pakistan providing AI model training, automation, computer vision, NLP, LLM solutions, data annotation, and AI training data services.',
+      description: 'AI agency in Pakistan providing custom AI agents, data analytics, website and app integrations, business automation, model training, and data annotation.',
       email: 'contact@smartscalesystems.tech',
       areaServed: {
         '@type': 'Country',
@@ -296,11 +296,11 @@ function buildStructuredData({ title, description, url, kind }) {
         'AI services',
         'AI automation',
         'AI model training',
-        'Computer vision',
-        'NLP',
-        'LLM solutions',
+        'Custom AI agents',
+        'Data analytics',
+        'AI integrations for websites and apps',
         'Data annotation',
-        'AI training data',
+        'Business automation',
       ],
     },
     {
