@@ -846,10 +846,8 @@ function initRevealAnimations() {
 function initSplineLoader() {
   const loaders = Array.from(document.querySelectorAll('.spline-loader'));
   if (!loaders.length) return () => {};
-  const hideLoaders = () => loaders.forEach((loader) => loader.classList.add('hidden'));
-  const timer = window.setTimeout(hideLoaders, 9000);
   return () => {
-    window.clearTimeout(timer);
+    loaders.forEach((loader) => loader.classList.remove('hidden'));
   };
 }
 
