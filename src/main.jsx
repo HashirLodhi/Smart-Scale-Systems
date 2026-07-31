@@ -1507,10 +1507,13 @@ function initScaleMotion() {
   const clamp = gsap.utils.clamp(0, 1);
 
   const travelDistance = () => Math.max(
-    headline.offsetLeft + headline.offsetWidth - window.innerWidth * 0.76,
-    window.innerWidth * 1.8
+    track.scrollWidth - stage.clientWidth,
+    window.innerWidth * 2.4
   );
-  const scrollDistance = () => travelDistance() + window.innerHeight * 0.72;
+  const scrollDistance = () => Math.max(
+    travelDistance() * 0.85,
+    window.innerHeight * 2.8
+  );
 
   const ctx = gsap.context(() => {
     const updateScene = (progress) => {
@@ -1566,37 +1569,31 @@ function initScaleMotion() {
         pin: stage,
         start: 'top top',
         end: () => `+=${scrollDistance()}`,
-        scrub: 1,
+        scrub: 0.45,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => updateScene(self.progress),
       },
     });
 
-    chars.forEach((char, index) => {
-      const direction = index % 2 === 0 ? -1 : 1;
+    chars.forEach((char) => {
       gsap.fromTo(
         char,
         {
-          yPercent: direction * (82 + (index % 5) * 24),
-          rotationX: direction * (46 + (index % 4) * 9),
-          rotationZ: direction * (7 + (index % 3) * 3),
-          autoAlpha: 0.12,
-          filter: 'blur(10px)',
+          yPercent: gsap.utils.random(-200, 200),
+          rotation: gsap.utils.random(-20, 20),
+          autoAlpha: 0,
         },
         {
           yPercent: 0,
-          rotationX: 0,
-          rotationZ: 0,
           autoAlpha: 1,
-          filter: 'blur(0px)',
           ease: 'back.out(1.35)',
           scrollTrigger: {
             trigger: char,
             containerAnimation: horizontalTween,
             start: 'left 94%',
             end: 'left 43%',
-            scrub: 0.85,
+            scrub: 0.55,
           },
         }
       );
