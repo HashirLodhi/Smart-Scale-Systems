@@ -615,6 +615,10 @@
 .service-choice-card.service-full-card:nth-child(6) { --tile-index: 6; --tile-glow: rgba(0, 201, 167, 0.26); }
 .service-choice-card.service-full-card:nth-child(7) { --tile-index: 7; --tile-glow: rgba(255, 95, 31, 0.24); }
 .service-choice-card.service-full-card:nth-child(8) { --tile-index: 8; --tile-glow: rgba(0, 168, 255, 0.26); }
+.service-choice-card.service-full-card:nth-child(9) { --tile-index: 9; --tile-glow: rgba(255, 111, 145, 0.26); }
+.service-choice-card.service-full-card:nth-child(10) { --tile-index: 10; --tile-glow: rgba(87, 189, 255, 0.26); }
+.service-choice-card.service-full-card:nth-child(11) { --tile-index: 11; --tile-glow: rgba(163, 114, 255, 0.28); }
+.service-choice-card.service-full-card:nth-child(12) { --tile-index: 12; --tile-glow: rgba(255, 159, 64, 0.26); }
 
 .service-choice-card.service-full-card:hover,
 .service-choice-card.service-full-card:focus-visible {
