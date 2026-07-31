@@ -113,7 +113,7 @@ textarea:focus-visible,
   top: 14px;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 999;
   height: auto;
   display: flex;
   align-items: center;
