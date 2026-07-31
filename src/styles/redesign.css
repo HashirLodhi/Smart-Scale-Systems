@@ -119,8 +119,8 @@ body {
 }
 
 :is(
-  .motion-tile,
   .service-icon,
+  .motion-tile,
   .why-icon,
   .industry-icon,
   .offering-icon,
@@ -419,19 +419,6 @@ body {
   background:
     radial-gradient(circle at 88% 8%, rgba(255, 255, 255, 0.7), transparent 22%),
     #dfe5e6;
-}
-
-.route-services .services-motion-board {
-  border-radius: 40px !important;
-  box-shadow: var(--ui-shadow-soft);
-}
-
-.route-services .services-motion-viewport {
-  border-radius: 34px !important;
-}
-
-.route-services .motion-tile {
-  border-radius: 22px !important;
 }
 
 .route-services .service-choice-shell {
@@ -1073,4 +1060,17 @@ body {
   .projects-hero
 )::after {
   background-image: none !important;
+}
+
+.route-services .services-motion-board {
+  border-radius: 40px !important;
+  box-shadow: var(--ui-shadow-soft);
+}
+
+.route-services .services-motion-viewport {
+  border-radius: 34px !important;
+}
+
+.route-services .motion-tile {
+  border-radius: 22px !important;
 }

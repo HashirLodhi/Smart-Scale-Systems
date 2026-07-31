@@ -2204,7 +2204,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const cleanups = [initRevealAnimations(), initSplineLoader(), initCountUpStats(), initAiCanvases(), initCarousels(), initForms(), initScaleMotion(), initPremiumAnimations()];
+    const cleanups = [initRevealAnimations(), initSplineLoader(), initCountUpStats(), initAiCanvases(), initCarousels(), initForms(), initPremiumAnimations()];
     return () => cleanups.forEach((cleanup) => cleanup && cleanup());
   }, [content]);
 
