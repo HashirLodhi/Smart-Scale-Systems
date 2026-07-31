@@ -1586,6 +1586,7 @@ function initScaleMotion() {
         },
         {
           yPercent: 0,
+          rotation: 0,
           autoAlpha: 1,
           ease: 'back.out(1.35)',
           scrollTrigger: {

@@ -149,6 +149,9 @@
 
 .scale-motion__headline .gsap-char {
   display: inline-block;
+  line-height: 1;
+  vertical-align: top;
+  transform-origin: 50% 50%;
   transform-style: preserve-3d;
   will-change: transform, opacity, filter;
 }
