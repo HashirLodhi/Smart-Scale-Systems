@@ -5181,9 +5181,10 @@ a.service-card:hover .card-link::after {
     background: rgba(102, 102, 102, 0.06);
     border: none;
     box-shadow: none;
-    padding: 16px;
+    box-sizing: border-box;
+    padding: 0 16px;
     border-radius: 16px;
-    margin-top: 8px;
+    margin-top: 0;
     max-height: 0;
     overflow: hidden;
     opacity: 0;
@@ -5194,6 +5195,8 @@ a.service-card:hover .card-link::after {
 
   .nav-dropdown.open {
     max-height: 600px;
+    padding: 16px;
+    margin-top: 8px;
     opacity: 1;
     visibility: visible;
     pointer-events: all;

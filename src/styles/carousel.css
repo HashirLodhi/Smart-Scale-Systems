@@ -751,28 +751,88 @@
 
 @media (max-width: 560px) {
   .service-choice-shell {
-    padding: 22px;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 32px;
+    padding: 20px;
+    min-height: 0;
     border-radius: 22px;
   }
 
+  .service-choice-intro {
+    max-width: none;
+  }
+
+  .service-choice-intro span {
+    margin-bottom: 12px;
+  }
+
+  .service-choice-intro h3 {
+    font-size: clamp(1.6rem, 7vw, 2.1rem);
+    margin-bottom: 12px;
+  }
+
+  .service-choice-intro p {
+    line-height: 1.6;
+  }
+
   .service-choice-grid {
-    grid-template-columns: repeat(2, 124px);
-    gap: 28px;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 0;
   }
 
   .service-choice-card.service-full-card {
-    width: 124px !important;
-    height: 124px !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 86px;
+    padding: 16px 18px !important;
+    border-radius: 22px;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 14px;
   }
 
-  .service-choice-card.service-full-card:nth-child(4),
-  .service-choice-card.service-full-card:nth-child(5),
-  .service-choice-card.service-full-card:nth-child(6) {
-    margin-left: 0;
+  .service-choice-card.service-full-card::before {
+    border-radius: 22px;
   }
 
-  .service-choice-card.service-full-card:nth-child(even) {
-    margin-top: 28px;
+  .service-choice-card .sfc-header {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .service-choice-card .service-icon.large {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+  }
+
+  .service-choice-card .sfc-title-wrap {
+    text-align: left;
+  }
+
+  .service-choice-card .sfc-title-wrap h2 {
+    font-size: 1rem !important;
+    line-height: 1.25;
+    text-align: left;
+  }
+
+  .service-choice-card.service-full-card:hover,
+  .service-choice-card.service-full-card:focus-visible {
+    transform: none;
+    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.14);
+  }
+
+  .service-choice-card:hover .service-icon.large,
+  .service-choice-card:focus-visible .service-icon.large {
+    transform: none;
+  }
+
+  .service-choice-card.service-full-card > p {
+    display: none;
   }
 }
 
