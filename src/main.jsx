@@ -30,7 +30,7 @@ import nlpHtml from './pages/service-nlp.html?raw';
 import llmHtml from './pages/service-llm.html?raw';
 import dataAnnotationHtml from './pages/service-data-annotation.html?raw';
 import trainingDataHtml from './pages/service-ai-training-data.html?raw';
-import customServiceHtml from './pages/service-custom.html?raw';
+import customSolutionsHtml from './pages/service-custom.html?raw';
 import privacyHtml from './pages/privacy-policy.html?raw';
 import termsHtml from './pages/terms-of-service.html?raw';
 import error403Html from './pages/error-403.html?raw';
@@ -82,8 +82,8 @@ const pages = {
   '/service-data-annotation.html': dataAnnotationHtml,
   '/service-ai-training-data': trainingDataHtml,
   '/service-ai-training-data.html': trainingDataHtml,
-  '/service-custom': customServiceHtml,
-  '/service-custom.html': customServiceHtml,
+  '/service-custom-ai-solutions': customSolutionsHtml,
+  '/service-custom-ai-solutions.html': customSolutionsHtml,
   '/privacy-policy': privacyHtml,
   '/privacy-policy.html': privacyHtml,
   '/terms-of-service': termsHtml,
@@ -152,8 +152,8 @@ const SEO_OVERRIDES = {
   },
   '/services': {
     title: 'Services | AI Services in Pakistan',
-    description: 'Explore custom AI agents, data analytics, AI integrations for websites and apps, business automation, model training, and data annotation by Smart Scale Systems.',
-    keywords: 'custom AI agents Pakistan, data analytics Pakistan, AI website integration, AI app integration, business automation Pakistan, AI model training, data annotation',
+    description: 'Explore AI model training, AI automation, custom AI agents, data analytics, AI integrations, business automations, data annotation, AI training data, computer vision, NLP, LLM solutions, and custom AI solutions by Smart Scale Systems.',
+    keywords: 'AI model training Pakistan, AI automation Pakistan, custom AI agents Pakistan, data analytics Pakistan, AI integration Pakistan, business automation Pakistan, data annotation Pakistan, AI training data Pakistan, computer vision Pakistan, NLP services Pakistan, LLM solutions Pakistan, custom AI solutions Pakistan',
   },
   '/projects': {
     title: 'AI Projects & Case Studies | Smart Scale Systems',
@@ -180,12 +180,12 @@ const SEO_OVERRIDES = {
   },
   '/ai-agency-pakistan': {
     title: 'AI Agency in Pakistan | AI Development Company',
-    description: 'Looking for an AI agency in Pakistan? Smart Scale Systems builds custom AI agents, data analytics systems, AI website and app integrations, business automations, and training datasets.',
+    description: 'Looking for an AI agency in Pakistan? Smart Scale Systems builds AI model training systems, automation, custom AI agents, data analytics, AI integrations, business automations, data annotation, training data, computer vision, NLP, LLM solutions, and custom AI solutions.',
     keywords: PAKISTAN_KEYWORDS,
   },
   '/ai-services-pakistan': {
     title: 'AI Services in Pakistan | Automation, Models and Data',
-    description: 'Smart Scale Systems provides AI services in Pakistan for startups and businesses, including custom AI agents, data analytics, AI integrations, business automations, annotation, and training data.',
+    description: 'Smart Scale Systems provides AI services in Pakistan for startups and businesses, including AI model training, AI automation, custom AI agents, data analytics, AI integrations, business automations, data annotation, AI training data, computer vision, NLP, LLM solutions, and custom AI solutions.',
     keywords: PAKISTAN_KEYWORDS,
   },
   '/service-ai-model-training': {
@@ -243,7 +243,7 @@ const SEO_OVERRIDES = {
     description: 'AI training data services in Pakistan for machine learning, computer vision, NLP, LLMs, automation systems, evaluation datasets, and dataset curation.',
     keywords: 'AI training data Pakistan, dataset creation Pakistan, machine learning datasets Pakistan, data collection Pakistan, dataset curation Pakistan',
   },
-  '/service-custom': {
+  '/service-custom-ai-solutions': {
     title: 'Custom AI Solutions | AI Development Services',
     description: 'Custom AI solutions in Pakistan for businesses that need tailored automation, machine learning, LLM, computer vision, NLP, and data systems.',
     keywords: 'custom AI solutions Pakistan, AI consulting Pakistan, AI development Pakistan, artificial intelligence agency Pakistan',
@@ -385,13 +385,17 @@ function buildStructuredData({ title, description, url, kind }) {
       '@id': `${url}#offer-catalog`,
       name: 'AI Services in Pakistan',
       itemListElement: [
+        'AI Model Training',
+        'AI Automation',
         'Custom AI Agents',
         'Data Analytics',
         'AI Integration for Websites & Apps',
         'Business Automations',
-        'AI Model Training',
-        'AI Automation',
         'Data Annotation',
+        'AI Training Data',
+        'Computer Vision',
+        'NLP',
+        'LLM Solutions',
         'Custom AI Solutions',
       ].map((name) => ({
         '@type': 'Offer',
@@ -541,12 +545,16 @@ function setActiveNav(pathname) {
     'services',
     'service-ai-model-training',
     'service-ai-automation',
+    'service-custom-ai-agents',
+    'service-data-analytics',
+    'service-ai-integrations',
+    'service-business-automations',
     'service-computer-vision',
     'service-nlp',
     'service-llm',
     'service-data-annotation',
     'service-ai-training-data',
-    'service-custom',
+    'service-custom-ai-solutions',
     'ai-agency-pakistan',
     'ai-services-pakistan',
   ];
