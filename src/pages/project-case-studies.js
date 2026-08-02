@@ -360,7 +360,7 @@ function escapeHtml(value) {
 function renderProjectPage(project, index) {
   const nextProject = projectCaseStudies[(index + 1) % projectCaseStudies.length];
   const story = customerStories[project.testimonial];
-  const canonical = `https://smartscalesystems.com/projects/${project.slug}`;
+  const canonical = `https://www.smartscalesystems.tech/projects/${project.slug}`;
   const description = `${project.summary} Explore the approach, capabilities, and delivery process from Smart Scale Systems.`;
 
   return `<!DOCTYPE html>

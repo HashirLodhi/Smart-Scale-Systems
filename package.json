@@ -4,7 +4,7 @@
   "description": "Smart Scale Systems - AI Services, Automation and Training Data",
   "main": "server.js",
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && node scripts/prerender-routes.js",
     "api": "node scripts/start-api.js",
     "start": "node server.js",
     "generate:knowledge": "node scripts/generate-rag-pdf.js",

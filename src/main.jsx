@@ -137,7 +137,7 @@ function primeSplineLoading(pathname) {
 
 primeSplineLoading(normalizeRoutePath(window.location.pathname));
 
-const SITE_URL = 'https://smartscalesystems.com';
+const SITE_URL = 'https://www.smartscalesystems.tech';
 const LOGO_IMAGE = `${SITE_URL}/logo-main.png`;
 const SOCIAL_IMAGE = `${SITE_URL}/og.png`;
 const DEFAULT_DESCRIPTION = 'Smart Scale Systems builds custom AI agents, data analytics, AI integrations for websites and apps, business automations, and practical AI systems that remove manual work.';
