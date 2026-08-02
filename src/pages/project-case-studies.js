@@ -369,7 +369,6 @@ function renderProjectPage(project, index) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${escapeHtml(project.title)} Project | Smart Scale Systems</title>
-  <link rel="icon" href="/logo-main.png" />
   <meta name="description" content="${escapeHtml(description)}" />
   <meta name="keywords" content="${escapeHtml(`${project.title}, ${project.category}, AI project, AI case study, Smart Scale Systems`)}" />
   <meta property="og:title" content="${escapeHtml(project.title)} Project | Smart Scale Systems" />
