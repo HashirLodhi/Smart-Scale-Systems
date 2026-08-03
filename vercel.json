@@ -29,9 +29,11 @@
     { "src": "/googlefbf06ee5c38322ac.html", "dest": "/googlefbf06ee5c38322ac.html" },
     { "src": "/index(?:\\.html)?", "dest": "/", "status": 308 },
     { "src": "/(.+)\\.html", "dest": "/$1", "status": 308 },
+    { "src": "/ai-services-pakistan", "dest": "/services", "status": 308 },
+    { "src": "/testimonials", "dest": "/team", "status": 308 },
     { "handle": "filesystem" },
     {
-      "src": "/(services|projects|team|careers|testimonials|contact|ai-agency-pakistan|ai-services-pakistan|service-ai-model-training|service-ai-automation|service-custom-ai-agents|service-data-analytics|service-ai-integrations|service-business-automations|service-computer-vision|service-nlp|service-llm|service-data-annotation|service-ai-training-data|service-custom-ai-solutions|privacy-policy|terms-of-service)",
+      "src": "/(services|projects|team|careers|contact|ai-agency-pakistan|ai-services-pakistan|service-ai-model-training|service-ai-automation|service-custom-ai-agents|service-data-analytics|service-ai-integrations|service-business-automations|service-computer-vision|service-nlp|service-llm|service-data-annotation|service-ai-training-data|service-custom-ai-solutions|privacy-policy|terms-of-service)",
       "dest": "/$1/index.html"
     },
     { "src": "/projects/([^/]+)", "dest": "/projects/$1/index.html" },

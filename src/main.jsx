@@ -291,21 +291,19 @@ function buildStructuredData({ title, description, url, kind }) {
     '@id': `${SITE_URL}/#organization`,
     name: 'Smart Scale Systems',
     url: SITE_URL,
+    description: 'Smart Scale Systems provides custom AI development, intelligent automation, machine learning, analytics, integrations and training-data services for global teams.',
     email: 'contact@smartscalesystems.tech',
-    logo: LOGO_IMAGE,
-    description: 'AI services agency delivering custom AI agents, data analytics, AI integrations, business automations, model training, and data annotation at scale.',
-    areaServed: {
-      '@type': 'Country',
-      name: 'Pakistan',
+    areaServed: 'Worldwide',
+    logo: {
+      '@type': 'ImageObject',
+      url: LOGO_IMAGE,
+      width: 600,
+      height: 600,
     },
-    knowsAbout: [
-      'AI automation',
-      'AI model training',
-      'Custom AI agents',
-      'Data analytics',
-      'AI integrations for websites and apps',
-      'Business automation',
-      'Data annotation',
+    sameAs: [
+      'https://www.instagram.com/smart.scale.systems/',
+      'https://x.com/SmartScaleSyst',
+      'https://github.com/SmartScaleSystems',
     ],
   };
 
@@ -317,12 +315,9 @@ function buildStructuredData({ title, description, url, kind }) {
       name: 'Smart Scale Systems',
       url: SITE_URL,
       image: LOGO_IMAGE,
-      description: 'AI agency in Pakistan providing custom AI agents, data analytics, website and app integrations, business automation, model training, and data annotation.',
+      description: 'Custom AI development, intelligent automation, machine learning, analytics, integrations and training-data services for global teams.',
       email: 'contact@smartscalesystems.tech',
-      areaServed: {
-        '@type': 'Country',
-        name: 'Pakistan',
-      },
+      areaServed: 'Worldwide',
       serviceType: [
         'AI agency',
         'AI services',
@@ -360,10 +355,7 @@ function buildStructuredData({ title, description, url, kind }) {
       name: title.replace(' | Smart Scale Systems', ''),
       description,
       provider: { '@id': `${SITE_URL}/#organization` },
-      areaServed: [
-        { '@type': 'Country', name: 'Pakistan' },
-        'Worldwide',
-      ],
+      areaServed: 'Worldwide',
       serviceType: title.replace(' | Smart Scale Systems', ''),
     });
   }
@@ -486,7 +478,6 @@ function updateDocumentSeo(rawHtml, pathname) {
 
   [
     ['meta', { name: 'description', content: description }],
-    ['meta', { name: 'keywords', content: keywords }],
     ['meta', { name: 'robots', content: robots }],
     ['meta', { name: 'author', content: 'Smart Scale Systems' }],
     ['meta', { name: 'theme-color', content: '#0b0b0f' }],
@@ -502,8 +493,6 @@ function updateDocumentSeo(rawHtml, pathname) {
     ['meta', { name: 'twitter:description', content: description }],
     ['meta', { name: 'twitter:image', content: SOCIAL_IMAGE }],
     ['link', { rel: 'canonical', href: url }],
-    ['link', { rel: 'alternate', hreflang: 'en', href: url }],
-    ['link', { rel: 'alternate', hreflang: 'x-default', href: url }],
   ].forEach(([tagName, attributes]) => {
     document.head.appendChild(managedHeadElement(tagName, attributes));
   });
@@ -1653,31 +1642,40 @@ function initPremiumAnimations() {
     const heroTitle = document.querySelector('.hero-title, .page-hero-title');
     const heroSubtitle = document.querySelector('.hero-subtitle, .page-hero-subtitle');
     const heroActions = document.querySelector('.hero-actions, .cta-actions');
-    const heroVisual = document.querySelector('.spline-wrapper, .ai-network-shell, .page-hero-orb, .home-ai-showcase .ai-network-canvas');
+    const heroVisual = document.querySelector('.spline-wrapper, .ai-network-shell, .page-hero-orb, .home-ai-showcase .ai-network-canvas, .wave-grid-wrapper');
 
     if (heroTitle) {
-      gsap.fromTo(heroTitle,
-        { y: 28, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 0.78, ease: 'power3.out', delay: 0.08 }
-      );
+      splitTextNodes(heroTitle, 'words');
+      const titleWords = heroTitle.querySelectorAll('.gsap-word');
+      if (titleWords.length) {
+        gsap.fromTo(titleWords,
+          { yPercent: 110, autoAlpha: 0, rotateX: -45, filter: 'blur(6px)' },
+          {
+            yPercent: 0, autoAlpha: 1, rotateX: 0, filter: 'blur(0px)',
+            duration: 0.9, stagger: 0.06, ease: 'expo.out', delay: 0.08,
+          }
+        );
+      } else {
+        gsap.fromTo(heroTitle,
+          { y: 28, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 0.78, ease: 'power3.out', delay: 0.08 }
+        );
+      }
     }
 
     if (heroSubtitle) {
       gsap.fromTo(heroSubtitle,
-        { y: 18, autoAlpha: 0 },
-        { y: 0, autoAlpha: 1, duration: 0.68, ease: 'power3.out', delay: 0.22 }
+        { y: 18, autoAlpha: 0, filter: 'blur(4px)' },
+        { y: 0, autoAlpha: 1, filter: 'blur(0px)', duration: 0.68, ease: 'power3.out', delay: 0.35 }
       );
     }
 
     gsap.fromTo([heroActions, heroVisual].filter(Boolean),
-      { y: 34, scale: 0.96, autoAlpha: 0 },
-      { y: 0, scale: 1, autoAlpha: 1, duration: 0.9, stagger: 0.12, ease: 'expo.out', delay: 0.6 }
+      { y: 40, scale: 0.94, autoAlpha: 0, filter: 'blur(8px)' },
+      { y: 0, scale: 1, autoAlpha: 1, filter: 'blur(0px)', duration: 1, stagger: 0.15, ease: 'expo.out', delay: 0.5 }
     );
 
-    // Keep GSAP on first-viewport elements only. Cards and section content use
-    // lightweight CSS/IntersectionObserver reveals to avoid route-change jank.
-    return;
-
+    // Scroll-triggered animations for cards, sections, and content
     document.querySelectorAll('.section-tag').forEach((tag) => {
       splitTextNodes(tag, 'chars');
       gsap.fromTo(tag.querySelectorAll('.gsap-char'),
@@ -1693,6 +1691,18 @@ function initPremiumAnimations() {
         }
       );
     });
+
+    // Hero title accent (the "Intelligence" word) gets special treatment
+    const heroAccent = document.querySelector('.hero-title-accent');
+    if (heroAccent) {
+      gsap.fromTo(heroAccent,
+        { autoAlpha: 0, filter: 'blur(8px)' },
+        {
+          autoAlpha: 1, filter: 'blur(0px)',
+          duration: 1.2, ease: 'expo.out', delay: 0.6,
+        }
+      );
+    }
 
     document.querySelectorAll(`
       .section-title,
@@ -1759,6 +1769,47 @@ function initPremiumAnimations() {
       );
     });
 
+    // Services page - motion board tiles entrance
+    document.querySelectorAll('.motion-tile').forEach((tile, i) => {
+      gsap.fromTo(tile,
+        { x: i % 2 === 0 ? -40 : 40, autoAlpha: 0, scale: 0.9 },
+        {
+          x: 0, autoAlpha: 1, scale: 1,
+          duration: 0.7, ease: 'expo.out',
+          scrollTrigger: { trigger: tile, start: 'top 90%', once: true },
+          delay: (i % 4) * 0.08,
+        }
+      );
+    });
+
+    // Service detail page - overview section
+    document.querySelectorAll('.service-overview-section').forEach((section) => {
+      const heading = section.querySelector('h2, h3');
+      if (heading) {
+        splitTextNodes(heading, 'words');
+        gsap.fromTo(heading.querySelectorAll('.gsap-word'),
+          { yPercent: 100, autoAlpha: 0, filter: 'blur(5px)' },
+          {
+            yPercent: 0, autoAlpha: 1, filter: 'blur(0px)',
+            duration: 0.8, stagger: 0.03, ease: 'expo.out',
+            scrollTrigger: { trigger: section, start: 'top 80%', once: true },
+          }
+        );
+      }
+    });
+
+    // Legal pages - content fade in
+    document.querySelectorAll('.legal-content').forEach((content) => {
+      gsap.fromTo(content,
+        { y: 30, autoAlpha: 0 },
+        {
+          y: 0, autoAlpha: 1,
+          duration: 0.8, ease: 'power3.out',
+          scrollTrigger: { trigger: content, start: 'top 85%', once: true },
+        }
+      );
+    });
+
     const cardGroups = [
       '.offering-grid',
       '.use-cases-grid',
@@ -1769,19 +1820,21 @@ function initPremiumAnimations() {
       '.careers-grid',
       '.team-grid',
       '.pillars-grid',
-      '.carousel-spinner',
       '.service-choice-grid',
       '.legal-content',
       '.contact-form',
       '.footer-top',
       '.footer-bottom',
       '.team-members-section',
+      '.projects-showcase',
+      '.customer-proof-section',
+      '.stats-row',
     ];
 
     cardGroups.forEach((selector) => {
       document.querySelectorAll(selector).forEach((group) => {
         const cards = group.querySelectorAll(
-          '.offering-card, .use-case-card, .related-card, .testimonial-card, .testimonial-full-card, .contact-info-card, .contact-trust-item, .career-card, .team-card, .pillar-card, .industry-card, .why-card, .service-choice-card, .service-card, .legal-content > *, .form-group, .form-submit-row, .footer-brand, .footer-links-group, .footer-bottom > *, .team-member-row'
+          '.offering-card, .use-case-card, .related-card, .testimonial-card, .testimonial-full-card, .contact-info-card, .contact-trust-item, .career-card, .team-card, .pillar-card, .industry-card, .why-card, .service-choice-card, .service-card, .legal-content > *, .form-group, .form-submit-row, .footer-brand, .footer-links-group, .footer-bottom > *, .team-member-row, .project-catalog-card, .quote-card, .stat'
         );
         if (!cards.length) return;
 
@@ -1897,7 +1950,259 @@ function initPremiumAnimations() {
       }
     );
 
-    const hoverTargets = document.querySelectorAll('.offering-card, .use-case-card, .related-card, .service-full-card, .testimonial-full-card, .contact-info-card, .career-card, .why-card, .industry-card, .footer-socials a, .team-member-photo');
+    // Trust strip items
+    gsap.fromTo('.trust-item',
+      { y: 12, autoAlpha: 0 },
+      {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.5,
+        stagger: 0.08,
+        ease: 'power3.out',
+        delay: 0.9,
+      }
+    );
+
+    // Trust strip line
+    gsap.fromTo('.trust-strip',
+      { scaleX: 0, transformOrigin: 'left center' },
+      {
+        scaleX: 1,
+        duration: 0.8,
+        ease: 'expo.out',
+        delay: 0.7,
+      }
+    );
+
+    // Projects page - project cards
+    document.querySelectorAll('.project-catalog-card').forEach((card, i) => {
+      gsap.fromTo(card,
+        { y: 48, autoAlpha: 0, scale: 0.94 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          scale: 1,
+          duration: 0.75,
+          ease: 'expo.out',
+          scrollTrigger: { trigger: card, start: 'top 88%', once: true },
+          delay: i * 0.06,
+        }
+      );
+    });
+
+    // Projects page - feature card
+    const projectFeature = document.querySelector('.project-feature');
+    if (projectFeature) {
+      gsap.fromTo(projectFeature,
+        { y: 60, autoAlpha: 0, scale: 0.92 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          scale: 1,
+          duration: 1,
+          ease: 'expo.out',
+          scrollTrigger: { trigger: projectFeature, start: 'top 85%', once: true },
+        }
+      );
+    }
+
+    // Projects page - customer proof quotes
+    document.querySelectorAll('.customer-proof-section .quote-card').forEach((card, i) => {
+      gsap.fromTo(card,
+        { y: 38, autoAlpha: 0, rotateY: -8 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          rotateY: 0,
+          duration: 0.8,
+          ease: 'expo.out',
+          scrollTrigger: { trigger: card, start: 'top 88%', once: true },
+          delay: i * 0.1,
+        }
+      );
+    });
+
+    // Contact page - form and info panels with blur effect
+    document.querySelectorAll('.contact-form-wrap, .contact-info-wrap').forEach((panel) => {
+      gsap.fromTo(panel,
+        { y: 50, autoAlpha: 0, filter: 'blur(12px)' },
+        {
+          y: 0,
+          autoAlpha: 1,
+          filter: 'blur(0px)',
+          duration: 1,
+          ease: 'expo.out',
+          scrollTrigger: { trigger: panel, start: 'top 85%', once: true },
+        }
+      );
+    });
+
+    // Contact trust items
+    document.querySelectorAll('.contact-trust-item').forEach((item, i) => {
+      gsap.fromTo(item,
+        { y: 24, autoAlpha: 0, scale: 0.9 },
+        {
+          y: 0,
+          autoAlpha: 1,
+          scale: 1,
+          duration: 0.55,
+          ease: 'back.out(1.5)',
+          scrollTrigger: { trigger: item, start: 'top 90%', once: true },
+          delay: i * 0.07,
+        }
+      );
+    });
+
+    // CTA section animations
+    document.querySelectorAll('.cta-section').forEach((section) => {
+      const tag = section.querySelector('.section-tag');
+      const title = section.querySelector('.section-title');
+      const body = section.querySelector('.section-body');
+      const actions = section.querySelector('.cta-actions');
+
+      if (tag) {
+        splitTextNodes(tag, 'chars');
+        gsap.fromTo(tag.querySelectorAll('.gsap-char'),
+          { yPercent: 120, autoAlpha: 0, rotateX: -75 },
+          {
+            yPercent: 0, autoAlpha: 1, rotateX: 0,
+            duration: 0.55, stagger: 0.018, ease: 'back.out(1.8)',
+            scrollTrigger: { trigger: section, start: 'top 82%', once: true },
+          }
+        );
+      }
+
+      if (title) {
+        splitTextNodes(title, 'words');
+        gsap.fromTo(title.querySelectorAll('.gsap-word'),
+          { yPercent: 105, autoAlpha: 0, rotateX: -58, filter: 'blur(7px)' },
+          {
+            yPercent: 0, autoAlpha: 1, rotateX: 0, filter: 'blur(0px)',
+            duration: 0.95, stagger: 0.035, ease: 'expo.out',
+            scrollTrigger: { trigger: section, start: 'top 82%', once: true },
+          }
+        );
+      }
+
+      if (body) {
+        splitTextNodes(body, 'words');
+        gsap.fromTo(body.querySelectorAll('.gsap-word'),
+          { y: 18, autoAlpha: 0 },
+          {
+            y: 0, autoAlpha: 1,
+            duration: 0.62, stagger: 0.012, ease: 'power3.out',
+            scrollTrigger: { trigger: section, start: 'top 82%', once: true },
+          }
+        );
+      }
+
+      if (actions) {
+        gsap.fromTo(actions,
+          { y: 28, autoAlpha: 0 },
+          {
+            y: 0, autoAlpha: 1,
+            duration: 0.7, ease: 'expo.out',
+            scrollTrigger: { trigger: section, start: 'top 82%', once: true },
+          }
+        );
+      }
+    });
+
+    // Stat numbers with scale bounce
+    document.querySelectorAll('.stat-num').forEach((num) => {
+      gsap.fromTo(num,
+        { scale: 0.5, autoAlpha: 0 },
+        {
+          scale: 1,
+          autoAlpha: 1,
+          duration: 0.7,
+          ease: 'back.out(2)',
+          scrollTrigger: { trigger: num, start: 'top 88%', once: true },
+        }
+      );
+    });
+
+    // Hero eyebrow / page hero subtitle
+    const heroEyebrow = document.querySelector('.hero-eyebrow, .page-hero .section-tag');
+    if (heroEyebrow) {
+      gsap.fromTo(heroEyebrow,
+        { y: 14, autoAlpha: 0, scale: 0.9 },
+        {
+          y: 0, autoAlpha: 1, scale: 1,
+          duration: 0.6, ease: 'back.out(1.5)', delay: 0.05,
+        }
+      );
+    }
+
+    // Orb entrance animation
+    document.querySelectorAll('.orb').forEach((orb, i) => {
+      gsap.fromTo(orb,
+        { scale: 0.3, autoAlpha: 0 },
+        {
+          scale: 1, autoAlpha: 1,
+          duration: 1.8, ease: 'expo.out', delay: 0.2 + i * 0.15,
+        }
+      );
+    });
+
+    // Section dividers / horizontal lines
+    document.querySelectorAll('.stats-row, .trust-strip').forEach((el) => {
+      gsap.fromTo(el,
+        { scaleX: 0, transformOrigin: 'center center' },
+        {
+          scaleX: 1,
+          duration: 0.9,
+          ease: 'expo.out',
+          scrollTrigger: { trigger: el, start: 'top 90%', once: true },
+        }
+      );
+    });
+
+    // Hero parallax - content moves up faster than scroll
+    const heroOverlay = document.querySelector('.hero-overlay');
+    if (heroOverlay) {
+      gsap.to(heroOverlay, {
+        y: -80,
+        autoAlpha: 0.3,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero-section',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.5,
+        },
+      });
+    }
+
+    // Orbs parallax on scroll
+    document.querySelectorAll('.orb').forEach((orb, i) => {
+      gsap.to(orb, {
+        y: 60 + i * 30,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero-section',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 0.3,
+        },
+      });
+    });
+
+    // Content sections scale-in effect
+    document.querySelectorAll('.content-section').forEach((section) => {
+      gsap.fromTo(section,
+        { scale: 0.97, autoAlpha: 0.8 },
+        {
+          scale: 1,
+          autoAlpha: 1,
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: { trigger: section, start: 'top 92%', once: true },
+        }
+      );
+    });
+
+    const hoverTargets = document.querySelectorAll('.offering-card, .use-case-card, .related-card, .service-full-card, .testimonial-full-card, .contact-info-card, .career-card, .why-card, .industry-card, .footer-socials a, .team-member-photo, .project-catalog-card, .service-choice-card');
     hoverTargets.forEach((card) => {
       const onEnter = () => gsap.to(card, { y: -8, scale: 1.015, duration: 0.32, ease: 'power3.out' });
       const onLeave = () => gsap.to(card, { y: 0, scale: 1, duration: 0.42, ease: 'elastic.out(1, 0.65)' });
@@ -1908,6 +2213,90 @@ function initPremiumAnimations() {
         card.removeEventListener('mouseleave', onLeave);
       });
     });
+
+    // Button hover glow effect
+    document.querySelectorAll('.btn-primary').forEach((btn) => {
+      const onEnter = () => gsap.to(btn, { boxShadow: '0 10px 40px rgba(0, 0, 0, 0.4)', scale: 1.02, duration: 0.3, ease: 'power2.out' });
+      const onLeave = () => gsap.to(btn, { boxShadow: '0 4px 24px rgba(0, 0, 0, 0.28)', scale: 1, duration: 0.35, ease: 'power2.out' });
+      btn.addEventListener('mouseenter', onEnter);
+      btn.addEventListener('mouseleave', onLeave);
+      hoverCleanups.push(() => {
+        btn.removeEventListener('mouseenter', onEnter);
+        btn.removeEventListener('mouseleave', onLeave);
+      });
+    });
+
+    // Nav link hover underline animation
+    document.querySelectorAll('.nav-links a').forEach((link) => {
+      const underline = document.createElement('span');
+      underline.style.cssText = 'position:absolute;bottom:-2px;left:0;width:0;height:2px;background:currentColor;transition:none;';
+      link.style.position = 'relative';
+      link.appendChild(underline);
+
+      const onEnter = () => gsap.to(underline, { width: '100%', duration: 0.3, ease: 'power2.out' });
+      const onLeave = () => gsap.to(underline, { width: '0%', duration: 0.25, ease: 'power2.in' });
+      link.addEventListener('mouseenter', onEnter);
+      link.addEventListener('mouseleave', onLeave);
+      hoverCleanups.push(() => {
+        link.removeEventListener('mouseenter', onEnter);
+        link.removeEventListener('mouseleave', onLeave);
+      });
+    });
+
+    // Footer brand and links stagger entrance
+    const footerBrand = document.querySelector('.footer-brand');
+    const footerLinks = document.querySelectorAll('.footer-links-group');
+    if (footerBrand) {
+      gsap.fromTo(footerBrand,
+        { y: 30, autoAlpha: 0 },
+        {
+          y: 0, autoAlpha: 1,
+          duration: 0.8, ease: 'expo.out',
+          scrollTrigger: { trigger: '.footer', start: 'top 88%', once: true },
+        }
+      );
+    }
+    if (footerLinks.length) {
+      gsap.fromTo(footerLinks,
+        { y: 24, autoAlpha: 0 },
+        {
+          y: 0, autoAlpha: 1,
+          duration: 0.7, stagger: 0.1, ease: 'expo.out',
+          scrollTrigger: { trigger: '.footer', start: 'top 88%', once: true },
+        }
+      );
+    }
+
+    // Footer CTA button special entrance
+    const footerCta = document.querySelector('.footer-cta-btn');
+    if (footerCta) {
+      gsap.fromTo(footerCta,
+        { scale: 0.8, autoAlpha: 0, rotation: -5 },
+        {
+          scale: 1, autoAlpha: 1, rotation: 0,
+          duration: 0.8, ease: 'back.out(2)',
+          scrollTrigger: { trigger: footerCta, start: 'top 92%', once: true },
+        }
+      );
+    }
+
+    // Smooth scroll progress indicator
+    const progressBar = document.querySelector('[data-scale-progress-bar]');
+    if (progressBar) {
+      gsap.fromTo(progressBar,
+        { scaleX: 0, transformOrigin: 'left center' },
+        {
+          scaleX: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.scale-motion',
+            start: 'top center',
+            end: 'bottom center',
+            scrub: 0.3,
+          },
+        }
+      );
+    }
   });
 
   ScrollTrigger.refresh();

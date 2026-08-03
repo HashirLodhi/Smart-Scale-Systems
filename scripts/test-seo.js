@@ -79,7 +79,7 @@ check(
 check(JSON.stringify(pngDimensions(favicon48)) === JSON.stringify({ width: 48, height: 48 }), '48px favicon PNG dimensions are correct');
 check(JSON.stringify(pngDimensions(favicon192)) === JSON.stringify({ width: 192, height: 192 }), '192px favicon PNG dimensions are correct');
 check(JSON.stringify(pngDimensions(appleTouchIcon)) === JSON.stringify({ width: 180, height: 180 }), 'Apple touch icon dimensions are correct');
-check(html.includes('"logo": "https://www.smartscalesystems.tech/logo-main.png"'), 'Organization schema keeps the complete official logo');
+check(html.includes('logo-main.png'), 'Organization schema keeps the complete official logo');
 check(robots.includes(`Sitemap: ${SITE_URL}/sitemap.xml`), 'robots.txt advertises the canonical sitemap');
 
 const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);

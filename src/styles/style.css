@@ -3198,6 +3198,27 @@ textarea:focus-visible,
 }
 .breadcrumb:hover { color: var(--sage-dark); }
 
+.breadcrumb-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  font-size: 0.85rem;
+  color: var(--sage-mid);
+}
+.breadcrumb-nav a {
+  color: var(--sage-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.breadcrumb-nav a:hover {
+  color: var(--sage-dark);
+}
+.breadcrumb-nav [aria-current="page"] {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
 /* ── SECTION HEADER ROW ───────────────────────────────── */
 .section-header-row {
   display: flex;

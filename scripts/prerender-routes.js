@@ -13,7 +13,6 @@ const pageRoutes = [
   ['/projects', 'projects.html'],
   ['/team', 'team.html'],
   ['/careers', 'careers.html'],
-  ['/testimonials', 'testimonials.html'],
   ['/contact', 'contact.html'],
   ['/ai-agency-pakistan', 'ai-agency-pakistan.html'],
   ['/ai-services-pakistan', 'ai-services-pakistan.html'],
@@ -34,18 +33,18 @@ const pageRoutes = [
 ];
 
 const projectRoutes = [
-  ['agentic-rag', 'Agentic RAG', 'A grounded knowledge system that plans, searches, evaluates, and synthesizes answers across company data and connected tools.'],
-  ['custom-chatbot', 'Custom Chatbot', 'A branded conversational experience built around business knowledge, customer journeys, and support operations.'],
-  ['custom-ai-agent', 'Custom AI Agent', 'A goal-driven AI agent that reasons across tools, coordinates multi-step tasks, and completes work with controlled autonomy.'],
-  ['voice-calling-agent', 'Voice Calling Agent', 'A natural inbound and outbound voice agent for qualification, scheduling, service, and follow-up calls.'],
-  ['ai-integrations', 'AI Integrations', 'Practical AI capabilities integrated into websites, applications, and existing business systems.'],
-  ['business-automation', 'Business Automation', 'Connected automation for sales, support, operations, reporting, and repetitive business workflows.'],
-  ['autonomous-data-annotation', 'Autonomous Data Annotation', 'An intelligent annotation workflow combining automation, quality control, and human review.'],
-  ['custom-model-training', 'Custom Model Training', 'A production-focused model training pipeline covering data preparation, evaluation, optimization, and deployment.'],
-  ['video-action-recognition', 'Video Action Recognition', 'A computer vision system that identifies actions and events across video streams.'],
-  ['data-segmentation', 'Data Segmentation', 'A data intelligence workflow that groups customers and operational signals into actionable segments.'],
-  ['churn-value-optimization', 'Churn & Value Optimization', 'Predictive analytics that identifies retention risk and customer value opportunities.'],
-  ['fraud-anomaly-detection', 'Fraud & Anomaly Detection', 'A risk detection system that surfaces unusual behavior and prioritizes high-value investigations.'],
+  ['agentic-rag', 'Agentic RAG', 'Solution blueprint for agentic RAG systems covering source ingestion, hybrid retrieval, agent planning, citation validation, hallucination controls, and retrieval evaluation.'],
+  ['custom-chatbot', 'Custom Chatbot', 'Solution blueprint for production chatbots covering conversation state, intent routing, knowledge grounding, tone controls, help-desk integrations, and abuse handling.'],
+  ['custom-ai-agent', 'Custom AI Agent', 'Solution blueprint for autonomous AI agents covering tool registries, planning, memory, approval gates, retry logic, idempotency, and cost controls.'],
+  ['voice-calling-agent', 'Voice Calling Agent', 'Solution blueprint for voice AI agents covering telephony, speech-to-text, turn-taking, barge-in handling, latency budgets, consent rules, and call-quality evaluation.'],
+  ['ai-integrations', 'AI Integrations', 'Solution blueprint for AI product integrations covering API patterns, authentication, data contracts, webhooks, error handling, rate limits, and monitoring.'],
+  ['business-automation', 'Business Automation', 'Solution blueprint for business automation covering trigger-action workflows, CRM processes, approval queues, audit logs, SLA monitoring, and baseline measurement.'],
+  ['autonomous-data-annotation', 'Autonomous Data Annotation', 'Solution blueprint for autonomous annotation covering pre-labeling, confidence thresholds, human review routing, annotation guidelines, inter-annotator agreement, and dataset QA.'],
+  ['custom-model-training', 'Custom Model Training', 'Solution blueprint for custom model training covering dataset readiness, train-test splits, baseline models, evaluation metrics, error analysis, deployment, and monitoring.'],
+  ['video-action-recognition', 'Video Action Recognition', 'Solution blueprint for video action recognition covering temporal annotation, frame sampling, clip construction, overlapping actions, streaming latency, and privacy.'],
+  ['data-segmentation', 'Data Segmentation', 'Solution blueprint for data segmentation covering feature engineering, clustering, segment stability, CRM activation, experiment design, privacy, and drift monitoring.'],
+  ['churn-value-optimization', 'Churn & Value Optimization', 'Solution blueprint for churn prediction and customer value optimization covering churn definition, CLV, survival analysis, uplift modeling, retention targeting, and fairness.'],
+  ['fraud-anomaly-detection', 'Fraud & Anomaly Detection', 'Solution blueprint for fraud detection covering real-time scoring, imbalanced data, rules-ML hybrid, PR-AUC, investigation queues, feedback loops, and drift monitoring.'],
 ];
 
 const routeOverrides = {
@@ -63,7 +62,6 @@ const routeOverrides = {
   },
   '/team': { title: 'Our Team | AI Experts in Pakistan' },
   '/careers': { title: 'Careers | AI Jobs in Pakistan' },
-  '/testimonials': { title: 'Client Testimonials | AI Success Stories' },
   '/contact': { title: 'Contact Us | Start Your AI Project' },
 };
 
@@ -133,8 +131,15 @@ function structuredData(route, title, description) {
       '@id': `${SITE_URL}/#organization`,
       name: 'Smart Scale Systems',
       url: `${SITE_URL}/`,
-      logo: `${SITE_URL}/logo-main.png`,
+      description: 'Smart Scale Systems provides custom AI development, intelligent automation, machine learning, analytics, integrations and training-data services for global teams.',
       email: 'contact@smartscalesystems.tech',
+      areaServed: 'Worldwide',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/logo-main.png`,
+        width: 600,
+        height: 600,
+      },
       sameAs: [
         'https://www.instagram.com/smart.scale.systems/',
         'https://x.com/SmartScaleSyst',
