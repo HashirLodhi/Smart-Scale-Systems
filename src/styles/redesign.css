@@ -312,8 +312,6 @@ body {
 }
 
 .route-home .hero-overlay {
-  grid-template-columns: minmax(0, 0.95fr) minmax(390px, 1.05fr);
-  gap: clamp(34px, 5vw, 72px);
   padding: 132px clamp(30px, 6vw, 86px) 52px;
 }
 
@@ -852,7 +850,6 @@ body {
 /* Responsive: hierarchy and order remain unchanged. */
 @media (max-width: 1024px) {
   .route-home .hero-overlay {
-    grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
     padding-inline: 34px;
   }
 
@@ -882,19 +879,11 @@ body {
   .route-home .hero-overlay {
     position: relative;
     min-height: 960px;
-    grid-template-columns: 1fr;
-    align-content: start;
     padding: 130px 24px 44px;
   }
 
   .route-home .hero-left {
     width: min(100%, 720px);
-    margin-inline: auto;
-  }
-
-  .route-home .hero-right {
-    width: min(100%, 720px);
-    height: 420px;
     margin-inline: auto;
   }
 

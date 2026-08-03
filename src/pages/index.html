@@ -31,9 +31,7 @@
 <!-- HERO SECTION -->
 <section class="hero-section" id="heroSection">
   <div class="sticky-wrap">
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
+    <canvas class="wave-grid-canvas" id="wave-grid-canvas"></canvas>
 
     <div class="hero-overlay" id="heroOverlay">
       <div class="hero-left">
@@ -69,21 +67,6 @@
             <svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="8"/></svg>
             4.9 / 5
           </div>
-        </div>
-      </div>
-      <div class="hero-right">
-        <div class="spline-wrapper" id="spline-wrapper" aria-label="Interactive AI robot animation">
-          <div class="spline-loader cinematic-spline-loader" id="spline-loader" aria-hidden="true">
-            <div class="spline-loader-ring"></div>
-            <div class="spline-loader-core"></div>
-            <div class="spline-loader-scan"></div>
-            <span>Initializing AI model</span>
-          </div>
-          <div
-            id="spline-viewer"
-            class="react-spline-viewer"
-            data-spline-url="https://prod.spline.design/Zff-nbYm4vXOgRRQ/scene.splinecode"
-          ></div>
         </div>
       </div>
     </div>

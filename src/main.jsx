@@ -859,6 +859,27 @@ function initSplineLoader() {
   };
 }
 
+let waveGridInstance = null;
+
+function initWaveGrid() {
+  const canvas = document.getElementById('wave-grid-canvas');
+  const stickyWrap = canvas?.closest('.sticky-wrap');
+  if (!canvas || !stickyWrap) return () => {};
+
+  import('./three-wave-grid/index.js').then(({ default: Orchestrator }) => {
+    waveGridInstance = new Orchestrator(canvas, stickyWrap);
+  }).catch((err) => {
+    console.warn('Failed to load wave grid:', err);
+  });
+
+  return () => {
+    if (waveGridInstance) {
+      waveGridInstance.destroy();
+      waveGridInstance = null;
+    }
+  };
+}
+
 function initCountUpStats() {
   const stats = Array.from(document.querySelectorAll('[data-count-up]'));
   if (!stats.length) return () => {};
@@ -2204,7 +2225,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const cleanups = [initRevealAnimations(), initSplineLoader(), initCountUpStats(), initAiCanvases(), initCarousels(), initForms(), initPremiumAnimations()];
+    const cleanups = [initRevealAnimations(), initSplineLoader(), initCountUpStats(), initAiCanvases(), initCarousels(), initForms(), initPremiumAnimations(), initWaveGrid()];
     return () => cleanups.forEach((cleanup) => cleanup && cleanup());
   }, [content]);
 
