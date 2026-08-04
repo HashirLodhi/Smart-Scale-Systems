@@ -157,8 +157,8 @@ const DEFAULT_KEYWORDS = 'custom AI agents, data analytics, AI website integrati
 
 const SEO_OVERRIDES = {
   '/': {
-    title: 'Smart Scale Systems | Custom AI & Automation',
-    description: 'Smart Scale Systems builds custom AI agents, data analytics, integrations, and automation for teams worldwide.',
+    title: 'Custom AI Systems and Automation | Smart Scale Systems',
+    description: 'Custom AI Systems and Automation Built for Real Operations. We design, develop, and integrate AI agents, machine-learning systems, data pipelines, and business automations for growing companies.',
     keywords: DEFAULT_KEYWORDS,
   },
   '/services': {
