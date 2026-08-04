@@ -919,6 +919,13 @@ function ReactSplineMounts({ contentKey }) {
   const [visibleMounts, setVisibleMounts] = useState([]);
   const [SplineComponent, setSplineComponent] = useState(null);
 
+  // Prevent rendering into stale/detached mounts when content changes
+  const prevContentKey = useRef(contentKey);
+  const isStale = prevContentKey.current !== contentKey;
+  if (isStale) {
+    prevContentKey.current = contentKey;
+  }
+
   useEffect(() => {
     setMounts(Array.from(document.querySelectorAll('.react-spline-viewer')));
     setVisibleMounts([]);
@@ -926,7 +933,10 @@ function ReactSplineMounts({ contentKey }) {
 
   useEffect(() => {
     const splineMounts = mounts.filter((mount) => mount.dataset.splineUrl);
-    if (!splineMounts.length) return undefined;
+    if (!splineMounts.length) {
+      setVisibleMounts([]);
+      return undefined;
+    }
     setVisibleMounts(splineMounts);
     primeSplineLoading(window.location.pathname);
     return undefined;
@@ -946,9 +956,12 @@ function ReactSplineMounts({ contentKey }) {
     };
   }, [visibleMounts, SplineComponent]);
 
-  if (!SplineComponent) return null;
+  if (isStale || !SplineComponent) return null;
 
   return visibleMounts.map((mount) => {
+    // Safety check to ensure the mount is still in the document
+    if (!document.body.contains(mount)) return null;
+
     const scene = mount.dataset.splineUrl;
     if (!scene) return null;
 
@@ -1886,4 +1899,42 @@ function App() {
   );
 }
 
-createRoot(document.getElementById('root')).render(<App />);
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null, errorInfo: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    this.setState({ errorInfo });
+    console.error("Uncaught error:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ padding: '40px', background: 'red', color: 'white', minHeight: '100vh', fontFamily: 'monospace' }}>
+          <h1>React Crashed!</h1>
+          <h2>{this.state.error && this.state.error.toString()}</h2>
+          <pre style={{ whiteSpace: 'pre-wrap', fontSize: '14px' }}>
+            {this.state.errorInfo && this.state.errorInfo.componentStack}
+          </pre>
+          <pre style={{ whiteSpace: 'pre-wrap', fontSize: '14px', marginTop: '20px' }}>
+            {this.state.error && this.state.error.stack}
+          </pre>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+createRoot(document.getElementById('root')).render(
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>
+);
