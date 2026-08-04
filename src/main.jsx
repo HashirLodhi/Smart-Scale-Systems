@@ -1730,6 +1730,46 @@ function routeClassNames(pathname) {
   return classes.join(' ');
 }
 
+const PAGE_NAMES = {
+  '/': 'Home',
+  '/services': 'Services',
+  '/projects': 'Projects',
+  '/about': 'About',
+  '/insights': 'Insights',
+  '/team': 'Team',
+  '/careers': 'Careers',
+  '/contact': 'Contact Us',
+  '/ai-agency': 'AI Agency',
+  '/service-ai-model-training': 'AI Model Training',
+  '/service-ai-automation': 'AI Automation',
+  '/service-custom-ai-agents': 'Custom AI Agents',
+  '/service-data-analytics': 'Data Analytics',
+  '/service-ai-integrations': 'AI Integrations',
+  '/service-business-automations': 'Business Automations',
+  '/service-computer-vision': 'Computer Vision',
+  '/service-nlp': 'NLP',
+  '/service-llm': 'LLM Solutions',
+  '/service-data-annotation': 'Data Annotation',
+  '/service-ai-training-data': 'AI Training Data',
+  '/service-custom-ai-solutions': 'Custom AI Solutions',
+};
+
+function getPageName(pathname) {
+  const cleanPath = pathname.replace('.html', '');
+  if (PAGE_NAMES[cleanPath]) {
+    return PAGE_NAMES[cleanPath];
+  }
+  if (cleanPath.startsWith('/projects/')) {
+    const slug = cleanPath.replace('/projects/', '');
+    const project = projectCaseStudies.find(p => p.slug === slug);
+    if (project) {
+      return project.title;
+    }
+    return 'Project Details';
+  }
+  return 'Smart Scale';
+}
+
 function PageTransition() {
   return (
     <div className="page-transition" aria-hidden="true">
@@ -1742,7 +1782,7 @@ function PageTransition() {
         <div className="page-transition-brand">SMART SCALE / SYSTEMS</div>
         <div className="page-transition-route">
           <span className="page-transition-kicker">Entering</span>
-          <strong className="page-transition-label">Projects</strong>
+          <strong className="page-transition-label">Home</strong>
         </div>
         <div className="page-transition-count">SSS — 2026</div>
       </div>
@@ -1772,6 +1812,7 @@ function App() {
   const [pathname, setPathname] = useState(() => normalizeRoutePath(window.location.pathname));
   const currentPathRef = useRef(pathname);
   const navigateRef = useRef(null);
+  const isTransitioningRef = useRef(false);
   const rawPage = pages[pathname] || error404Html;
   const content = useMemo(() => bodyContent(rawPage), [rawPage]);
 
@@ -1832,13 +1873,68 @@ function App() {
       scrollToPageTop();
     };
 
+    if (isTransitioningRef.current) return;
+
     const overlay = document.querySelector('.page-transition');
+    const labelEl = document.querySelector('.page-transition-label');
+
     if (overlay) {
-      gsap.set(overlay, { autoAlpha: 0, pointerEvents: 'none' });
-      overlay.setAttribute('aria-hidden', 'true');
+      isTransitioningRef.current = true;
+      if (labelEl) {
+        labelEl.textContent = getPageName(normalizedTarget);
+      }
+
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('route-transitioning');
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          isTransitioningRef.current = false;
+        }
+      });
+
+      tl.set(overlay, { autoAlpha: 1, pointerEvents: 'all' })
+        .fromTo('.page-transition-panel',
+          { scaleY: 0, transformOrigin: 'bottom' },
+          { scaleY: 1, duration: 0.45, stagger: 0.08, ease: 'power3.inOut' }
+        )
+        .fromTo('.page-transition-content',
+          { autoAlpha: 0, y: 30 },
+          { autoAlpha: 1, y: 0, duration: 0.35, ease: 'power2.out' },
+          '-=0.25'
+        )
+        .fromTo('.page-transition-progress span',
+          { scaleX: 0 },
+          { scaleX: 1, duration: 0.5, ease: 'power2.inOut' },
+          '-=0.15'
+        );
+
+      tl.add(() => {
+        commitRoute();
+      });
+
+      tl.to('.page-transition-panel', {
+        scaleY: 0,
+        transformOrigin: 'top',
+        duration: 0.45,
+        stagger: 0.06,
+        ease: 'power3.inOut',
+        delay: 0.15
+      })
+      .to('.page-transition-content', {
+        autoAlpha: 0,
+        y: -30,
+        duration: 0.3,
+        ease: 'power2.in'
+      }, '<')
+      .set(overlay, { autoAlpha: 0, pointerEvents: 'none' })
+      .add(() => {
+        document.body.classList.remove('route-transitioning');
+        overlay.setAttribute('aria-hidden', 'true');
+      });
+    } else {
+      commitRoute();
     }
-    document.body.classList.remove('route-transitioning');
-    commitRoute();
   };
 
   useEffect(() => {

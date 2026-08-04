@@ -53,13 +53,13 @@ export default class Orchestrator {
     }
 
     destroy() {
-        this.clock.disconnect();
-        this.clock.dispose();
+        if (this.clock.disconnect) this.clock.disconnect();
+        if (this.clock.dispose) this.clock.dispose();
         this.sizes.emitter.off("resize");
 
         this.scene.traverse((child) => {
             if (child instanceof THREE.Mesh) {
-                child.geometry.dispose();
+                if (child.geometry) child.geometry.dispose();
                 for (const key in child.material) {
                     const value = child.material[key];
                     if (value && typeof value.dispose === "function") {
@@ -69,10 +69,16 @@ export default class Orchestrator {
             }
         });
 
-        this.camera.controls.dispose();
-        this.renderer.instance.dispose();
+        if (this.camera.controls && typeof this.camera.controls.dispose === 'function') {
+            this.camera.controls.dispose();
+        }
+        if (typeof this.camera.destroy === 'function') {
+            this.camera.destroy();
+        }
 
-        if (this.debug.active) this.debug.ui.destroy();
+        if (this.renderer.instance) this.renderer.instance.dispose();
+
+        if (this.debug.active && this.debug.ui) this.debug.ui.destroy();
 
         instance = null;
     }
