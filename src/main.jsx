@@ -1611,11 +1611,6 @@ function initPremiumAnimations() {
 
   const ctx = gsap.context(() => {
 
-    gsap.fromTo('.nav-logo, .nav-links > *, .nav-cta',
-      { y: -18, autoAlpha: 0 },
-      { y: 0, autoAlpha: 1, duration: 0.72, stagger: 0.045, ease: 'expo.out', delay: 0.08 }
-    );
-
     const heroTitle = document.querySelector('.hero-title, .page-hero-title');
     const heroSubtitle = document.querySelector('.hero-subtitle, .page-hero-subtitle');
     const heroActions = document.querySelector('.hero-actions, .cta-actions');
