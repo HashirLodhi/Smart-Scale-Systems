@@ -377,8 +377,8 @@ textarea:focus-visible,
 .hero-spline-viewer {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 100%;
+  right: 0;
+  width: 45%;
   height: 100%;
   z-index: 0;
   outline: none;
@@ -899,6 +899,10 @@ textarea:focus-visible,
 
 /* ── RESPONSIVE: stack on mobile ───────────────────────── */
 @media (max-width: 900px) {
+  .hero-spline-viewer {
+    display: none;
+  }
+
   .hero-overlay {
     padding: var(--nav-h) 28px 48px;
     justify-content: center;
