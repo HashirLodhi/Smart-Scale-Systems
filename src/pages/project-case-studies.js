@@ -860,7 +860,7 @@ function renderProjectPage(project, index) {
     <a class="project-detail-back" href="/projects" aria-label="Back to all projects"><span aria-hidden="true">←</span> All projects</a>
     <div class="project-detail-hero-grid">
       <div class="project-detail-hero-copy">
-        <div class="project-detail-eyebrow"><span>Case study ${escapeHtml(project.number)}</span><span>${escapeHtml(project.category)}</span></div>
+        <div class="project-detail-eyebrow"><span>Blueprint ${escapeHtml(project.number)}</span><span>${escapeHtml(project.category)}</span></div>
         <h1>${escapeHtml(project.title)}</h1>
         <p>${escapeHtml(project.summary)}</p>
         <div class="project-detail-signals" aria-label="Project qualities">
@@ -940,34 +940,6 @@ ${relatedLinks.length ? `
   </div>
 </section>
 ` : ''}
-
-<section class="project-detail-proof">
-  <div class="section-inner project-detail-proof-grid project-reveal">
-    <div class="project-detail-proof-heading">
-      <p class="project-detail-label">Customer proof</p>
-      <h2>See what our real customers said.</h2>
-      <a href="/team">Learn about our team <span aria-hidden="true">↗</span></a>
-    </div>
-    <blockquote>
-      <div class="project-detail-rating" aria-label="Five out of five stars">5 / 5</div>
-      <p>\u201c${escapeHtml(story.quote)}\u201d</p>
-      <footer><strong>${escapeHtml(story.author)}</strong><span>${escapeHtml(story.role)}</span></footer>
-    </blockquote>
-  </div>
-</section>
-
-<section class="project-detail-next">
-  <a href="/projects/${escapeHtml(nextProject.slug)}" class="section-inner project-detail-next-link" aria-label="View next project: ${escapeHtml(nextProject.title)}">
-    <div>
-      <p class="project-detail-label">Next project / ${escapeHtml(nextProject.number)}</p>
-      <h2>${escapeHtml(nextProject.title)}</h2>
-      <span class="project-detail-next-cta">Explore case study <i aria-hidden="true">↗</i></span>
-    </div>
-    <figure>
-      <img src="${escapeHtml(nextProject.image)}" alt="" width="1717" height="916" loading="lazy" decoding="async" />
-    </figure>
-  </a>
-</section>
 
 <section class="projects-cta">
   <div class="section-inner projects-cta-inner">

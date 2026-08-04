@@ -84,5 +84,20 @@ module.exports = defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
     chunkSizeWarningLimit: 2500,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/three')) {
+            return 'three';
+          }
+          if (id.includes('node_modules/gsap')) {
+            return 'gsap';
+          }
+          if (id.includes('node_modules/@splinetool')) {
+            return 'spline';
+          }
+        },
+      },
+    },
   },
 });

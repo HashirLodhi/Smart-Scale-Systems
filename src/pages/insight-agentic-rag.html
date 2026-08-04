@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Production Agentic RAG Systems | Smart Scale Systems</title>
+  <meta name="description" content="A comprehensive guide to architecting agentic retrieval-augmented generation systems that handle source ingestion, hybrid retrieval, agent planning, citation validation, and production evaluation." />
+  <meta property="og:title" content="Building Production Agentic RAG Systems | Smart Scale Systems" />
+  <meta property="og:description" content="A comprehensive guide to architecting agentic retrieval-augmented generation systems that handle source ingestion, hybrid retrieval, agent planning, citation validation, and production evaluation." />
+  <link rel="canonical" href="https://www.smartscalesystems.tech/insights/agentic-rag-architecture" />
+  <!-- Fonts are self-hosted via src/styles/fonts.css -->
+  <link rel="stylesheet" href="/src/styles/style.css" />
+  <link rel="stylesheet" href="/src/styles/carousel.css" />
+</head>
+<body>
+<div class="noise-overlay"></div>
+<div id="nav-placeholder"></div>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-hero-content">
+      <div class="section-tag">Insights / RAG Architecture</div>
+      <h1 class="page-hero-title">Building Production<br/>Agentic RAG Systems</h1>
+      <p class="page-hero-subtitle">A comprehensive guide to architecting agentic retrieval-augmented generation systems that handle source ingestion, hybrid retrieval, agent planning, citation validation, and production evaluation.</p>
+    </div>
+    <div class="page-hero-orb"></div>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="section-inner">
+    <nav aria-label="Breadcrumb" class="breadcrumbs">
+      <a href="/">Home</a>
+      <span aria-hidden="true">/</span>
+      <a href="/insights">Insights</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Agentic RAG Architecture</span>
+    </nav>
+
+    <div class="legal-content">
+      <p style="color:var(--text-muted);font-size:0.9rem;">Published: August 2026 &middot; Smart Scale Systems Editorial Team &middot; 12 min read</p>
+
+      <h2>Introduction</h2>
+      <p>Retrieval-augmented generation (RAG) has become the standard pattern for grounding large language models in real-world knowledge. But basic RAG pipelines retrieve once and generate once, which breaks down when questions are complex, multi-hop, or require reasoning across multiple sources. Agentic RAG adds a planning layer that decomposes questions, selects retrieval strategies, evaluates intermediate results, and synthesizes answers with citations.</p>
+      <p>This article covers the architecture of a production agentic RAG system, from source ingestion through evaluation and monitoring. The patterns described here are based on real implementation work across knowledge management, customer support, and internal operations use cases.</p>
+
+      <h2>Source Ingestion and Access Control</h2>
+      <p>Every agentic RAG system begins with reliable source access. A production system needs connectors for SQL databases, REST APIs, cloud storage, CMS platforms, and internal wikis. Each connector must enforce role-based access control so the retrieval layer never surfaces documents a user is not authorized to see.</p>
+      <p>Incremental synchronization keeps indexes fresh without full re-ingestion. Webhook listeners trigger re-indexing when source content changes. Document processing handles PDFs, Word files, HTML pages, spreadsheets, and slide decks through a configurable chunking pipeline that splits documents into overlapping segments of 256 to 1,024 tokens, preserving paragraph boundaries and section headings.</p>
+      <p>Each chunk carries metadata including source URL, author, publication date, department, and content type. This metadata enables filtered retrieval and citation generation downstream. The chunking strategy matters: too aggressive and you lose context; too conservative and you waste context window budget on irrelevant content.</p>
+
+      <h2>Hybrid Retrieval Architecture</h2>
+      <p>Single-mode retrieval misses relevant content. A production architecture combines BM25 keyword search for exact term matches with dense vector similarity for semantic understanding. A learned sparse retrieval layer adds term-weighting that adapts to the corpus.</p>
+      <p>Results from all three channels are merged using reciprocal rank fusion, then passed through a cross-encoder reranker that scores each candidate against the original query. The reranking stage typically improves top-5 precision by 15 to 30 percent over unranked retrieval. The system supports configurable top-k values, minimum score thresholds, and diversity constraints that prevent multiple results from the same source document from dominating the context window.</p>
+      <p>Vector embeddings should be generated using models that match your domain. General-purpose embedding models work for broad knowledge bases, but domain-specific fine-tuning improves retrieval quality for specialized corpora like medical literature, legal documents, or technical documentation.</p>
+
+      <h2>Agent Planning and Answer Synthesis</h2>
+      <p>Simple RAG pipelines retrieve once and generate once. Agentic RAG adds a planning layer that decomposes complex questions into sub-queries, retrieves for each, evaluates intermediate results, and synthesizes a final answer. The planner uses tool-calling patterns to invoke retrieval, web search, database queries, or calculator functions as needed.</p>
+      <p>Answer synthesis follows a structured prompting pattern: the model receives the query, retrieved passages with source attribution, and instructions to cite each claim. Unsupported claims are explicitly marked. Confidence scores are assigned at the sentence level, and low-confidence passages trigger additional retrieval rounds or clarification prompts rather than speculative generation.</p>
+      <p>The agent should also handle follow-up questions and conversational context. Session memory tracks the conversation history so the agent can refine its retrieval strategy based on what the user has already asked and what information has already been provided.</p>
+
+      <h2>Citation Validation and Hallucination Controls</h2>
+      <p>The most critical quality metric for a RAG system is faithfulness: every claim in the generated response must be grounded in the retrieved context. Citation validation checks that each generated statement can be traced to a specific passage in the retrieved documents.</p>
+      <p>Implementation patterns include: sentence-level claim extraction, passage matching using semantic similarity, contradiction detection between claims and source passages, and confidence scoring that flags low-evidence statements. Unsupported statements are either suppressed, marked with a confidence warning, or trigger additional retrieval rounds.</p>
+      <p>Production systems should track hallucination rates over time. A sudden increase may indicate stale source content, embedding drift, or retrieval degradation. Automated faithfulness checking using an LLM-as-judge approach provides continuous monitoring without manual review of every response.</p>
+
+      <h2>Evaluation Framework</h2>
+      <p>The evaluation framework tests three dimensions: retrieval quality, answer faithfulness, and end-to-end utility. Retrieval quality measures recall@k, precision@k, and mean reciprocal rank against a labeled test set of 200 or more questions. Answer faithfulness uses an LLM-as-judge approach to verify that every claim in the generated response is grounded in the retrieved context.</p>
+      <p>End-to-end utility measures task completion: did the answer resolve the question, was it cited correctly, and did it arrive within the latency budget? The system tracks these metrics continuously and surfaces regressions in a quality dashboard. Common failure modes include chunking boundary errors, stale source content, and reranker overconfidence on ambiguous queries.</p>
+
+      <h2>Production Monitoring</h2>
+      <p>Once deployed, the system needs continuous monitoring across several dimensions: retrieval quality (are relevant documents being found?), answer quality (are responses accurate and useful?), latency (are responses arriving within acceptable time?), and cost (are token budgets being managed effectively?).</p>
+      <p>Source freshness tracking ensures the knowledge base stays current. Documents that change frequently need more frequent re-indexing. TTL policies prevent stale content from being retrieved. Priority re-indexing handles high-velocity content like news feeds or product catalogs.</p>
+
+      <h2>Implementation Considerations</h2>
+      <p><strong>Chunk size optimization:</strong> The optimal chunk size depends on the source content and the retrieval strategy. Shorter chunks (256 tokens) improve precision but may lose context. Longer chunks (1024 tokens) preserve context but waste context window budget. Overlapping chunks with 50-100 token overlap provide a good balance.</p>
+      <p><strong>Embedding model selection:</strong> General-purpose models like text-embedding-3-small work for broad knowledge bases. Domain-specific fine-tuning improves retrieval quality for specialized content. The embedding model should be versioned and evaluated alongside the retrieval system.</p>
+      <p><strong>Context window management:</strong> The retrieved passages must fit within the LLM context window while leaving room for the query, instructions, and generated response. A typical production system retrieves 5-10 passages of 512 tokens each, using approximately 50% of a 32K context window for retrieved content.</p>
+
+      <h2>When to Use Agentic RAG</h2>
+      <p>Agentic RAG is most valuable when: questions require reasoning across multiple sources, the knowledge base is large and diverse, users need cited and verifiable answers, the domain requires high accuracy, or the system needs to handle follow-up questions and conversational context. For simpler use cases, a basic RAG pipeline may be sufficient and more cost-effective.</p>
+
+      <h2>Related Services</h2>
+      <p>Smart Scale Systems offers <a href="/service-llm">LLM Solutions</a>, <a href="/service-custom-ai-agents">Custom AI Agents</a>, and <a href="/service-data-annotation">Data Annotation</a> for teams building RAG systems. Our <a href="/projects/agentic-rag">Agentic RAG project blueprint</a> covers the full implementation architecture.</p>
+
+      <h2>Frequently Asked Questions</h2>
+      <h3>How is agentic RAG different from basic RAG?</h3>
+      <p>Basic RAG retrieves documents once and generates a response. Agentic RAG adds a planning layer that decomposes complex questions, retrieves for each sub-query, evaluates intermediate results, and synthesizes answers with citations. This produces more accurate, traceable, and useful responses for complex queries.</p>
+      <h3>What data sources can be connected?</h3>
+      <p>Production agentic RAG systems connect to SQL databases, REST APIs, cloud storage, CMS platforms, internal wikis, PDFs, spreadsheets, and email systems. Each connector enforces access controls and supports incremental synchronization.</p>
+      <h3>How do you prevent hallucinations?</h3>
+      <p>Hallucination prevention uses citation validation (every claim is checked against retrieved passages), confidence scoring (low-confidence statements are flagged), and retrieval-then-verify loops (uncertain answers trigger additional retrieval rounds). Automated faithfulness checking provides continuous monitoring.</p>
+      <h3>What evaluation metrics matter most?</h3>
+      <p>The three key dimensions are retrieval quality (recall@k, precision@k), answer faithfulness (percentage of claims grounded in source passages), and end-to-end utility (task completion rate, latency, and user satisfaction). All three should be tracked continuously in a quality dashboard.</p>
+
+      <div class="cta-actions" style="margin-top:3rem;">
+        <a href="/contact" class="btn-primary">Discuss Your RAG Project</a>
+        <a href="/insights" class="btn-ghost">Back to Insights</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+</body>
+</html>

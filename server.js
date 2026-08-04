@@ -150,16 +150,25 @@ app.get('/', (req, res) => {
   sendReactIndex(req, res);
 });
 
+// Permanent redirects for legacy Pakistan URLs
+app.get('/ai-agency-pakistan', (req, res) => {
+  res.redirect(301, '/ai-agency');
+});
+app.get('/ai-services-pakistan', (req, res) => {
+  res.redirect(301, '/services');
+});
+
 // Page routes
 const pages = [
   'index',
   'services',
+  'projects',
+  'about',
+  'insights',
+  'ai-agency',
   'team',
   'careers',
-  'testimonials',
   'contact',
-  'ai-agency-pakistan',
-  'ai-services-pakistan',
   'service-ai-model-training',
   'service-ai-automation',
   'service-computer-vision',

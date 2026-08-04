@@ -19,6 +19,12 @@ import testimonialsHtml from './pages/testimonials.html?raw';
 import contactHtml from './pages/contact.html?raw';
 import aiAgencyPakistanHtml from './pages/ai-agency-pakistan.html?raw';
 import aiServicesPakistanHtml from './pages/ai-services-pakistan.html?raw';
+import aiAgencyHtml from './pages/ai-agency.html?raw';
+import aboutHtml from './pages/about.html?raw';
+import insightsHtml from './pages/insights.html?raw';
+import insightAgenticRagHtml from './pages/insight-agentic-rag.html?raw';
+import insightLlmFineTuningHtml from './pages/insight-llm-fine-tuning.html?raw';
+import insightAiAutomationHtml from './pages/insight-ai-automation.html?raw';
 import modelTrainingHtml from './pages/service-ai-model-training.html?raw';
 import automationHtml from './pages/service-ai-automation.html?raw';
 import customAgentsHtml from './pages/service-custom-ai-agents.html?raw';
@@ -60,6 +66,15 @@ const pages = {
   '/ai-agency-pakistan.html': aiAgencyPakistanHtml,
   '/ai-services-pakistan': aiServicesPakistanHtml,
   '/ai-services-pakistan.html': aiServicesPakistanHtml,
+  '/ai-agency': aiAgencyHtml,
+  '/ai-agency.html': aiAgencyHtml,
+  '/about': aboutHtml,
+  '/about.html': aboutHtml,
+  '/insights': insightsHtml,
+  '/insights.html': insightsHtml,
+  '/insights/agentic-rag-architecture': insightAgenticRagHtml,
+  '/insights/llm-fine-tuning-production': insightLlmFineTuningHtml,
+  '/insights/ai-automation-workflows': insightAiAutomationHtml,
   '/service-ai-model-training': modelTrainingHtml,
   '/service-ai-model-training.html': modelTrainingHtml,
   '/service-ai-automation': automationHtml,
@@ -142,29 +157,37 @@ const LOGO_IMAGE = `${SITE_URL}/logo-main.png`;
 const SOCIAL_IMAGE = `${SITE_URL}/og.png`;
 const DEFAULT_DESCRIPTION = 'Smart Scale Systems builds custom AI agents, data analytics, AI integrations for websites and apps, business automations, and practical AI systems that remove manual work.';
 const DEFAULT_KEYWORDS = 'custom AI agents, data analytics, AI website integration, AI app integration, business automation, AI services, AI consulting, AI model training, data annotation';
-const PAKISTAN_KEYWORDS = 'AI agency in Pakistan, AI services in Pakistan, artificial intelligence company Pakistan, custom AI agents Pakistan, data analytics Pakistan, AI integration Pakistan, business automation Pakistan, AI model training Pakistan, data annotation Pakistan';
 
 const SEO_OVERRIDES = {
   '/': {
-    title: 'Smart Scale Systems | AI Agency in Pakistan',
-    description: 'Smart Scale Systems is an AI agency in Pakistan for custom AI agents, data analytics, website and app integrations, business automations, model training, and data annotation.',
-    keywords: PAKISTAN_KEYWORDS,
+    title: 'Smart Scale Systems | Custom AI & Automation',
+    description: 'Smart Scale Systems builds custom AI agents, data analytics, integrations, and automation for teams worldwide.',
+    keywords: DEFAULT_KEYWORDS,
   },
   '/services': {
-    title: 'Services | AI Services in Pakistan',
-    description: 'Explore AI model training, AI automation, custom AI agents, data analytics, AI integrations, business automations, data annotation, AI training data, computer vision, NLP, LLM solutions, and custom AI solutions by Smart Scale Systems.',
-    keywords: 'AI model training Pakistan, AI automation Pakistan, custom AI agents Pakistan, data analytics Pakistan, AI integration Pakistan, business automation Pakistan, data annotation Pakistan, AI training data Pakistan, computer vision Pakistan, NLP services Pakistan, LLM solutions Pakistan, custom AI solutions Pakistan',
+    title: 'AI Development & Automation Services | Smart Scale Systems',
+    description: 'Explore AI model training, automation, custom AI agents, data analytics, AI integrations, computer vision, NLP, LLM solutions, and data services by Smart Scale Systems.',
+    keywords: DEFAULT_KEYWORDS,
   },
   '/projects': {
-    title: 'AI Projects & Case Studies | Smart Scale Systems',
-    description: 'Explore Smart Scale Systems projects across Agentic RAG, custom chatbots, AI agents, voice calling, automation, model training, video annotation, analytics, and financial risk.',
+    title: 'AI Projects & Blueprints | Smart Scale Systems',
+    description: 'Explore Smart Scale Systems project blueprints across Agentic RAG, custom chatbots, AI agents, voice calling, automation, model training, video annotation, analytics, and financial risk.',
     keywords: 'Agentic RAG, custom chatbot, custom AI agent, voice calling agent, AI integrations, AI automation, autonomous data annotation, custom model training, action recognition, customer analytics, fraud detection',
   },
+  '/about': {
+    title: 'About Smart Scale Systems | Global AI Development Agency',
+    description: 'Learn about Smart Scale Systems, a global AI development and automation agency delivering custom AI systems, data operations, and intelligent automation.',
+  },
+  '/insights': {
+    title: 'AI Insights & Technical Articles | Smart Scale Systems',
+    description: 'Technical articles on AI development, agentic RAG systems, LLM fine-tuning, and practical automation from Smart Scale Systems.',
+  },
   '/team': {
-    title: 'Our Team | AI Experts in Pakistan',
+    title: 'Our Team | AI Engineers & Specialists',
   },
   '/careers': {
-    title: 'Careers | AI Jobs in Pakistan',
+    title: 'Careers at Smart Scale Systems | Join Our AI Team',
+    description: 'Join Smart Scale Systems. We are hiring AI engineers, ML engineers, computer vision specialists, NLP specialists, data annotators, and automation experts.',
   },
   '/testimonials': {
     title: 'Client Testimonials | AI Success Stories',
@@ -178,75 +201,70 @@ const SEO_OVERRIDES = {
   '/terms-of-service': {
     title: 'Terms of Service | Website Usage Policies',
   },
-  '/ai-agency-pakistan': {
-    title: 'AI Agency in Pakistan | AI Development Company',
-    description: 'Looking for an AI agency in Pakistan? Smart Scale Systems builds AI model training systems, automation, custom AI agents, data analytics, AI integrations, business automations, data annotation, training data, computer vision, NLP, LLM solutions, and custom AI solutions.',
-    keywords: PAKISTAN_KEYWORDS,
-  },
-  '/ai-services-pakistan': {
-    title: 'AI Services in Pakistan | Automation, Models and Data',
-    description: 'Smart Scale Systems provides AI services in Pakistan for startups and businesses, including AI model training, AI automation, custom AI agents, data analytics, AI integrations, business automations, data annotation, AI training data, computer vision, NLP, LLM solutions, and custom AI solutions.',
-    keywords: PAKISTAN_KEYWORDS,
+  '/ai-agency': {
+    title: 'Global AI Development Agency | Smart Scale Systems',
+    description: 'Smart Scale Systems is a global AI development agency delivering custom AI systems, automation, data operations, and intelligent workflows for teams worldwide.',
+    keywords: DEFAULT_KEYWORDS,
   },
   '/service-ai-model-training': {
     title: 'AI Model Training | Custom Machine Learning Models',
-    description: 'Custom AI model training services in Pakistan, including fine-tuning, dataset preparation, model evaluation, optimization, and deployment support.',
-    keywords: 'AI model training Pakistan, machine learning model training Pakistan, AI fine-tuning Pakistan, custom AI models Pakistan',
+    description: 'Custom AI model training services including fine-tuning, dataset preparation, model evaluation, optimization, and deployment support.',
+    keywords: 'AI model training, machine learning model training, AI fine-tuning, custom AI models',
   },
   '/service-ai-automation': {
     title: 'AI Automation | Business Workflow Automation',
-    description: 'AI automation services in Pakistan for workflows, AI agents, CRM automation, lead generation, operations, and business process automation.',
-    keywords: 'AI automation Pakistan, AI agents Pakistan, business process automation Pakistan, CRM automation Pakistan, workflow automation Pakistan',
+    description: 'AI automation services for workflows, AI agents, CRM automation, lead generation, operations, and business process automation.',
+    keywords: 'AI automation, AI agents, business process automation, CRM automation, workflow automation',
   },
   '/service-custom-ai-agents': {
     title: 'Custom AI Agents | Smart Scale Systems',
     description: 'Custom AI agent development for lead qualification, customer support, internal operations, task execution, and integrated business workflows.',
-    keywords: 'custom AI agents Pakistan, AI agents Pakistan, agentic workflows Pakistan, AI assistants Pakistan',
+    keywords: 'custom AI agents, AI agents, agentic workflows, AI assistants',
   },
   '/service-data-analytics': {
     title: 'Data Analytics | Smart Scale Systems',
     description: 'Data analytics services for dashboards, reporting, forecasting, KPI tracking, and decision support.',
-    keywords: 'data analytics Pakistan, business dashboards Pakistan, KPI tracking Pakistan, reporting automation Pakistan',
+    keywords: 'data analytics, business dashboards, KPI tracking, reporting automation',
   },
   '/service-ai-integrations': {
     title: 'AI Integration for Websites & Apps | Smart Scale Systems',
     description: 'AI integration services for websites and apps, including smart search, assistants, recommendations, and workflow automation.',
-    keywords: 'AI integration Pakistan, website AI Pakistan, app AI integration Pakistan, AI product features Pakistan',
+    keywords: 'AI integration, website AI, app AI integration, AI product features',
   },
   '/service-business-automations': {
     title: 'Business Automations | Smart Scale Systems',
     description: 'Business automation services for sales, support, operations, reporting, and system connections.',
-    keywords: 'business automation Pakistan, workflow automation Pakistan, sales automation Pakistan, support automation Pakistan',
+    keywords: 'business automation, workflow automation, sales automation, support automation',
   },
   '/service-computer-vision': {
     title: 'Computer Vision | Image and Video AI',
-    description: 'Computer vision services in Pakistan for object detection, image classification, segmentation, OCR, video analytics, and visual AI systems.',
-    keywords: 'computer vision services Pakistan, object detection Pakistan, OCR services Pakistan, image annotation Pakistan, video analytics Pakistan',
+    description: 'Computer vision services for object detection, image classification, segmentation, OCR, video analytics, and visual AI systems.',
+    keywords: 'computer vision services, object detection, OCR services, image annotation, video analytics',
   },
   '/service-nlp': {
     title: 'NLP Services | Natural Language Processing',
-    description: 'NLP services in Pakistan for text classification, sentiment analysis, named entity recognition, intent detection, search relevance, and language AI.',
-    keywords: 'NLP services Pakistan, natural language processing Pakistan, text classification Pakistan, sentiment analysis Pakistan, NER Pakistan',
+    description: 'NLP services for text classification, sentiment analysis, named entity recognition, intent detection, search relevance, and language AI.',
+    keywords: 'NLP services, natural language processing, text classification, sentiment analysis, NER',
   },
   '/service-llm': {
     title: 'LLM Solutions | Custom AI Assistants',
-    description: 'LLM solutions in Pakistan, including prompt engineering, LLM fine-tuning, RLHF, response evaluation, AI assistants, and custom large language model pipelines.',
-    keywords: 'LLM solutions Pakistan, LLM fine-tuning Pakistan, prompt engineering Pakistan, RLHF Pakistan, AI assistants Pakistan',
+    description: 'LLM solutions including prompt engineering, LLM fine-tuning, RLHF, response evaluation, AI assistants, and custom large language model pipelines.',
+    keywords: 'LLM solutions, LLM fine-tuning, prompt engineering, RLHF, AI assistants',
   },
   '/service-data-annotation': {
     title: 'Data Annotation | Training Data Services',
-    description: 'Data annotation services in Pakistan for images, video, text, audio, OCR, bounding boxes, polygons, segmentation masks, and QA review.',
-    keywords: 'data annotation Pakistan, image annotation Pakistan, video annotation Pakistan, text annotation Pakistan, OCR annotation Pakistan',
+    description: 'Data annotation services for images, video, text, audio, OCR, bounding boxes, polygons, segmentation masks, and QA review.',
+    keywords: 'data annotation, image annotation, video annotation, text annotation, OCR annotation',
   },
   '/service-ai-training-data': {
     title: 'AI Training Data | Dataset Creation Services',
-    description: 'AI training data services in Pakistan for machine learning, computer vision, NLP, LLMs, automation systems, evaluation datasets, and dataset curation.',
-    keywords: 'AI training data Pakistan, dataset creation Pakistan, machine learning datasets Pakistan, data collection Pakistan, dataset curation Pakistan',
+    description: 'AI training data services for machine learning, computer vision, NLP, LLMs, automation systems, evaluation datasets, and dataset curation.',
+    keywords: 'AI training data, dataset creation, machine learning datasets, data collection, dataset curation',
   },
   '/service-custom-ai-solutions': {
     title: 'Custom AI Solutions | AI Development Services',
-    description: 'Custom AI solutions in Pakistan for businesses that need tailored automation, machine learning, LLM, computer vision, NLP, and data systems.',
-    keywords: 'custom AI solutions Pakistan, AI consulting Pakistan, AI development Pakistan, artificial intelligence agency Pakistan',
+    description: 'Custom AI solutions for businesses that need tailored automation, machine learning, LLM, computer vision, NLP, and data systems.',
+    keywords: 'custom AI solutions, AI consulting, AI development, artificial intelligence agency',
   },
 };
 
@@ -264,7 +282,10 @@ function pageKind(pathname) {
   const normalizedPath = normalizeSeoPath(pathname);
   if (normalizedPath.startsWith('/projects/')) return 'project';
   if (normalizedPath.startsWith('/service-')) return 'service';
-  if (normalizedPath === '/ai-agency-pakistan' || normalizedPath === '/ai-services-pakistan') return 'service';
+  if (normalizedPath === '/ai-agency') return 'service';
+  if (normalizedPath === '/about') return 'about';
+  if (normalizedPath === '/insights') return 'insights';
+  if (normalizedPath.startsWith('/insights/')) return 'article';
   if (normalizedPath === '/contact') return 'contact';
   return 'page';
 }
@@ -371,66 +392,15 @@ function buildStructuredData({ title, description, url, kind }) {
     });
   }
 
-  if (url.endsWith('/ai-agency-pakistan') || url.endsWith('/ai-services-pakistan')) {
+  if (kind === 'about') {
     graph.push({
-      '@type': 'OfferCatalog',
-      '@id': `${url}#offer-catalog`,
-      name: 'AI Services in Pakistan',
-      itemListElement: [
-        'AI Model Training',
-        'AI Automation',
-        'Custom AI Agents',
-        'Data Analytics',
-        'AI Integration for Websites & Apps',
-        'Business Automations',
-        'Data Annotation',
-        'AI Training Data',
-        'Computer Vision',
-        'NLP',
-        'LLM Solutions',
-        'Custom AI Solutions',
-      ].map((name) => ({
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name,
-          provider: { '@id': `${SITE_URL}/#organization` },
-          areaServed: { '@type': 'Country', name: 'Pakistan' },
-        },
-      })),
-    });
-  }
-
-  if (url.endsWith('/ai-agency-pakistan')) {
-    graph.push({
-      '@type': 'FAQPage',
-      '@id': `${url}#faq`,
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'What makes Smart Scale Systems an AI agency in Pakistan?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Smart Scale Systems provides AI services for businesses in Pakistan and global clients, including custom AI agents, data analytics, AI integrations, business automations, model training, and data annotation.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Do you provide AI automation services in Pakistan?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Yes. Smart Scale Systems builds AI agents, workflow automation, CRM automation, lead generation systems, and business process automation.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name: 'Can you create datasets for AI model training?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: 'Yes. Smart Scale Systems creates, cleans, annotates, reviews, and structures datasets for machine learning and custom AI systems.',
-          },
-        },
-      ],
+      '@type': 'AboutPage',
+      '@id': `${url}#about`,
+      url,
+      name: title,
+      description,
+      about: { '@id': `${SITE_URL}/#organization` },
+      isPartOf: { '@id': `${SITE_URL}/#website` },
     });
   }
 
@@ -544,8 +514,7 @@ function setActiveNav(pathname) {
     'service-data-annotation',
     'service-ai-training-data',
     'service-custom-ai-solutions',
-    'ai-agency-pakistan',
-    'ai-services-pakistan',
+    'ai-agency',
   ];
   const servicesButton = document.getElementById('servicesDropBtn');
   if (servicesButton) {
@@ -2311,10 +2280,13 @@ const ROUTE_LABELS = {
   '/': 'Home',
   '/services': 'Services',
   '/projects': 'Projects',
+  '/about': 'About',
+  '/insights': 'Insights',
   '/team': 'Team',
   '/careers': 'Careers',
   '/testimonials': 'Testimonials',
   '/contact': 'Contact',
+  '/ai-agency': 'AI Agency',
 };
 
 function routeLabel(pathname) {
@@ -2351,7 +2323,7 @@ function routeClassNames(pathname) {
 
   if (slug.startsWith('service-')) classes.push('route-service-detail');
   if (slug.startsWith('projects-')) classes.push('route-project-detail');
-  if (slug === 'ai-agency-pakistan' || slug === 'ai-services-pakistan') classes.push('route-market-page');
+  if (slug === 'ai-agency') classes.push('route-market-page');
   if (slug === 'privacy-policy' || slug === 'terms-of-service') classes.push('route-legal');
   if (slug === '403' || slug === '404' || slug === '500') classes.push('route-error');
 
