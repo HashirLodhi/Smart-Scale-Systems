@@ -658,7 +658,7 @@ function initNav() {
   if (compactToggle) {
     gsap.set(compactToggle, { autoAlpha: 0, x: 18, scale: 0.78 });
   }
-  updateNav();
+  requestAnimationFrame(() => updateNav());
 
   if (compactToggle && navInner) {
     const toggleCompactNav = (event) => {
@@ -771,6 +771,16 @@ function initRevealAnimations() {
       });
     });
     observers.push(observer);
+
+    const safetyTimeout = window.setTimeout(() => {
+      revealItems.forEach((el) => {
+        if (!el.classList.contains('revealed')) {
+          el.classList.add('revealed');
+          el.style.willChange = 'auto';
+        }
+      });
+    }, 1500);
+    observers.push({ disconnect: () => window.clearTimeout(safetyTimeout) });
   }
 
   const sectionItems = document.querySelectorAll('[data-section-reveal]');
@@ -1768,6 +1778,14 @@ function App() {
 
   useLayoutEffect(() => {
     scrollToPageTop();
+    const nav = document.getElementById('nav');
+    if (nav) {
+      const navInner = nav.querySelector('.nav-inner');
+      const compactToggle = document.getElementById('navCompactToggle');
+      nav.classList.remove('compact', 'compact-mobile', 'expanded-past-hero');
+      if (navInner) gsap.set(navInner, { x: 0, scale: 1, autoAlpha: 1 });
+      if (compactToggle) gsap.set(compactToggle, { x: 18, scale: 0.78, autoAlpha: 0 });
+    }
   }, [pathname]);
 
   useEffect(() => {
