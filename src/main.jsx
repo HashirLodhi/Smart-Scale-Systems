@@ -2453,6 +2453,22 @@ function App() {
     overlay.setAttribute('aria-hidden', 'false');
     if (label) label.textContent = routeLabel(normalizedTarget);
 
+    const finishTransition = () => {
+      const nextShell = document.querySelector('.route-shell');
+      gsap.set(overlay, { autoAlpha: 0, pointerEvents: 'none' });
+      if (nextShell) gsap.set(nextShell, { clearProps: 'all' });
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('route-transitioning');
+      transitionInProgressRef.current = false;
+      const queued = queuedNavigationRef.current;
+      queuedNavigationRef.current = null;
+      if (queued && queued.targetPath !== currentPathRef.current) {
+        navigateRef.current?.(queued.targetPath, { historyAction: queued.historyAction });
+      }
+    };
+
+    const safetyTimeout = setTimeout(finishTransition, 2000);
+
     gsap.killTweensOf([overlay, panels, contentItems, progress, currentShell].filter(Boolean));
     gsap.set(overlay, { autoAlpha: 1, pointerEvents: 'auto' });
     gsap.set(panels, { scaleY: 0, transformOrigin: 'bottom center' });
@@ -2467,14 +2483,16 @@ function App() {
         window.requestAnimationFrame(() => {
           window.requestAnimationFrame(() => {
             const nextShell = document.querySelector('.route-shell');
+            if (!nextShell) { clearTimeout(safetyTimeout); finishTransition(); return; }
             gsap.set(panels, { transformOrigin: 'top center' });
             gsap.set(nextShell, { y: 40, scale: 0.988, autoAlpha: 0, filter: 'blur(12px)' });
 
             gsap.timeline({
               defaults: { overwrite: 'auto' },
               onComplete: () => {
+                clearTimeout(safetyTimeout);
                 gsap.set(overlay, { autoAlpha: 0, pointerEvents: 'none' });
-                gsap.set(nextShell, { clearProps: 'transform,opacity,visibility,filter' });
+                gsap.set(nextShell, { clearProps: 'all' });
                 overlay.setAttribute('aria-hidden', 'true');
                 document.body.classList.remove('route-transitioning');
                 transitionInProgressRef.current = false;
