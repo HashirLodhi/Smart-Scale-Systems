@@ -373,7 +373,8 @@ textarea:focus-visible,
 }
 
 /* ── WAVE GRID CANVAS (full hero background) ───────────── */
-.wave-grid-canvas {
+.wave-grid-canvas,
+.hero-spline-viewer {
   position: absolute;
   top: 0;
   left: 0;
@@ -381,6 +382,15 @@ textarea:focus-visible,
   height: 100%;
   z-index: 0;
   outline: none;
+}
+
+.hero-spline-viewer {
+  --spline-bg: transparent;
+}
+
+.hero-spline-viewer::part(canvas) {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* ── AMBIENT ORBS ───────────────────────────────────────── */

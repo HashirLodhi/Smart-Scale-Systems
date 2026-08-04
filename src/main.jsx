@@ -118,9 +118,6 @@ function normalizeRoutePath(pathname) {
 }
 
 const SPLINE_SCENES = {
-  '/': 'https://prod.spline.design/Zff-nbYm4vXOgRRQ/scene.splinecode',
-  '/index': 'https://prod.spline.design/Zff-nbYm4vXOgRRQ/scene.splinecode',
-  '/index.html': 'https://prod.spline.design/Zff-nbYm4vXOgRRQ/scene.splinecode',
   '/team': 'https://prod.spline.design/gK4Rs3Br2IqpULHy/scene.splinecode',
   '/team.html': 'https://prod.spline.design/gK4Rs3Br2IqpULHy/scene.splinecode',
 };
