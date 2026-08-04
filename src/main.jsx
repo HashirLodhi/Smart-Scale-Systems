@@ -761,6 +761,15 @@ function initRevealAnimations() {
       el.style.transitionDelay = `${(index % 5) * 0.045}s`;
       observer.observe(el);
     });
+    requestAnimationFrame(() => {
+      revealItems.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          el.classList.add('revealed');
+          el.style.willChange = 'auto';
+        }
+      });
+    });
     observers.push(observer);
   }
 
@@ -1601,7 +1610,6 @@ function initPremiumAnimations() {
   const hoverCleanups = [];
 
   const ctx = gsap.context(() => {
-    gsap.set('main', { autoAlpha: 1 });
 
     gsap.fromTo('.nav-logo, .nav-links > *, .nav-cta',
       { y: -18, autoAlpha: 0 },
@@ -2272,7 +2280,7 @@ function initPremiumAnimations() {
 
   return () => {
     hoverCleanups.forEach((cleanup) => cleanup());
-    ctx.revert();
+    ScrollTrigger.getAll().forEach((t) => t.kill());
   };
 }
 
