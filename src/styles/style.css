@@ -385,10 +385,10 @@ textarea:focus-visible,
 
 .hero-spline-container {
   position: absolute;
-  bottom: -45%;
-  right: -3%;
-  width: 70%;
-  height: 130%;
+  bottom: -10%;
+  right: 8%;
+  width: 50%;
+  height: 115%;
   z-index: 0;
 }
 
