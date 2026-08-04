@@ -2371,8 +2371,6 @@ function Layout({ children, pathname }) {
 function App() {
   const [pathname, setPathname] = useState(() => normalizeRoutePath(window.location.pathname));
   const currentPathRef = useRef(pathname);
-  const transitionInProgressRef = useRef(false);
-  const queuedNavigationRef = useRef(null);
   const navigateRef = useRef(null);
   const rawPage = pages[pathname] || error404Html;
   const content = useMemo(() => bodyContent(rawPage), [rawPage]);
@@ -2417,11 +2415,6 @@ function App() {
       return;
     }
 
-    if (transitionInProgressRef.current) {
-      queuedNavigationRef.current = { targetPath: normalizedTarget, historyAction };
-      return;
-    }
-
     const commitRoute = () => {
       if (historyAction === 'push') {
         window.history.pushState({}, '', normalizedTarget);
@@ -2431,136 +2424,13 @@ function App() {
       scrollToPageTop();
     };
 
-    if (prefersReducedMotion()) {
-      commitRoute();
-      return;
-    }
-
     const overlay = document.querySelector('.page-transition');
-    const panels = overlay?.querySelectorAll('.page-transition-panel');
-    const label = overlay?.querySelector('.page-transition-label');
-    const contentItems = overlay?.querySelectorAll('.page-transition-brand, .page-transition-route, .page-transition-count');
-    const progress = overlay?.querySelector('.page-transition-progress span');
-    const currentShell = document.querySelector('.route-shell');
-
-    if (!overlay || !panels?.length) {
-      commitRoute();
-      return;
-    }
-
-    transitionInProgressRef.current = true;
-    document.body.classList.add('route-transitioning');
-    overlay.setAttribute('aria-hidden', 'false');
-    if (label) label.textContent = routeLabel(normalizedTarget);
-
-    const finishTransition = () => {
-      const nextShell = document.querySelector('.route-shell');
+    if (overlay) {
       gsap.set(overlay, { autoAlpha: 0, pointerEvents: 'none' });
-      if (nextShell) gsap.set(nextShell, { clearProps: 'all' });
       overlay.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('route-transitioning');
-      transitionInProgressRef.current = false;
-      const queued = queuedNavigationRef.current;
-      queuedNavigationRef.current = null;
-      if (queued && queued.targetPath !== currentPathRef.current) {
-        navigateRef.current?.(queued.targetPath, { historyAction: queued.historyAction });
-      }
-    };
-
-    const safetyTimeout = setTimeout(finishTransition, 2000);
-
-    gsap.killTweensOf([overlay, panels, contentItems, progress, currentShell].filter(Boolean));
-    gsap.set(overlay, { autoAlpha: 1, pointerEvents: 'auto' });
-    gsap.set(panels, { scaleY: 0, transformOrigin: 'bottom center' });
-    gsap.set(contentItems, { y: 26, autoAlpha: 0 });
-    gsap.set(progress, { scaleX: 0, transformOrigin: 'left center' });
-
-    gsap.timeline({
-      defaults: { overwrite: 'auto' },
-      onComplete: () => {
-        commitRoute();
-
-        window.requestAnimationFrame(() => {
-          window.requestAnimationFrame(() => {
-            const nextShell = document.querySelector('.route-shell');
-            if (!nextShell) { clearTimeout(safetyTimeout); finishTransition(); return; }
-            gsap.set(panels, { transformOrigin: 'top center' });
-            gsap.set(nextShell, { y: 40, scale: 0.988, autoAlpha: 0, filter: 'blur(12px)' });
-
-            gsap.timeline({
-              defaults: { overwrite: 'auto' },
-              onComplete: () => {
-                clearTimeout(safetyTimeout);
-                gsap.set(overlay, { autoAlpha: 0, pointerEvents: 'none' });
-                gsap.set(nextShell, { clearProps: 'all' });
-                overlay.setAttribute('aria-hidden', 'true');
-                document.body.classList.remove('route-transitioning');
-                transitionInProgressRef.current = false;
-
-                const queued = queuedNavigationRef.current;
-                queuedNavigationRef.current = null;
-                if (queued && queued.targetPath !== currentPathRef.current) {
-                  navigateRef.current?.(queued.targetPath, { historyAction: queued.historyAction });
-                }
-              },
-            })
-              .to(contentItems, {
-                y: -22,
-                autoAlpha: 0,
-                duration: 0.32,
-                stagger: 0.025,
-                ease: 'power2.in',
-              }, 0)
-              .to(panels, {
-                scaleY: 0,
-                duration: 0.78,
-                stagger: { each: 0.065, from: 'end' },
-                ease: 'power4.inOut',
-              }, 0.08)
-              .to(progress, {
-                scaleX: 0,
-                transformOrigin: 'right center',
-                duration: 0.55,
-                ease: 'power3.inOut',
-              }, 0.08)
-              .to(nextShell, {
-                y: 0,
-                scale: 1,
-                autoAlpha: 1,
-                filter: 'blur(0px)',
-                duration: 0.82,
-                ease: 'expo.out',
-              }, 0.28);
-          });
-        });
-      },
-    })
-      .to(currentShell, {
-        y: -30,
-        scale: 0.982,
-        autoAlpha: 0.35,
-        filter: 'blur(10px)',
-        duration: 0.56,
-        ease: 'power3.in',
-      }, 0)
-      .to(panels, {
-        scaleY: 1,
-        duration: 0.76,
-        stagger: 0.065,
-        ease: 'power4.inOut',
-      }, 0)
-      .to(contentItems, {
-        y: 0,
-        autoAlpha: 1,
-        duration: 0.58,
-        stagger: 0.055,
-        ease: 'expo.out',
-      }, 0.31)
-      .to(progress, {
-        scaleX: 1,
-        duration: 0.62,
-        ease: 'power3.inOut',
-      }, 0.2);
+    }
+    document.body.classList.remove('route-transitioning');
+    commitRoute();
   };
 
   useEffect(() => {
